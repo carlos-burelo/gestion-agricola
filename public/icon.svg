@@ -1,0 +1,48 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <clipPath id="pina-body">
+      <path d="M90 70C118 70 134 90 134 113C134 139 113 156 90 156C67 156 46 139 46 113C46 90 62 70 90 70Z" />
+    </clipPath>
+    <linearGradient id="pina-fruit" x1="90" y1="70" x2="90" y2="156" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#F7C752" />
+      <stop offset="1" stop-color="#E0982A" />
+    </linearGradient>
+    <linearGradient id="pina-leaf" x1="90" y1="22" x2="90" y2="84" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#5BC676" />
+      <stop offset="1" stop-color="#2C8B55" />
+    </linearGradient>
+  </defs>
+
+  <!-- App-icon background -->
+  <rect width="180" height="180" rx="40" fill="#16341F" />
+
+  <!-- Pineapple body -->
+  <path d="M90 70C118 70 134 90 134 113C134 139 113 156 90 156C67 156 46 139 46 113C46 90 62 70 90 70Z"
+    fill="url(#pina-fruit)" stroke="#B9781F" stroke-width="3" />
+
+  <!-- Diamond cross-hatch, clipped to the body -->
+  <g clip-path="url(#pina-body)" stroke="#B9781F" stroke-width="3" stroke-linecap="round" opacity="0.8">
+    <path d="M46 28L134 116" />
+    <path d="M46 46L134 134" />
+    <path d="M46 64L134 152" />
+    <path d="M46 82L134 170" />
+    <path d="M46 100L134 188" />
+    <path d="M46 118L134 206" />
+    <path d="M46 74L134 -14" />
+    <path d="M46 92L134 4" />
+    <path d="M46 110L134 22" />
+    <path d="M46 128L134 40" />
+    <path d="M46 146L134 58" />
+    <path d="M46 164L134 76" />
+    <path d="M46 182L134 94" />
+  </g>
+
+  <!-- Crown leaves -->
+  <g fill="url(#pina-leaf)" stroke="#1F6B3E" stroke-width="2" stroke-linejoin="round">
+    <path d="M78 84C58 70 46 62 42 48C58 56 80 66 78 84Z" />
+    <path d="M102 84C122 70 134 62 138 48C122 56 100 66 102 84Z" />
+    <path d="M84 82C70 60 64 50 64 34C76 46 90 60 84 82Z" />
+    <path d="M96 82C110 60 116 50 116 34C104 46 90 60 96 82Z" />
+    <path d="M90 82C82 56 86 42 90 24C94 42 98 56 90 82Z" />
+  </g>
+</svg>

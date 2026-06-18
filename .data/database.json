@@ -1,0 +1,4816 @@
+{
+  "ranchos": [
+    {
+      "id": "rancho-1",
+      "nombre": "Rancho El Porvenir",
+      "estado": "activo",
+      "createdAt": "2025-01-10T08:00:00.000Z",
+      "updatedAt": "2025-01-10T08:00:00.000Z"
+    },
+    {
+      "id": "rancho-2",
+      "nombre": "Rancho La Esperanza",
+      "estado": "activo",
+      "createdAt": "2025-01-12T08:00:00.000Z",
+      "updatedAt": "2025-01-12T08:00:00.000Z"
+    },
+    {
+      "id": "rancho-3",
+      "nombre": "Rancho San Isidro",
+      "estado": "activo",
+      "createdAt": "2025-01-14T08:00:00.000Z",
+      "updatedAt": "2025-01-14T08:00:00.000Z"
+    }
+  ],
+  "parcelas": [
+    {
+      "id": "parcela-1",
+      "ranchoId": "rancho-1",
+      "identificador": "L-01",
+      "superficieM2": 20000,
+      "estado": "activo",
+      "esSemillero": false,
+      "geometria": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.8842,
+              18.1018
+            ],
+            [
+              -95.8798,
+              18.1018
+            ],
+            [
+              -95.8798,
+              18.106199999999998
+            ],
+            [
+              -95.8842,
+              18.106199999999998
+            ],
+            [
+              -95.8842,
+              18.1018
+            ]
+          ]
+        ]
+      },
+      "createdAt": "2025-01-15T08:00:00.000Z",
+      "updatedAt": "2025-01-15T08:00:00.000Z"
+    },
+    {
+      "id": "parcela-2",
+      "ranchoId": "rancho-1",
+      "identificador": "L-02",
+      "superficieM2": 15000,
+      "estado": "activo",
+      "esSemillero": true,
+      "geometria": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.8782,
+              18.100800000000003
+            ],
+            [
+              -95.8738,
+              18.100800000000003
+            ],
+            [
+              -95.8738,
+              18.1052
+            ],
+            [
+              -95.8782,
+              18.1052
+            ],
+            [
+              -95.8782,
+              18.100800000000003
+            ]
+          ]
+        ]
+      },
+      "createdAt": "2025-01-15T08:00:00.000Z",
+      "updatedAt": "2025-01-15T08:00:00.000Z"
+    },
+    {
+      "id": "parcela-3",
+      "ranchoId": "rancho-2",
+      "identificador": "L-01",
+      "superficieM2": 18000,
+      "estado": "activo",
+      "esSemillero": false,
+      "geometria": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.8722,
+              18.105800000000002
+            ],
+            [
+              -95.8678,
+              18.105800000000002
+            ],
+            [
+              -95.8678,
+              18.1102
+            ],
+            [
+              -95.8722,
+              18.1102
+            ],
+            [
+              -95.8722,
+              18.105800000000002
+            ]
+          ]
+        ]
+      },
+      "createdAt": "2025-01-16T08:00:00.000Z",
+      "updatedAt": "2025-01-16T08:00:00.000Z"
+    },
+    {
+      "id": "parcela-4",
+      "ranchoId": "rancho-2",
+      "identificador": "L-02",
+      "superficieM2": 22000,
+      "estado": "inactivo",
+      "esSemillero": false,
+      "geometria": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.8662,
+              18.103800000000003
+            ],
+            [
+              -95.8618,
+              18.103800000000003
+            ],
+            [
+              -95.8618,
+              18.1082
+            ],
+            [
+              -95.8662,
+              18.1082
+            ],
+            [
+              -95.8662,
+              18.103800000000003
+            ]
+          ]
+        ]
+      },
+      "createdAt": "2025-01-18T08:00:00.000Z",
+      "updatedAt": "2025-01-18T08:00:00.000Z"
+    },
+    {
+      "id": "parcela-5",
+      "ranchoId": "rancho-3",
+      "identificador": "L-01",
+      "superficieM2": 25000,
+      "estado": "activo",
+      "esSemillero": false,
+      "geometria": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.8602,
+              18.1078
+            ],
+            [
+              -95.8558,
+              18.1078
+            ],
+            [
+              -95.8558,
+              18.112199999999998
+            ],
+            [
+              -95.8602,
+              18.112199999999998
+            ],
+            [
+              -95.8602,
+              18.1078
+            ]
+          ]
+        ]
+      },
+      "createdAt": "2025-01-19T08:00:00.000Z",
+      "updatedAt": "2025-01-19T08:00:00.000Z"
+    },
+    {
+      "id": "parcela-6",
+      "ranchoId": "rancho-3",
+      "identificador": "L-02",
+      "superficieM2": 12000,
+      "estado": "inactivo",
+      "esSemillero": true,
+      "geometria": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              -95.8542,
+              18.0988
+            ],
+            [
+              -95.8498,
+              18.0988
+            ],
+            [
+              -95.8498,
+              18.103199999999998
+            ],
+            [
+              -95.8542,
+              18.103199999999998
+            ],
+            [
+              -95.8542,
+              18.0988
+            ]
+          ]
+        ]
+      },
+      "createdAt": "2025-01-19T08:00:00.000Z",
+      "updatedAt": "2025-01-19T08:00:00.000Z"
+    }
+  ],
+  "plantillas": [
+    {
+      "id": "plantilla-1",
+      "parcelaId": "parcela-1",
+      "numero": "T-01",
+      "superficieM2": 6000,
+      "createdAt": "2025-01-20T08:00:00.000Z",
+      "updatedAt": "2025-01-20T08:00:00.000Z"
+    },
+    {
+      "id": "plantilla-2",
+      "parcelaId": "parcela-1",
+      "numero": "T-02",
+      "superficieM2": 5000,
+      "createdAt": "2025-01-20T08:00:00.000Z",
+      "updatedAt": "2025-01-20T08:00:00.000Z"
+    },
+    {
+      "id": "plantilla-3",
+      "parcelaId": "parcela-3",
+      "numero": "T-01",
+      "superficieM2": 6000,
+      "createdAt": "2025-01-21T08:00:00.000Z",
+      "updatedAt": "2025-01-21T08:00:00.000Z"
+    },
+    {
+      "id": "plantilla-4",
+      "parcelaId": "parcela-3",
+      "numero": "T-02",
+      "superficieM2": 5500,
+      "createdAt": "2025-01-22T08:00:00.000Z",
+      "updatedAt": "2025-01-22T08:00:00.000Z"
+    },
+    {
+      "id": "plantilla-5",
+      "parcelaId": "parcela-4",
+      "numero": "T-01",
+      "superficieM2": 7000,
+      "createdAt": "2025-01-23T08:00:00.000Z",
+      "updatedAt": "2025-01-23T08:00:00.000Z"
+    },
+    {
+      "id": "plantilla-6",
+      "parcelaId": "parcela-5",
+      "numero": "T-01",
+      "superficieM2": 8000,
+      "createdAt": "2025-01-24T08:00:00.000Z",
+      "updatedAt": "2025-01-24T08:00:00.000Z"
+    },
+    {
+      "id": "plantilla-7",
+      "parcelaId": "parcela-5",
+      "numero": "T-02",
+      "superficieM2": 7500,
+      "createdAt": "2025-01-24T08:00:00.000Z",
+      "updatedAt": "2025-01-24T08:00:00.000Z"
+    },
+    {
+      "id": "plantilla-8",
+      "parcelaId": "parcela-4",
+      "numero": "T-02",
+      "superficieM2": 6500,
+      "createdAt": "2025-01-25T08:00:00.000Z",
+      "updatedAt": "2025-01-25T08:00:00.000Z"
+    }
+  ],
+  "ciclos": [
+    {
+      "id": "ciclo-1",
+      "parcelaId": "parcela-1",
+      "fechaInicio": "2025-02-01",
+      "fechaCosechaEstimada": "2026-06-01",
+      "estado": "cosechado",
+      "createdAt": "2025-02-01T08:00:00.000Z",
+      "updatedAt": "2025-02-01T08:00:00.000Z"
+    },
+    {
+      "id": "ciclo-2",
+      "parcelaId": "parcela-3",
+      "fechaInicio": "2025-03-01",
+      "fechaCosechaEstimada": "2026-07-01",
+      "estado": "planeado",
+      "createdAt": "2025-03-01T08:00:00.000Z",
+      "updatedAt": "2025-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "ciclo-3",
+      "parcelaId": "parcela-1",
+      "fechaInicio": "2025-08-01",
+      "fechaCosechaEstimada": "2026-11-01",
+      "estado": "activo",
+      "createdAt": "2025-08-01T08:00:00.000Z",
+      "updatedAt": "2025-08-01T08:00:00.000Z"
+    },
+    {
+      "id": "ciclo-4",
+      "parcelaId": "parcela-4",
+      "fechaInicio": "2025-05-01",
+      "fechaCosechaEstimada": "2026-09-01",
+      "estado": "activo",
+      "createdAt": "2025-05-01T08:00:00.000Z",
+      "updatedAt": "2025-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "ciclo-5",
+      "parcelaId": "parcela-5",
+      "fechaInicio": "2025-06-01",
+      "fechaCosechaEstimada": "2026-10-01",
+      "estado": "activo",
+      "createdAt": "2025-06-01T08:00:00.000Z",
+      "updatedAt": "2025-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "ciclo-6",
+      "parcelaId": "parcela-3",
+      "fechaInicio": "2025-02-15",
+      "fechaCosechaEstimada": "2026-05-15",
+      "estado": "cosechado",
+      "createdAt": "2025-02-15T08:00:00.000Z",
+      "updatedAt": "2025-02-15T08:00:00.000Z"
+    },
+    {
+      "id": "ciclo-7",
+      "parcelaId": "parcela-4",
+      "fechaInicio": "2025-01-20",
+      "fechaCosechaEstimada": "2026-03-20",
+      "estado": "cerrado",
+      "createdAt": "2025-01-20T08:00:00.000Z",
+      "updatedAt": "2025-01-20T08:00:00.000Z"
+    }
+  ],
+  "siembras": [
+    {
+      "id": "siembra-1",
+      "cicloId": "ciclo-1",
+      "plantillaId": "plantilla-1",
+      "fecha": "2025-02-05",
+      "cantidadPlantas": 30000,
+      "costoUnitarioPlanta": 1.25,
+      "createdAt": "2025-02-05T08:00:00.000Z",
+      "updatedAt": "2025-02-05T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-100",
+      "cicloId": "ciclo-4",
+      "plantillaId": "plantilla-5",
+      "fecha": "2025-01-15",
+      "cantidadPlantas": 20338,
+      "costoUnitarioPlanta": 1.5,
+      "createdAt": "2025-01-01T08:00:00.000Z",
+      "updatedAt": "2025-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-101",
+      "cicloId": "ciclo-5",
+      "plantillaId": "plantilla-7",
+      "fecha": "2025-02-25",
+      "cantidadPlantas": 10457,
+      "costoUnitarioPlanta": 1.52,
+      "createdAt": "2025-02-01T08:00:00.000Z",
+      "updatedAt": "2025-02-01T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-102",
+      "cicloId": "ciclo-4",
+      "plantillaId": "plantilla-5",
+      "fecha": "2025-03-24",
+      "cantidadPlantas": 32674,
+      "costoUnitarioPlanta": 1.4,
+      "createdAt": "2025-03-01T08:00:00.000Z",
+      "updatedAt": "2025-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-103",
+      "cicloId": "ciclo-1",
+      "plantillaId": "plantilla-1",
+      "fecha": "2025-03-15",
+      "cantidadPlantas": 9177,
+      "costoUnitarioPlanta": 1.48,
+      "createdAt": "2025-03-01T08:00:00.000Z",
+      "updatedAt": "2025-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-104",
+      "cicloId": "ciclo-6",
+      "plantillaId": "plantilla-3",
+      "fecha": "2025-04-26",
+      "cantidadPlantas": 29219,
+      "costoUnitarioPlanta": 1.03,
+      "createdAt": "2025-04-01T08:00:00.000Z",
+      "updatedAt": "2025-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-105",
+      "cicloId": "ciclo-6",
+      "plantillaId": "plantilla-4",
+      "fecha": "2025-04-14",
+      "cantidadPlantas": 13300,
+      "costoUnitarioPlanta": 1.35,
+      "createdAt": "2025-04-01T08:00:00.000Z",
+      "updatedAt": "2025-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-106",
+      "cicloId": "ciclo-3",
+      "plantillaId": "plantilla-2",
+      "fecha": "2025-07-10",
+      "cantidadPlantas": 24833,
+      "costoUnitarioPlanta": 1.35,
+      "createdAt": "2025-07-01T08:00:00.000Z",
+      "updatedAt": "2025-07-01T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-107",
+      "cicloId": "ciclo-4",
+      "plantillaId": "plantilla-5",
+      "fecha": "2025-08-02",
+      "cantidadPlantas": 22947,
+      "costoUnitarioPlanta": 1.24,
+      "createdAt": "2025-08-01T08:00:00.000Z",
+      "updatedAt": "2025-08-01T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-108",
+      "cicloId": "ciclo-4",
+      "plantillaId": "plantilla-8",
+      "fecha": "2025-08-27",
+      "cantidadPlantas": 18785,
+      "costoUnitarioPlanta": 1.23,
+      "createdAt": "2025-08-01T08:00:00.000Z",
+      "updatedAt": "2025-08-01T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-109",
+      "cicloId": "ciclo-6",
+      "plantillaId": "plantilla-3",
+      "fecha": "2025-09-13",
+      "cantidadPlantas": 32428,
+      "costoUnitarioPlanta": 1.57,
+      "createdAt": "2025-09-01T08:00:00.000Z",
+      "updatedAt": "2025-09-01T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-110",
+      "cicloId": "ciclo-6",
+      "plantillaId": "plantilla-4",
+      "fecha": "2025-09-22",
+      "cantidadPlantas": 19293,
+      "costoUnitarioPlanta": 1.26,
+      "createdAt": "2025-09-01T08:00:00.000Z",
+      "updatedAt": "2025-09-01T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-111",
+      "cicloId": "ciclo-6",
+      "plantillaId": "plantilla-4",
+      "fecha": "2025-10-03",
+      "cantidadPlantas": 31214,
+      "costoUnitarioPlanta": 1.29,
+      "createdAt": "2025-10-01T08:00:00.000Z",
+      "updatedAt": "2025-10-01T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-112",
+      "cicloId": "ciclo-3",
+      "plantillaId": "plantilla-1",
+      "fecha": "2025-11-08",
+      "cantidadPlantas": 19881,
+      "costoUnitarioPlanta": 1.56,
+      "createdAt": "2025-11-01T08:00:00.000Z",
+      "updatedAt": "2025-11-01T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-113",
+      "cicloId": "ciclo-6",
+      "plantillaId": "plantilla-4",
+      "fecha": "2025-11-18",
+      "cantidadPlantas": 14264,
+      "costoUnitarioPlanta": 1.1,
+      "createdAt": "2025-11-01T08:00:00.000Z",
+      "updatedAt": "2025-11-01T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-114",
+      "cicloId": "ciclo-1",
+      "plantillaId": "plantilla-1",
+      "fecha": "2025-12-24",
+      "cantidadPlantas": 11599,
+      "costoUnitarioPlanta": 1.32,
+      "createdAt": "2025-12-01T08:00:00.000Z",
+      "updatedAt": "2025-12-01T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-115",
+      "cicloId": "ciclo-3",
+      "plantillaId": "plantilla-2",
+      "fecha": "2025-12-07",
+      "cantidadPlantas": 10400,
+      "costoUnitarioPlanta": 1.18,
+      "createdAt": "2025-12-01T08:00:00.000Z",
+      "updatedAt": "2025-12-01T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-116",
+      "cicloId": "ciclo-3",
+      "plantillaId": "plantilla-2",
+      "fecha": "2026-01-13",
+      "cantidadPlantas": 32225,
+      "costoUnitarioPlanta": 1.26,
+      "createdAt": "2026-01-01T08:00:00.000Z",
+      "updatedAt": "2026-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-117",
+      "cicloId": "ciclo-5",
+      "plantillaId": "plantilla-6",
+      "fecha": "2026-01-11",
+      "cantidadPlantas": 9156,
+      "costoUnitarioPlanta": 1.03,
+      "createdAt": "2026-01-01T08:00:00.000Z",
+      "updatedAt": "2026-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-118",
+      "cicloId": "ciclo-1",
+      "plantillaId": "plantilla-1",
+      "fecha": "2026-03-24",
+      "cantidadPlantas": 22726,
+      "costoUnitarioPlanta": 1.06,
+      "createdAt": "2026-03-01T08:00:00.000Z",
+      "updatedAt": "2026-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-119",
+      "cicloId": "ciclo-4",
+      "plantillaId": "plantilla-5",
+      "fecha": "2026-04-07",
+      "cantidadPlantas": 33829,
+      "costoUnitarioPlanta": 1.37,
+      "createdAt": "2026-04-01T08:00:00.000Z",
+      "updatedAt": "2026-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-120",
+      "cicloId": "ciclo-6",
+      "plantillaId": "plantilla-3",
+      "fecha": "2026-04-17",
+      "cantidadPlantas": 25141,
+      "costoUnitarioPlanta": 1.19,
+      "createdAt": "2026-04-01T08:00:00.000Z",
+      "updatedAt": "2026-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-121",
+      "cicloId": "ciclo-4",
+      "plantillaId": "plantilla-8",
+      "fecha": "2026-05-14",
+      "cantidadPlantas": 27462,
+      "costoUnitarioPlanta": 1.58,
+      "createdAt": "2026-05-01T08:00:00.000Z",
+      "updatedAt": "2026-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-122",
+      "cicloId": "ciclo-3",
+      "plantillaId": "plantilla-1",
+      "fecha": "2026-05-17",
+      "cantidadPlantas": 15358,
+      "costoUnitarioPlanta": 1.09,
+      "createdAt": "2026-05-01T08:00:00.000Z",
+      "updatedAt": "2026-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "siembra-123",
+      "cicloId": "ciclo-6",
+      "plantillaId": "plantilla-4",
+      "fecha": "2026-06-21",
+      "cantidadPlantas": 11827,
+      "costoUnitarioPlanta": 1.53,
+      "createdAt": "2026-06-01T08:00:00.000Z",
+      "updatedAt": "2026-06-01T08:00:00.000Z"
+    }
+  ],
+  "semilleros": [
+    {
+      "id": "semillero-1",
+      "parcelaId": "parcela-2",
+      "fechaProduccion": "2025-01-30",
+      "costoManoObra": 15000,
+      "costoInsumos": 8000,
+      "costoMaquinaria": 5000,
+      "plantasProducidas": 22400,
+      "createdAt": "2025-01-30T08:00:00.000Z",
+      "updatedAt": "2025-01-30T08:00:00.000Z"
+    },
+    {
+      "id": "semillero-2",
+      "parcelaId": "parcela-6",
+      "fechaProduccion": "2025-05-20",
+      "costoManoObra": 21000,
+      "costoInsumos": 9500,
+      "costoMaquinaria": 7200,
+      "plantasProducidas": 28000,
+      "createdAt": "2025-05-20T08:00:00.000Z",
+      "updatedAt": "2025-05-20T08:00:00.000Z"
+    },
+    {
+      "id": "semillero-3",
+      "parcelaId": "parcela-2",
+      "fechaProduccion": "2025-09-12",
+      "costoManoObra": 18500,
+      "costoInsumos": 7400,
+      "costoMaquinaria": 6100,
+      "plantasProducidas": 25500,
+      "createdAt": "2025-09-12T08:00:00.000Z",
+      "updatedAt": "2025-09-12T08:00:00.000Z"
+    },
+    {
+      "id": "semillero-4",
+      "parcelaId": "parcela-6",
+      "fechaProduccion": "2026-02-08",
+      "costoManoObra": 23500,
+      "costoInsumos": 11200,
+      "costoMaquinaria": 8400,
+      "plantasProducidas": 31000,
+      "createdAt": "2026-02-08T08:00:00.000Z",
+      "updatedAt": "2026-02-08T08:00:00.000Z"
+    }
+  ],
+  "actividades": [
+    {
+      "id": "actividad-1",
+      "nombre": "Siembra",
+      "descripcion": "Colocación de plantas en campo",
+      "createdAt": "2025-01-05T08:00:00.000Z",
+      "updatedAt": "2025-01-05T08:00:00.000Z"
+    },
+    {
+      "id": "actividad-2",
+      "nombre": "Deshierbe",
+      "descripcion": "Eliminación de maleza",
+      "createdAt": "2025-01-05T08:00:00.000Z",
+      "updatedAt": "2025-01-05T08:00:00.000Z"
+    },
+    {
+      "id": "actividad-3",
+      "nombre": "Fumigación",
+      "descripcion": "Aplicación de productos",
+      "createdAt": "2025-01-05T08:00:00.000Z",
+      "updatedAt": "2025-01-05T08:00:00.000Z"
+    },
+    {
+      "id": "actividad-4",
+      "nombre": "Croquis",
+      "descripcion": "Trazado de plantilla",
+      "createdAt": "2025-01-06T08:00:00.000Z",
+      "updatedAt": "2025-01-06T08:00:00.000Z"
+    },
+    {
+      "id": "actividad-5",
+      "nombre": "Limpieza",
+      "descripcion": "Limpieza de parcela",
+      "createdAt": "2025-01-06T08:00:00.000Z",
+      "updatedAt": "2025-01-06T08:00:00.000Z"
+    },
+    {
+      "id": "actividad-6",
+      "nombre": "Preparación de tierra",
+      "descripcion": "Subsoleo y rastreo",
+      "createdAt": "2025-01-06T08:00:00.000Z",
+      "updatedAt": "2025-01-06T08:00:00.000Z"
+    },
+    {
+      "id": "actividad-7",
+      "nombre": "Riego",
+      "descripcion": "Riego por goteo",
+      "createdAt": "2025-01-07T08:00:00.000Z",
+      "updatedAt": "2025-01-07T08:00:00.000Z"
+    },
+    {
+      "id": "actividad-8",
+      "nombre": "Cosecha",
+      "descripcion": "Corte y acarreo de fruta",
+      "createdAt": "2025-01-07T08:00:00.000Z",
+      "updatedAt": "2025-01-07T08:00:00.000Z"
+    }
+  ],
+  "registrosActividad": [
+    {
+      "id": "regact-1",
+      "fecha": "2025-02-05",
+      "actividadId": "actividad-1",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-1",
+      "cicloId": "ciclo-1",
+      "responsable": "Cuadrilla A",
+      "cantidad": 30000,
+      "costo": 12000,
+      "createdAt": "2025-02-05T08:00:00.000Z",
+      "updatedAt": "2025-02-05T08:00:00.000Z"
+    },
+    {
+      "id": "regact-2",
+      "fecha": "2025-03-10",
+      "actividadId": "actividad-2",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-1",
+      "cicloId": "ciclo-1",
+      "responsable": "Cuadrilla B",
+      "cantidad": 1,
+      "costo": 4500,
+      "createdAt": "2025-03-10T08:00:00.000Z",
+      "updatedAt": "2025-03-10T08:00:00.000Z"
+    },
+    {
+      "id": "regact-100",
+      "fecha": "2025-01-22",
+      "actividadId": "actividad-3",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-1",
+      "cicloId": "ciclo-3",
+      "responsable": "Cuadrilla C",
+      "cantidad": 22,
+      "costo": 10227,
+      "createdAt": "2025-01-01T08:00:00.000Z",
+      "updatedAt": "2025-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-101",
+      "fecha": "2025-01-06",
+      "actividadId": "actividad-4",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-4",
+      "cicloId": "ciclo-6",
+      "responsable": "Cuadrilla D",
+      "cantidad": 24,
+      "costo": 19498,
+      "createdAt": "2025-01-01T08:00:00.000Z",
+      "updatedAt": "2025-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-102",
+      "fecha": "2025-01-07",
+      "actividadId": "actividad-8",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-1",
+      "cicloId": "ciclo-1",
+      "responsable": "Cuadrilla A",
+      "cantidad": 1,
+      "costo": 4338,
+      "createdAt": "2025-01-01T08:00:00.000Z",
+      "updatedAt": "2025-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-103",
+      "fecha": "2025-01-16",
+      "actividadId": "actividad-1",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-8",
+      "cicloId": "ciclo-4",
+      "responsable": "Cuadrilla C",
+      "cantidad": 30,
+      "costo": 7882,
+      "createdAt": "2025-01-01T08:00:00.000Z",
+      "updatedAt": "2025-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-104",
+      "fecha": "2025-02-13",
+      "actividadId": "actividad-2",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-1",
+      "cicloId": "ciclo-3",
+      "responsable": "Cuadrilla C",
+      "cantidad": 12,
+      "costo": 18709,
+      "createdAt": "2025-02-01T08:00:00.000Z",
+      "updatedAt": "2025-02-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-105",
+      "fecha": "2025-02-07",
+      "actividadId": "actividad-1",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-1",
+      "cicloId": "ciclo-3",
+      "responsable": "Equipo Riego",
+      "cantidad": 39,
+      "costo": 5760,
+      "createdAt": "2025-02-01T08:00:00.000Z",
+      "updatedAt": "2025-02-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-106",
+      "fecha": "2025-02-12",
+      "actividadId": "actividad-5",
+      "ranchoId": "rancho-3",
+      "parcelaId": "parcela-5",
+      "plantillaId": "plantilla-7",
+      "cicloId": "ciclo-5",
+      "responsable": "Cuadrilla A",
+      "cantidad": 17,
+      "costo": 13221,
+      "createdAt": "2025-02-01T08:00:00.000Z",
+      "updatedAt": "2025-02-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-107",
+      "fecha": "2025-02-02",
+      "actividadId": "actividad-2",
+      "ranchoId": "rancho-3",
+      "parcelaId": "parcela-5",
+      "plantillaId": "plantilla-7",
+      "cicloId": "ciclo-5",
+      "responsable": "Equipo Sanidad",
+      "cantidad": 32,
+      "costo": 12481,
+      "createdAt": "2025-02-01T08:00:00.000Z",
+      "updatedAt": "2025-02-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-108",
+      "fecha": "2025-02-20",
+      "actividadId": "actividad-5",
+      "ranchoId": "rancho-3",
+      "parcelaId": "parcela-5",
+      "plantillaId": "plantilla-7",
+      "cicloId": "ciclo-5",
+      "responsable": "Cuadrilla A",
+      "cantidad": 35,
+      "costo": 7341,
+      "createdAt": "2025-02-01T08:00:00.000Z",
+      "updatedAt": "2025-02-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-109",
+      "fecha": "2025-03-23",
+      "actividadId": "actividad-3",
+      "ranchoId": "rancho-3",
+      "parcelaId": "parcela-5",
+      "plantillaId": "plantilla-7",
+      "cicloId": "ciclo-5",
+      "responsable": "Equipo Sanidad",
+      "cantidad": 10,
+      "costo": 14958,
+      "createdAt": "2025-03-01T08:00:00.000Z",
+      "updatedAt": "2025-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-110",
+      "fecha": "2025-03-13",
+      "actividadId": "actividad-1",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-4",
+      "cicloId": "ciclo-6",
+      "responsable": "Cuadrilla C",
+      "cantidad": 31,
+      "costo": 11928,
+      "createdAt": "2025-03-01T08:00:00.000Z",
+      "updatedAt": "2025-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-111",
+      "fecha": "2025-03-06",
+      "actividadId": "actividad-5",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-4",
+      "cicloId": "ciclo-6",
+      "responsable": "Equipo Riego",
+      "cantidad": 34,
+      "costo": 3833,
+      "createdAt": "2025-03-01T08:00:00.000Z",
+      "updatedAt": "2025-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-112",
+      "fecha": "2025-03-17",
+      "actividadId": "actividad-3",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-8",
+      "cicloId": "ciclo-4",
+      "responsable": "Equipo Riego",
+      "cantidad": 12,
+      "costo": 7995,
+      "createdAt": "2025-03-01T08:00:00.000Z",
+      "updatedAt": "2025-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-113",
+      "fecha": "2025-04-25",
+      "actividadId": "actividad-4",
+      "ranchoId": "rancho-3",
+      "parcelaId": "parcela-5",
+      "plantillaId": "plantilla-6",
+      "cicloId": "ciclo-5",
+      "responsable": "Cuadrilla D",
+      "cantidad": 20,
+      "costo": 12943,
+      "createdAt": "2025-04-01T08:00:00.000Z",
+      "updatedAt": "2025-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-114",
+      "fecha": "2025-04-10",
+      "actividadId": "actividad-2",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-8",
+      "cicloId": "ciclo-4",
+      "responsable": "Equipo Riego",
+      "cantidad": 11,
+      "costo": 8002,
+      "createdAt": "2025-04-01T08:00:00.000Z",
+      "updatedAt": "2025-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-115",
+      "fecha": "2025-04-21",
+      "actividadId": "actividad-8",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-5",
+      "cicloId": "ciclo-4",
+      "responsable": "Cuadrilla A",
+      "cantidad": 29,
+      "costo": 16226,
+      "createdAt": "2025-04-01T08:00:00.000Z",
+      "updatedAt": "2025-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-116",
+      "fecha": "2025-05-20",
+      "actividadId": "actividad-1",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-4",
+      "cicloId": "ciclo-6",
+      "responsable": "Equipo Sanidad",
+      "cantidad": 7,
+      "costo": 4555,
+      "createdAt": "2025-05-01T08:00:00.000Z",
+      "updatedAt": "2025-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-117",
+      "fecha": "2025-05-28",
+      "actividadId": "actividad-3",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-4",
+      "cicloId": "ciclo-6",
+      "responsable": "Cuadrilla A",
+      "cantidad": 20,
+      "costo": 3502,
+      "createdAt": "2025-05-01T08:00:00.000Z",
+      "updatedAt": "2025-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-118",
+      "fecha": "2025-05-24",
+      "actividadId": "actividad-7",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-4",
+      "cicloId": "ciclo-6",
+      "responsable": "Cuadrilla C",
+      "cantidad": 30,
+      "costo": 7369,
+      "createdAt": "2025-05-01T08:00:00.000Z",
+      "updatedAt": "2025-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-119",
+      "fecha": "2025-06-02",
+      "actividadId": "actividad-6",
+      "ranchoId": "rancho-3",
+      "parcelaId": "parcela-5",
+      "plantillaId": "plantilla-7",
+      "cicloId": "ciclo-5",
+      "responsable": "Cuadrilla D",
+      "cantidad": 21,
+      "costo": 13972,
+      "createdAt": "2025-06-01T08:00:00.000Z",
+      "updatedAt": "2025-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-120",
+      "fecha": "2025-06-25",
+      "actividadId": "actividad-6",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-1",
+      "cicloId": "ciclo-3",
+      "responsable": "Cuadrilla D",
+      "cantidad": 14,
+      "costo": 3767,
+      "createdAt": "2025-06-01T08:00:00.000Z",
+      "updatedAt": "2025-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-121",
+      "fecha": "2025-06-06",
+      "actividadId": "actividad-7",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-8",
+      "cicloId": "ciclo-4",
+      "responsable": "Cuadrilla B",
+      "cantidad": 8,
+      "costo": 6057,
+      "createdAt": "2025-06-01T08:00:00.000Z",
+      "updatedAt": "2025-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-122",
+      "fecha": "2025-07-18",
+      "actividadId": "actividad-5",
+      "ranchoId": "rancho-3",
+      "parcelaId": "parcela-5",
+      "plantillaId": "plantilla-6",
+      "cicloId": "ciclo-5",
+      "responsable": "Cuadrilla A",
+      "cantidad": 22,
+      "costo": 7992,
+      "createdAt": "2025-07-01T08:00:00.000Z",
+      "updatedAt": "2025-07-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-123",
+      "fecha": "2025-07-24",
+      "actividadId": "actividad-2",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-2",
+      "cicloId": "ciclo-3",
+      "responsable": "Cuadrilla B",
+      "cantidad": 39,
+      "costo": 14824,
+      "createdAt": "2025-07-01T08:00:00.000Z",
+      "updatedAt": "2025-07-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-124",
+      "fecha": "2025-07-06",
+      "actividadId": "actividad-7",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-8",
+      "cicloId": "ciclo-4",
+      "responsable": "Cuadrilla A",
+      "cantidad": 4,
+      "costo": 10269,
+      "createdAt": "2025-07-01T08:00:00.000Z",
+      "updatedAt": "2025-07-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-125",
+      "fecha": "2025-08-19",
+      "actividadId": "actividad-3",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-1",
+      "cicloId": "ciclo-3",
+      "responsable": "Equipo Sanidad",
+      "cantidad": 16,
+      "costo": 15966,
+      "createdAt": "2025-08-01T08:00:00.000Z",
+      "updatedAt": "2025-08-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-126",
+      "fecha": "2025-08-09",
+      "actividadId": "actividad-8",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-4",
+      "cicloId": "ciclo-6",
+      "responsable": "Equipo Riego",
+      "cantidad": 8,
+      "costo": 19837,
+      "createdAt": "2025-08-01T08:00:00.000Z",
+      "updatedAt": "2025-08-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-127",
+      "fecha": "2025-08-19",
+      "actividadId": "actividad-1",
+      "ranchoId": "rancho-3",
+      "parcelaId": "parcela-5",
+      "plantillaId": "plantilla-6",
+      "cicloId": "ciclo-5",
+      "responsable": "Cuadrilla D",
+      "cantidad": 13,
+      "costo": 19742,
+      "createdAt": "2025-08-01T08:00:00.000Z",
+      "updatedAt": "2025-08-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-128",
+      "fecha": "2025-09-20",
+      "actividadId": "actividad-7",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-8",
+      "cicloId": "ciclo-4",
+      "responsable": "Cuadrilla A",
+      "cantidad": 9,
+      "costo": 2968,
+      "createdAt": "2025-09-01T08:00:00.000Z",
+      "updatedAt": "2025-09-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-129",
+      "fecha": "2025-09-05",
+      "actividadId": "actividad-8",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-5",
+      "cicloId": "ciclo-4",
+      "responsable": "Cuadrilla D",
+      "cantidad": 28,
+      "costo": 10124,
+      "createdAt": "2025-09-01T08:00:00.000Z",
+      "updatedAt": "2025-09-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-130",
+      "fecha": "2025-09-10",
+      "actividadId": "actividad-5",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-3",
+      "cicloId": "ciclo-6",
+      "responsable": "Cuadrilla B",
+      "cantidad": 27,
+      "costo": 7192,
+      "createdAt": "2025-09-01T08:00:00.000Z",
+      "updatedAt": "2025-09-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-131",
+      "fecha": "2025-09-28",
+      "actividadId": "actividad-1",
+      "ranchoId": "rancho-3",
+      "parcelaId": "parcela-5",
+      "plantillaId": "plantilla-7",
+      "cicloId": "ciclo-5",
+      "responsable": "Equipo Sanidad",
+      "cantidad": 6,
+      "costo": 2588,
+      "createdAt": "2025-09-01T08:00:00.000Z",
+      "updatedAt": "2025-09-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-132",
+      "fecha": "2025-09-01",
+      "actividadId": "actividad-1",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-1",
+      "cicloId": "ciclo-1",
+      "responsable": "Cuadrilla A",
+      "cantidad": 11,
+      "costo": 4558,
+      "createdAt": "2025-09-01T08:00:00.000Z",
+      "updatedAt": "2025-09-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-133",
+      "fecha": "2025-10-09",
+      "actividadId": "actividad-4",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-5",
+      "cicloId": "ciclo-4",
+      "responsable": "Equipo Riego",
+      "cantidad": 15,
+      "costo": 14765,
+      "createdAt": "2025-10-01T08:00:00.000Z",
+      "updatedAt": "2025-10-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-134",
+      "fecha": "2025-10-07",
+      "actividadId": "actividad-3",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-1",
+      "cicloId": "ciclo-3",
+      "responsable": "Cuadrilla D",
+      "cantidad": 19,
+      "costo": 10470,
+      "createdAt": "2025-10-01T08:00:00.000Z",
+      "updatedAt": "2025-10-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-135",
+      "fecha": "2025-10-21",
+      "actividadId": "actividad-3",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-8",
+      "cicloId": "ciclo-4",
+      "responsable": "Equipo Sanidad",
+      "cantidad": 29,
+      "costo": 17366,
+      "createdAt": "2025-10-01T08:00:00.000Z",
+      "updatedAt": "2025-10-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-136",
+      "fecha": "2025-11-11",
+      "actividadId": "actividad-7",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-2",
+      "cicloId": "ciclo-3",
+      "responsable": "Cuadrilla C",
+      "cantidad": 6,
+      "costo": 18279,
+      "createdAt": "2025-11-01T08:00:00.000Z",
+      "updatedAt": "2025-11-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-137",
+      "fecha": "2025-11-02",
+      "actividadId": "actividad-3",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-5",
+      "cicloId": "ciclo-4",
+      "responsable": "Cuadrilla A",
+      "cantidad": 7,
+      "costo": 12718,
+      "createdAt": "2025-11-01T08:00:00.000Z",
+      "updatedAt": "2025-11-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-138",
+      "fecha": "2025-11-17",
+      "actividadId": "actividad-4",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-8",
+      "cicloId": "ciclo-4",
+      "responsable": "Cuadrilla C",
+      "cantidad": 20,
+      "costo": 19277,
+      "createdAt": "2025-11-01T08:00:00.000Z",
+      "updatedAt": "2025-11-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-139",
+      "fecha": "2025-11-21",
+      "actividadId": "actividad-2",
+      "ranchoId": "rancho-3",
+      "parcelaId": "parcela-5",
+      "plantillaId": "plantilla-7",
+      "cicloId": "ciclo-5",
+      "responsable": "Cuadrilla D",
+      "cantidad": 5,
+      "costo": 6805,
+      "createdAt": "2025-11-01T08:00:00.000Z",
+      "updatedAt": "2025-11-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-140",
+      "fecha": "2025-11-16",
+      "actividadId": "actividad-5",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-1",
+      "cicloId": "ciclo-1",
+      "responsable": "Cuadrilla B",
+      "cantidad": 26,
+      "costo": 18603,
+      "createdAt": "2025-11-01T08:00:00.000Z",
+      "updatedAt": "2025-11-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-141",
+      "fecha": "2025-12-04",
+      "actividadId": "actividad-2",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-8",
+      "cicloId": "ciclo-4",
+      "responsable": "Equipo Sanidad",
+      "cantidad": 2,
+      "costo": 7001,
+      "createdAt": "2025-12-01T08:00:00.000Z",
+      "updatedAt": "2025-12-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-142",
+      "fecha": "2025-12-10",
+      "actividadId": "actividad-1",
+      "ranchoId": "rancho-3",
+      "parcelaId": "parcela-5",
+      "plantillaId": "plantilla-7",
+      "cicloId": "ciclo-5",
+      "responsable": "Cuadrilla B",
+      "cantidad": 30,
+      "costo": 13446,
+      "createdAt": "2025-12-01T08:00:00.000Z",
+      "updatedAt": "2025-12-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-143",
+      "fecha": "2025-12-09",
+      "actividadId": "actividad-7",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-4",
+      "cicloId": "ciclo-6",
+      "responsable": "Cuadrilla A",
+      "cantidad": 21,
+      "costo": 17399,
+      "createdAt": "2025-12-01T08:00:00.000Z",
+      "updatedAt": "2025-12-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-144",
+      "fecha": "2025-12-12",
+      "actividadId": "actividad-3",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-8",
+      "cicloId": "ciclo-4",
+      "responsable": "Cuadrilla D",
+      "cantidad": 20,
+      "costo": 5180,
+      "createdAt": "2025-12-01T08:00:00.000Z",
+      "updatedAt": "2025-12-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-145",
+      "fecha": "2025-12-15",
+      "actividadId": "actividad-3",
+      "ranchoId": "rancho-3",
+      "parcelaId": "parcela-5",
+      "plantillaId": "plantilla-6",
+      "cicloId": "ciclo-5",
+      "responsable": "Cuadrilla D",
+      "cantidad": 6,
+      "costo": 13590,
+      "createdAt": "2025-12-01T08:00:00.000Z",
+      "updatedAt": "2025-12-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-146",
+      "fecha": "2026-01-15",
+      "actividadId": "actividad-8",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-4",
+      "cicloId": "ciclo-6",
+      "responsable": "Cuadrilla B",
+      "cantidad": 4,
+      "costo": 4284,
+      "createdAt": "2026-01-01T08:00:00.000Z",
+      "updatedAt": "2026-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-147",
+      "fecha": "2026-01-06",
+      "actividadId": "actividad-4",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-5",
+      "cicloId": "ciclo-4",
+      "responsable": "Cuadrilla D",
+      "cantidad": 11,
+      "costo": 11446,
+      "createdAt": "2026-01-01T08:00:00.000Z",
+      "updatedAt": "2026-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-148",
+      "fecha": "2026-01-21",
+      "actividadId": "actividad-5",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-2",
+      "cicloId": "ciclo-3",
+      "responsable": "Cuadrilla A",
+      "cantidad": 6,
+      "costo": 5844,
+      "createdAt": "2026-01-01T08:00:00.000Z",
+      "updatedAt": "2026-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-149",
+      "fecha": "2026-01-22",
+      "actividadId": "actividad-4",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-3",
+      "cicloId": "ciclo-6",
+      "responsable": "Cuadrilla B",
+      "cantidad": 4,
+      "costo": 9530,
+      "createdAt": "2026-01-01T08:00:00.000Z",
+      "updatedAt": "2026-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-150",
+      "fecha": "2026-01-03",
+      "actividadId": "actividad-7",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-4",
+      "cicloId": "ciclo-6",
+      "responsable": "Equipo Sanidad",
+      "cantidad": 26,
+      "costo": 17001,
+      "createdAt": "2026-01-01T08:00:00.000Z",
+      "updatedAt": "2026-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-151",
+      "fecha": "2026-02-28",
+      "actividadId": "actividad-4",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-1",
+      "cicloId": "ciclo-3",
+      "responsable": "Cuadrilla B",
+      "cantidad": 22,
+      "costo": 18713,
+      "createdAt": "2026-02-01T08:00:00.000Z",
+      "updatedAt": "2026-02-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-152",
+      "fecha": "2026-02-10",
+      "actividadId": "actividad-5",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-3",
+      "cicloId": "ciclo-6",
+      "responsable": "Equipo Riego",
+      "cantidad": 39,
+      "costo": 5818,
+      "createdAt": "2026-02-01T08:00:00.000Z",
+      "updatedAt": "2026-02-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-153",
+      "fecha": "2026-02-21",
+      "actividadId": "actividad-2",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-1",
+      "cicloId": "ciclo-1",
+      "responsable": "Cuadrilla A",
+      "cantidad": 36,
+      "costo": 19524,
+      "createdAt": "2026-02-01T08:00:00.000Z",
+      "updatedAt": "2026-02-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-154",
+      "fecha": "2026-02-19",
+      "actividadId": "actividad-6",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-3",
+      "cicloId": "ciclo-6",
+      "responsable": "Cuadrilla D",
+      "cantidad": 3,
+      "costo": 19666,
+      "createdAt": "2026-02-01T08:00:00.000Z",
+      "updatedAt": "2026-02-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-155",
+      "fecha": "2026-03-12",
+      "actividadId": "actividad-6",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-1",
+      "cicloId": "ciclo-3",
+      "responsable": "Equipo Riego",
+      "cantidad": 13,
+      "costo": 2569,
+      "createdAt": "2026-03-01T08:00:00.000Z",
+      "updatedAt": "2026-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-156",
+      "fecha": "2026-03-05",
+      "actividadId": "actividad-2",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-3",
+      "cicloId": "ciclo-6",
+      "responsable": "Cuadrilla C",
+      "cantidad": 36,
+      "costo": 3264,
+      "createdAt": "2026-03-01T08:00:00.000Z",
+      "updatedAt": "2026-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-157",
+      "fecha": "2026-03-12",
+      "actividadId": "actividad-6",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-1",
+      "cicloId": "ciclo-3",
+      "responsable": "Cuadrilla B",
+      "cantidad": 10,
+      "costo": 6974,
+      "createdAt": "2026-03-01T08:00:00.000Z",
+      "updatedAt": "2026-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-158",
+      "fecha": "2026-04-19",
+      "actividadId": "actividad-5",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-8",
+      "cicloId": "ciclo-4",
+      "responsable": "Equipo Riego",
+      "cantidad": 21,
+      "costo": 19585,
+      "createdAt": "2026-04-01T08:00:00.000Z",
+      "updatedAt": "2026-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-159",
+      "fecha": "2026-04-08",
+      "actividadId": "actividad-5",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-1",
+      "cicloId": "ciclo-3",
+      "responsable": "Equipo Sanidad",
+      "cantidad": 23,
+      "costo": 15817,
+      "createdAt": "2026-04-01T08:00:00.000Z",
+      "updatedAt": "2026-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-160",
+      "fecha": "2026-04-28",
+      "actividadId": "actividad-8",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-2",
+      "cicloId": "ciclo-3",
+      "responsable": "Cuadrilla D",
+      "cantidad": 37,
+      "costo": 4813,
+      "createdAt": "2026-04-01T08:00:00.000Z",
+      "updatedAt": "2026-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-161",
+      "fecha": "2026-04-04",
+      "actividadId": "actividad-5",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-3",
+      "cicloId": "ciclo-6",
+      "responsable": "Cuadrilla A",
+      "cantidad": 14,
+      "costo": 18382,
+      "createdAt": "2026-04-01T08:00:00.000Z",
+      "updatedAt": "2026-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-162",
+      "fecha": "2026-05-09",
+      "actividadId": "actividad-1",
+      "ranchoId": "rancho-3",
+      "parcelaId": "parcela-5",
+      "plantillaId": "plantilla-6",
+      "cicloId": "ciclo-5",
+      "responsable": "Cuadrilla A",
+      "cantidad": 18,
+      "costo": 15228,
+      "createdAt": "2026-05-01T08:00:00.000Z",
+      "updatedAt": "2026-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-163",
+      "fecha": "2026-05-01",
+      "actividadId": "actividad-7",
+      "ranchoId": "rancho-3",
+      "parcelaId": "parcela-5",
+      "plantillaId": "plantilla-6",
+      "cicloId": "ciclo-5",
+      "responsable": "Cuadrilla B",
+      "cantidad": 34,
+      "costo": 3461,
+      "createdAt": "2026-05-01T08:00:00.000Z",
+      "updatedAt": "2026-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-164",
+      "fecha": "2026-05-10",
+      "actividadId": "actividad-5",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-8",
+      "cicloId": "ciclo-4",
+      "responsable": "Cuadrilla C",
+      "cantidad": 13,
+      "costo": 3520,
+      "createdAt": "2026-05-01T08:00:00.000Z",
+      "updatedAt": "2026-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-165",
+      "fecha": "2026-05-09",
+      "actividadId": "actividad-4",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-4",
+      "cicloId": "ciclo-6",
+      "responsable": "Equipo Sanidad",
+      "cantidad": 9,
+      "costo": 16994,
+      "createdAt": "2026-05-01T08:00:00.000Z",
+      "updatedAt": "2026-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-166",
+      "fecha": "2026-06-19",
+      "actividadId": "actividad-3",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-3",
+      "cicloId": "ciclo-6",
+      "responsable": "Cuadrilla C",
+      "cantidad": 19,
+      "costo": 19415,
+      "createdAt": "2026-06-01T08:00:00.000Z",
+      "updatedAt": "2026-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-167",
+      "fecha": "2026-06-27",
+      "actividadId": "actividad-4",
+      "ranchoId": "rancho-3",
+      "parcelaId": "parcela-5",
+      "plantillaId": "plantilla-6",
+      "cicloId": "ciclo-5",
+      "responsable": "Cuadrilla C",
+      "cantidad": 22,
+      "costo": 10089,
+      "createdAt": "2026-06-01T08:00:00.000Z",
+      "updatedAt": "2026-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-168",
+      "fecha": "2026-06-18",
+      "actividadId": "actividad-6",
+      "ranchoId": "rancho-3",
+      "parcelaId": "parcela-5",
+      "plantillaId": "plantilla-7",
+      "cicloId": "ciclo-5",
+      "responsable": "Cuadrilla A",
+      "cantidad": 19,
+      "costo": 4656,
+      "createdAt": "2026-06-01T08:00:00.000Z",
+      "updatedAt": "2026-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-169",
+      "fecha": "2026-06-12",
+      "actividadId": "actividad-2",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-8",
+      "cicloId": "ciclo-4",
+      "responsable": "Cuadrilla C",
+      "cantidad": 24,
+      "costo": 7354,
+      "createdAt": "2026-06-01T08:00:00.000Z",
+      "updatedAt": "2026-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "regact-170",
+      "fecha": "2026-06-07",
+      "actividadId": "actividad-7",
+      "ranchoId": "rancho-3",
+      "parcelaId": "parcela-5",
+      "plantillaId": "plantilla-6",
+      "cicloId": "ciclo-5",
+      "responsable": "Equipo Sanidad",
+      "cantidad": 19,
+      "costo": 5401,
+      "createdAt": "2026-06-01T08:00:00.000Z",
+      "updatedAt": "2026-06-01T08:00:00.000Z"
+    }
+  ],
+  "productos": [
+    {
+      "id": "producto-1",
+      "ingredienteActivo": "Glifosato",
+      "nombreComercial": "Faena",
+      "presentacion": "Bidón 20 L",
+      "unidadMedida": "litro",
+      "createdAt": "2025-01-08T08:00:00.000Z",
+      "updatedAt": "2025-01-08T08:00:00.000Z"
+    },
+    {
+      "id": "producto-2",
+      "ingredienteActivo": "Urea 46%",
+      "nombreComercial": "UreaMax",
+      "presentacion": "Saco 50 kg",
+      "unidadMedida": "kilogramo",
+      "createdAt": "2025-01-08T08:00:00.000Z",
+      "updatedAt": "2025-01-08T08:00:00.000Z"
+    },
+    {
+      "id": "producto-3",
+      "ingredienteActivo": "Mancozeb",
+      "nombreComercial": "Dithane",
+      "presentacion": "Bolsa 1 kg",
+      "unidadMedida": "kilogramo",
+      "createdAt": "2025-01-08T08:00:00.000Z",
+      "updatedAt": "2025-01-08T08:00:00.000Z"
+    },
+    {
+      "id": "producto-4",
+      "ingredienteActivo": "NPK 12-24-12",
+      "nombreComercial": "Nitrofoska",
+      "presentacion": "Saco 50 kg",
+      "unidadMedida": "kilogramo",
+      "createdAt": "2025-01-08T08:00:00.000Z",
+      "updatedAt": "2025-01-08T08:00:00.000Z"
+    },
+    {
+      "id": "producto-5",
+      "ingredienteActivo": "Clorpirifos",
+      "nombreComercial": "Lorsban",
+      "presentacion": "Bidón 5 L",
+      "unidadMedida": "litro",
+      "createdAt": "2025-01-08T08:00:00.000Z",
+      "updatedAt": "2025-01-08T08:00:00.000Z"
+    },
+    {
+      "id": "producto-6",
+      "ingredienteActivo": "Nonil fenol",
+      "nombreComercial": "Adherente Maxx",
+      "presentacion": "Bidón 5 L",
+      "unidadMedida": "litro",
+      "createdAt": "2025-01-08T08:00:00.000Z",
+      "updatedAt": "2025-01-08T08:00:00.000Z"
+    },
+    {
+      "id": "producto-7",
+      "ingredienteActivo": "Sulfato de potasio",
+      "nombreComercial": "SOP-K",
+      "presentacion": "Saco 25 kg",
+      "unidadMedida": "kilogramo",
+      "createdAt": "2025-01-08T08:00:00.000Z",
+      "updatedAt": "2025-01-08T08:00:00.000Z"
+    },
+    {
+      "id": "producto-8",
+      "ingredienteActivo": "Fosfato monoamónico",
+      "nombreComercial": "MAP-11",
+      "presentacion": "Saco 50 kg",
+      "unidadMedida": "kilogramo",
+      "createdAt": "2025-01-08T08:00:00.000Z",
+      "updatedAt": "2025-01-08T08:00:00.000Z"
+    },
+    {
+      "id": "producto-9",
+      "ingredienteActivo": "Óxido de cobre",
+      "nombreComercial": "Nordox",
+      "presentacion": "Bolsa 1 kg",
+      "unidadMedida": "kilogramo",
+      "createdAt": "2025-01-08T08:00:00.000Z",
+      "updatedAt": "2025-01-08T08:00:00.000Z"
+    },
+    {
+      "id": "producto-10",
+      "ingredienteActivo": "Fertilizante foliar",
+      "nombreComercial": "Bayfolan",
+      "presentacion": "Bidón 10 L",
+      "unidadMedida": "litro",
+      "createdAt": "2025-01-08T08:00:00.000Z",
+      "updatedAt": "2025-01-08T08:00:00.000Z"
+    },
+    {
+      "id": "producto-11",
+      "ingredienteActivo": "Carbonato de calcio",
+      "nombreComercial": "Cal Agrícola",
+      "presentacion": "Saco 40 kg",
+      "unidadMedida": "kilogramo",
+      "createdAt": "2025-01-08T08:00:00.000Z",
+      "updatedAt": "2025-01-08T08:00:00.000Z"
+    },
+    {
+      "id": "producto-12",
+      "ingredienteActivo": "Diésel",
+      "nombreComercial": "Diésel Pemex",
+      "presentacion": "Tambo 200 L",
+      "unidadMedida": "litro",
+      "createdAt": "2025-01-08T08:00:00.000Z",
+      "updatedAt": "2025-01-08T08:00:00.000Z"
+    }
+  ],
+  "proveedores": [
+    {
+      "id": "proveedor-1",
+      "razonSocial": "Agroquímicos del Golfo S.A.",
+      "contacto": "Luis Martínez",
+      "telefonoPrincipal": "229-111-2233",
+      "telefonoSecundario": "229-111-2234",
+      "whatsapp": "229-555-1122",
+      "email": "ventas@agrogolfo.mx",
+      "createdAt": "2025-01-03T08:00:00.000Z",
+      "updatedAt": "2025-01-03T08:00:00.000Z"
+    },
+    {
+      "id": "proveedor-2",
+      "razonSocial": "Insumos Agrícolas del Sur",
+      "contacto": "María López",
+      "telefonoPrincipal": "271-222-3344",
+      "telefonoSecundario": "",
+      "whatsapp": "271-555-3344",
+      "email": "contacto@iasur.mx",
+      "createdAt": "2025-01-04T08:00:00.000Z",
+      "updatedAt": "2025-01-04T08:00:00.000Z"
+    },
+    {
+      "id": "proveedor-3",
+      "razonSocial": "Fertilizantes del Papaloapan",
+      "contacto": "Jorge Ramírez",
+      "telefonoPrincipal": "287-333-4455",
+      "telefonoSecundario": "",
+      "whatsapp": "287-555-4455",
+      "email": "ventas@fertipapaloapan.mx",
+      "createdAt": "2025-01-05T08:00:00.000Z",
+      "updatedAt": "2025-01-05T08:00:00.000Z"
+    },
+    {
+      "id": "proveedor-4",
+      "razonSocial": "Maquinaria y Riego del Trópico",
+      "contacto": "Ana Cruz",
+      "telefonoPrincipal": "228-444-5566",
+      "telefonoSecundario": "",
+      "whatsapp": "228-555-5566",
+      "email": "ventas@riegotropico.mx",
+      "createdAt": "2025-01-06T08:00:00.000Z",
+      "updatedAt": "2025-01-06T08:00:00.000Z"
+    },
+    {
+      "id": "proveedor-5",
+      "razonSocial": "Combustibles La Cuenca",
+      "contacto": "Pedro Solís",
+      "telefonoPrincipal": "294-555-6677",
+      "telefonoSecundario": "",
+      "whatsapp": "294-555-6678",
+      "email": "ventas@combucuenca.mx",
+      "createdAt": "2025-01-07T08:00:00.000Z",
+      "updatedAt": "2025-01-07T08:00:00.000Z"
+    }
+  ],
+  "movimientosInventario": [
+    {
+      "id": "mov-1",
+      "productoId": "producto-2",
+      "tipo": "entrada",
+      "fecha": "2025-02-10",
+      "cantidad": 100,
+      "costoUnitario": 22,
+      "proveedorId": "proveedor-1",
+      "factura": "F-1001",
+      "destino": "",
+      "createdAt": "2025-02-10T08:00:00.000Z",
+      "updatedAt": "2025-02-10T08:00:00.000Z"
+    },
+    {
+      "id": "mov-2",
+      "productoId": "producto-2",
+      "tipo": "entrada",
+      "fecha": "2025-03-05",
+      "cantidad": 50,
+      "costoUnitario": 24,
+      "proveedorId": "proveedor-1",
+      "factura": "F-1042",
+      "destino": "",
+      "createdAt": "2025-03-05T08:00:00.000Z",
+      "updatedAt": "2025-03-05T08:00:00.000Z"
+    },
+    {
+      "id": "mov-3",
+      "productoId": "producto-2",
+      "tipo": "salida",
+      "fecha": "2025-03-12",
+      "cantidad": 30,
+      "costoUnitario": 22,
+      "proveedorId": "",
+      "factura": "",
+      "destino": "Ciclo ciclo-1",
+      "createdAt": "2025-03-12T08:00:00.000Z",
+      "updatedAt": "2025-03-12T08:00:00.000Z"
+    },
+    {
+      "id": "mov-100",
+      "productoId": "producto-1",
+      "tipo": "entrada",
+      "fecha": "2026-06-12",
+      "cantidad": 75,
+      "costoUnitario": 274,
+      "proveedorId": "proveedor-2",
+      "factura": "F-2000",
+      "destino": "",
+      "createdAt": "2026-06-01T08:00:00.000Z",
+      "updatedAt": "2026-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-101",
+      "productoId": "producto-1",
+      "tipo": "entrada",
+      "fecha": "2025-03-11",
+      "cantidad": 24,
+      "costoUnitario": 260,
+      "proveedorId": "proveedor-4",
+      "factura": "F-2001",
+      "destino": "",
+      "createdAt": "2025-03-01T08:00:00.000Z",
+      "updatedAt": "2025-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-102",
+      "productoId": "producto-1",
+      "tipo": "entrada",
+      "fecha": "2026-01-11",
+      "cantidad": 29,
+      "costoUnitario": 253,
+      "proveedorId": "proveedor-5",
+      "factura": "F-2002",
+      "destino": "",
+      "createdAt": "2026-01-01T08:00:00.000Z",
+      "updatedAt": "2026-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-103",
+      "productoId": "producto-1",
+      "tipo": "entrada",
+      "fecha": "2025-11-27",
+      "cantidad": 20,
+      "costoUnitario": 307,
+      "proveedorId": "proveedor-2",
+      "factura": "F-2003",
+      "destino": "",
+      "createdAt": "2025-11-01T08:00:00.000Z",
+      "updatedAt": "2025-11-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-104",
+      "productoId": "producto-1",
+      "tipo": "entrada",
+      "fecha": "2025-11-22",
+      "cantidad": 115,
+      "costoUnitario": 274,
+      "proveedorId": "proveedor-1",
+      "factura": "F-2004",
+      "destino": "",
+      "createdAt": "2025-11-01T08:00:00.000Z",
+      "updatedAt": "2025-11-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-105",
+      "productoId": "producto-2",
+      "tipo": "entrada",
+      "fecha": "2025-10-11",
+      "cantidad": 329,
+      "costoUnitario": 20,
+      "proveedorId": "proveedor-3",
+      "factura": "F-2005",
+      "destino": "",
+      "createdAt": "2025-10-01T08:00:00.000Z",
+      "updatedAt": "2025-10-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-106",
+      "productoId": "producto-2",
+      "tipo": "entrada",
+      "fecha": "2025-09-10",
+      "cantidad": 150,
+      "costoUnitario": 22,
+      "proveedorId": "proveedor-2",
+      "factura": "F-2006",
+      "destino": "",
+      "createdAt": "2025-09-01T08:00:00.000Z",
+      "updatedAt": "2025-09-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-107",
+      "productoId": "producto-2",
+      "tipo": "entrada",
+      "fecha": "2025-11-19",
+      "cantidad": 157,
+      "costoUnitario": 22,
+      "proveedorId": "proveedor-1",
+      "factura": "F-2007",
+      "destino": "",
+      "createdAt": "2025-11-01T08:00:00.000Z",
+      "updatedAt": "2025-11-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-108",
+      "productoId": "producto-2",
+      "tipo": "entrada",
+      "fecha": "2025-12-24",
+      "cantidad": 331,
+      "costoUnitario": 20,
+      "proveedorId": "proveedor-4",
+      "factura": "F-2008",
+      "destino": "",
+      "createdAt": "2025-12-01T08:00:00.000Z",
+      "updatedAt": "2025-12-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-109",
+      "productoId": "producto-2",
+      "tipo": "entrada",
+      "fecha": "2026-06-18",
+      "cantidad": 327,
+      "costoUnitario": 20,
+      "proveedorId": "proveedor-3",
+      "factura": "F-2009",
+      "destino": "",
+      "createdAt": "2026-06-01T08:00:00.000Z",
+      "updatedAt": "2026-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-110",
+      "productoId": "producto-2",
+      "tipo": "entrada",
+      "fecha": "2026-04-16",
+      "cantidad": 167,
+      "costoUnitario": 24,
+      "proveedorId": "proveedor-4",
+      "factura": "F-2010",
+      "destino": "",
+      "createdAt": "2026-04-01T08:00:00.000Z",
+      "updatedAt": "2026-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-111",
+      "productoId": "producto-3",
+      "tipo": "entrada",
+      "fecha": "2025-08-16",
+      "cantidad": 260,
+      "costoUnitario": 138,
+      "proveedorId": "proveedor-3",
+      "factura": "F-2011",
+      "destino": "",
+      "createdAt": "2025-08-01T08:00:00.000Z",
+      "updatedAt": "2025-08-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-112",
+      "productoId": "producto-3",
+      "tipo": "entrada",
+      "fecha": "2025-03-20",
+      "cantidad": 293,
+      "costoUnitario": 127,
+      "proveedorId": "proveedor-4",
+      "factura": "F-2012",
+      "destino": "",
+      "createdAt": "2025-03-01T08:00:00.000Z",
+      "updatedAt": "2025-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-113",
+      "productoId": "producto-3",
+      "tipo": "entrada",
+      "fecha": "2025-06-19",
+      "cantidad": 220,
+      "costoUnitario": 127,
+      "proveedorId": "proveedor-5",
+      "factura": "F-2013",
+      "destino": "",
+      "createdAt": "2025-06-01T08:00:00.000Z",
+      "updatedAt": "2025-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-114",
+      "productoId": "producto-3",
+      "tipo": "salida",
+      "fecha": "2025-04-07",
+      "cantidad": 77,
+      "costoUnitario": 0,
+      "proveedorId": "",
+      "factura": "",
+      "destino": "Ciclo ciclo-5",
+      "createdAt": "2025-04-01T08:00:00.000Z",
+      "updatedAt": "2025-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-115",
+      "productoId": "producto-3",
+      "tipo": "salida",
+      "fecha": "2025-08-23",
+      "cantidad": 71,
+      "costoUnitario": 0,
+      "proveedorId": "",
+      "factura": "",
+      "destino": "Ciclo ciclo-5",
+      "createdAt": "2025-08-01T08:00:00.000Z",
+      "updatedAt": "2025-08-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-116",
+      "productoId": "producto-4",
+      "tipo": "entrada",
+      "fecha": "2025-06-19",
+      "cantidad": 221,
+      "costoUnitario": 33,
+      "proveedorId": "proveedor-2",
+      "factura": "F-2014",
+      "destino": "",
+      "createdAt": "2025-06-01T08:00:00.000Z",
+      "updatedAt": "2025-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-117",
+      "productoId": "producto-4",
+      "tipo": "entrada",
+      "fecha": "2025-06-23",
+      "cantidad": 277,
+      "costoUnitario": 30,
+      "proveedorId": "proveedor-2",
+      "factura": "F-2015",
+      "destino": "",
+      "createdAt": "2025-06-01T08:00:00.000Z",
+      "updatedAt": "2025-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-118",
+      "productoId": "producto-4",
+      "tipo": "entrada",
+      "fecha": "2025-03-15",
+      "cantidad": 113,
+      "costoUnitario": 33,
+      "proveedorId": "proveedor-1",
+      "factura": "F-2016",
+      "destino": "",
+      "createdAt": "2025-03-01T08:00:00.000Z",
+      "updatedAt": "2025-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-119",
+      "productoId": "producto-4",
+      "tipo": "salida",
+      "fecha": "2025-06-17",
+      "cantidad": 58,
+      "costoUnitario": 0,
+      "proveedorId": "",
+      "factura": "",
+      "destino": "Ciclo ciclo-6",
+      "createdAt": "2025-06-01T08:00:00.000Z",
+      "updatedAt": "2025-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-120",
+      "productoId": "producto-5",
+      "tipo": "entrada",
+      "fecha": "2025-05-22",
+      "cantidad": 72,
+      "costoUnitario": 329,
+      "proveedorId": "proveedor-3",
+      "factura": "F-2017",
+      "destino": "",
+      "createdAt": "2025-05-01T08:00:00.000Z",
+      "updatedAt": "2025-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-121",
+      "productoId": "producto-5",
+      "tipo": "entrada",
+      "fecha": "2025-04-16",
+      "cantidad": 50,
+      "costoUnitario": 300,
+      "proveedorId": "proveedor-1",
+      "factura": "F-2018",
+      "destino": "",
+      "createdAt": "2025-04-01T08:00:00.000Z",
+      "updatedAt": "2025-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-122",
+      "productoId": "producto-5",
+      "tipo": "entrada",
+      "fecha": "2026-03-15",
+      "cantidad": 68,
+      "costoUnitario": 292,
+      "proveedorId": "proveedor-5",
+      "factura": "F-2019",
+      "destino": "",
+      "createdAt": "2026-03-01T08:00:00.000Z",
+      "updatedAt": "2026-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-123",
+      "productoId": "producto-5",
+      "tipo": "entrada",
+      "fecha": "2025-06-14",
+      "cantidad": 77,
+      "costoUnitario": 344,
+      "proveedorId": "proveedor-3",
+      "factura": "F-2020",
+      "destino": "",
+      "createdAt": "2025-06-01T08:00:00.000Z",
+      "updatedAt": "2025-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-124",
+      "productoId": "producto-5",
+      "tipo": "salida",
+      "fecha": "2026-03-19",
+      "cantidad": 5,
+      "costoUnitario": 0,
+      "proveedorId": "",
+      "factura": "",
+      "destino": "Ciclo ciclo-6",
+      "createdAt": "2026-03-01T08:00:00.000Z",
+      "updatedAt": "2026-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-125",
+      "productoId": "producto-6",
+      "tipo": "entrada",
+      "fecha": "2025-11-13",
+      "cantidad": 92,
+      "costoUnitario": 103,
+      "proveedorId": "proveedor-3",
+      "factura": "F-2021",
+      "destino": "",
+      "createdAt": "2025-11-01T08:00:00.000Z",
+      "updatedAt": "2025-11-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-126",
+      "productoId": "producto-6",
+      "tipo": "entrada",
+      "fecha": "2026-06-04",
+      "cantidad": 184,
+      "costoUnitario": 90,
+      "proveedorId": "proveedor-1",
+      "factura": "F-2022",
+      "destino": "",
+      "createdAt": "2026-06-01T08:00:00.000Z",
+      "updatedAt": "2026-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-127",
+      "productoId": "producto-6",
+      "tipo": "entrada",
+      "fecha": "2026-05-27",
+      "cantidad": 228,
+      "costoUnitario": 91,
+      "proveedorId": "proveedor-2",
+      "factura": "F-2023",
+      "destino": "",
+      "createdAt": "2026-05-01T08:00:00.000Z",
+      "updatedAt": "2026-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-128",
+      "productoId": "producto-6",
+      "tipo": "entrada",
+      "fecha": "2025-06-08",
+      "cantidad": 363,
+      "costoUnitario": 98,
+      "proveedorId": "proveedor-1",
+      "factura": "F-2024",
+      "destino": "",
+      "createdAt": "2025-06-01T08:00:00.000Z",
+      "updatedAt": "2025-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-129",
+      "productoId": "producto-6",
+      "tipo": "entrada",
+      "fecha": "2025-01-28",
+      "cantidad": 278,
+      "costoUnitario": 86,
+      "proveedorId": "proveedor-1",
+      "factura": "F-2025",
+      "destino": "",
+      "createdAt": "2025-01-01T08:00:00.000Z",
+      "updatedAt": "2025-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-130",
+      "productoId": "producto-6",
+      "tipo": "salida",
+      "fecha": "2025-12-05",
+      "cantidad": 33,
+      "costoUnitario": 0,
+      "proveedorId": "",
+      "factura": "",
+      "destino": "Ciclo ciclo-1",
+      "createdAt": "2025-12-01T08:00:00.000Z",
+      "updatedAt": "2025-12-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-131",
+      "productoId": "producto-7",
+      "tipo": "entrada",
+      "fecha": "2025-12-23",
+      "cantidad": 354,
+      "costoUnitario": 29,
+      "proveedorId": "proveedor-5",
+      "factura": "F-2026",
+      "destino": "",
+      "createdAt": "2025-12-01T08:00:00.000Z",
+      "updatedAt": "2025-12-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-132",
+      "productoId": "producto-7",
+      "tipo": "entrada",
+      "fecha": "2025-12-19",
+      "cantidad": 105,
+      "costoUnitario": 27,
+      "proveedorId": "proveedor-1",
+      "factura": "F-2027",
+      "destino": "",
+      "createdAt": "2025-12-01T08:00:00.000Z",
+      "updatedAt": "2025-12-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-133",
+      "productoId": "producto-7",
+      "tipo": "entrada",
+      "fecha": "2025-01-05",
+      "cantidad": 220,
+      "costoUnitario": 28,
+      "proveedorId": "proveedor-3",
+      "factura": "F-2028",
+      "destino": "",
+      "createdAt": "2025-01-01T08:00:00.000Z",
+      "updatedAt": "2025-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-134",
+      "productoId": "producto-7",
+      "tipo": "entrada",
+      "fecha": "2025-02-23",
+      "cantidad": 259,
+      "costoUnitario": 28,
+      "proveedorId": "proveedor-4",
+      "factura": "F-2029",
+      "destino": "",
+      "createdAt": "2025-02-01T08:00:00.000Z",
+      "updatedAt": "2025-02-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-135",
+      "productoId": "producto-7",
+      "tipo": "entrada",
+      "fecha": "2026-06-09",
+      "cantidad": 229,
+      "costoUnitario": 26,
+      "proveedorId": "proveedor-4",
+      "factura": "F-2030",
+      "destino": "",
+      "createdAt": "2026-06-01T08:00:00.000Z",
+      "updatedAt": "2026-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-136",
+      "productoId": "producto-7",
+      "tipo": "entrada",
+      "fecha": "2025-07-25",
+      "cantidad": 384,
+      "costoUnitario": 30,
+      "proveedorId": "proveedor-2",
+      "factura": "F-2031",
+      "destino": "",
+      "createdAt": "2025-07-01T08:00:00.000Z",
+      "updatedAt": "2025-07-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-137",
+      "productoId": "producto-7",
+      "tipo": "salida",
+      "fecha": "2026-02-12",
+      "cantidad": 60,
+      "costoUnitario": 0,
+      "proveedorId": "",
+      "factura": "",
+      "destino": "Ciclo ciclo-3",
+      "createdAt": "2026-02-01T08:00:00.000Z",
+      "updatedAt": "2026-02-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-138",
+      "productoId": "producto-8",
+      "tipo": "entrada",
+      "fecha": "2025-12-28",
+      "cantidad": 399,
+      "costoUnitario": 37,
+      "proveedorId": "proveedor-2",
+      "factura": "F-2032",
+      "destino": "",
+      "createdAt": "2025-12-01T08:00:00.000Z",
+      "updatedAt": "2025-12-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-139",
+      "productoId": "producto-8",
+      "tipo": "entrada",
+      "fecha": "2026-02-26",
+      "cantidad": 88,
+      "costoUnitario": 32,
+      "proveedorId": "proveedor-4",
+      "factura": "F-2033",
+      "destino": "",
+      "createdAt": "2026-02-01T08:00:00.000Z",
+      "updatedAt": "2026-02-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-140",
+      "productoId": "producto-8",
+      "tipo": "entrada",
+      "fecha": "2026-02-19",
+      "cantidad": 278,
+      "costoUnitario": 36,
+      "proveedorId": "proveedor-4",
+      "factura": "F-2034",
+      "destino": "",
+      "createdAt": "2026-02-01T08:00:00.000Z",
+      "updatedAt": "2026-02-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-141",
+      "productoId": "producto-8",
+      "tipo": "entrada",
+      "fecha": "2025-11-05",
+      "cantidad": 116,
+      "costoUnitario": 38,
+      "proveedorId": "proveedor-3",
+      "factura": "F-2035",
+      "destino": "",
+      "createdAt": "2025-11-01T08:00:00.000Z",
+      "updatedAt": "2025-11-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-142",
+      "productoId": "producto-8",
+      "tipo": "salida",
+      "fecha": "2026-04-22",
+      "cantidad": 72,
+      "costoUnitario": 0,
+      "proveedorId": "",
+      "factura": "",
+      "destino": "Ciclo ciclo-4",
+      "createdAt": "2026-04-01T08:00:00.000Z",
+      "updatedAt": "2026-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-143",
+      "productoId": "producto-8",
+      "tipo": "salida",
+      "fecha": "2025-03-03",
+      "cantidad": 64,
+      "costoUnitario": 0,
+      "proveedorId": "",
+      "factura": "",
+      "destino": "Ciclo ciclo-3",
+      "createdAt": "2025-03-01T08:00:00.000Z",
+      "updatedAt": "2025-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-144",
+      "productoId": "producto-9",
+      "tipo": "entrada",
+      "fecha": "2025-10-19",
+      "cantidad": 23,
+      "costoUnitario": 230,
+      "proveedorId": "proveedor-5",
+      "factura": "F-2036",
+      "destino": "",
+      "createdAt": "2025-10-01T08:00:00.000Z",
+      "updatedAt": "2025-10-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-145",
+      "productoId": "producto-9",
+      "tipo": "entrada",
+      "fecha": "2025-04-11",
+      "cantidad": 80,
+      "costoUnitario": 214,
+      "proveedorId": "proveedor-4",
+      "factura": "F-2037",
+      "destino": "",
+      "createdAt": "2025-04-01T08:00:00.000Z",
+      "updatedAt": "2025-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-146",
+      "productoId": "producto-9",
+      "tipo": "entrada",
+      "fecha": "2025-08-21",
+      "cantidad": 78,
+      "costoUnitario": 191,
+      "proveedorId": "proveedor-2",
+      "factura": "F-2038",
+      "destino": "",
+      "createdAt": "2025-08-01T08:00:00.000Z",
+      "updatedAt": "2025-08-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-147",
+      "productoId": "producto-10",
+      "tipo": "entrada",
+      "fecha": "2026-02-04",
+      "cantidad": 173,
+      "costoUnitario": 111,
+      "proveedorId": "proveedor-4",
+      "factura": "F-2039",
+      "destino": "",
+      "createdAt": "2026-02-01T08:00:00.000Z",
+      "updatedAt": "2026-02-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-148",
+      "productoId": "producto-10",
+      "tipo": "entrada",
+      "fecha": "2025-10-10",
+      "cantidad": 135,
+      "costoUnitario": 131,
+      "proveedorId": "proveedor-3",
+      "factura": "F-2040",
+      "destino": "",
+      "createdAt": "2025-10-01T08:00:00.000Z",
+      "updatedAt": "2025-10-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-149",
+      "productoId": "producto-10",
+      "tipo": "entrada",
+      "fecha": "2025-02-11",
+      "cantidad": 221,
+      "costoUnitario": 121,
+      "proveedorId": "proveedor-5",
+      "factura": "F-2041",
+      "destino": "",
+      "createdAt": "2025-02-01T08:00:00.000Z",
+      "updatedAt": "2025-02-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-150",
+      "productoId": "producto-10",
+      "tipo": "entrada",
+      "fecha": "2026-01-04",
+      "cantidad": 382,
+      "costoUnitario": 128,
+      "proveedorId": "proveedor-5",
+      "factura": "F-2042",
+      "destino": "",
+      "createdAt": "2026-01-01T08:00:00.000Z",
+      "updatedAt": "2026-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-151",
+      "productoId": "producto-10",
+      "tipo": "entrada",
+      "fecha": "2025-05-27",
+      "cantidad": 202,
+      "costoUnitario": 118,
+      "proveedorId": "proveedor-1",
+      "factura": "F-2043",
+      "destino": "",
+      "createdAt": "2025-05-01T08:00:00.000Z",
+      "updatedAt": "2025-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-152",
+      "productoId": "producto-11",
+      "tipo": "entrada",
+      "fecha": "2025-12-06",
+      "cantidad": 293,
+      "costoUnitario": 6,
+      "proveedorId": "proveedor-5",
+      "factura": "F-2044",
+      "destino": "",
+      "createdAt": "2025-12-01T08:00:00.000Z",
+      "updatedAt": "2025-12-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-153",
+      "productoId": "producto-11",
+      "tipo": "entrada",
+      "fecha": "2025-11-08",
+      "cantidad": 382,
+      "costoUnitario": 7,
+      "proveedorId": "proveedor-2",
+      "factura": "F-2045",
+      "destino": "",
+      "createdAt": "2025-11-01T08:00:00.000Z",
+      "updatedAt": "2025-11-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-154",
+      "productoId": "producto-11",
+      "tipo": "entrada",
+      "fecha": "2025-07-27",
+      "cantidad": 198,
+      "costoUnitario": 6,
+      "proveedorId": "proveedor-3",
+      "factura": "F-2046",
+      "destino": "",
+      "createdAt": "2025-07-01T08:00:00.000Z",
+      "updatedAt": "2025-07-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-155",
+      "productoId": "producto-11",
+      "tipo": "entrada",
+      "fecha": "2025-03-10",
+      "cantidad": 240,
+      "costoUnitario": 6,
+      "proveedorId": "proveedor-4",
+      "factura": "F-2047",
+      "destino": "",
+      "createdAt": "2025-03-01T08:00:00.000Z",
+      "updatedAt": "2025-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-156",
+      "productoId": "producto-11",
+      "tipo": "salida",
+      "fecha": "2025-01-06",
+      "cantidad": 51,
+      "costoUnitario": 0,
+      "proveedorId": "",
+      "factura": "",
+      "destino": "Ciclo ciclo-6",
+      "createdAt": "2025-01-01T08:00:00.000Z",
+      "updatedAt": "2025-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-157",
+      "productoId": "producto-11",
+      "tipo": "salida",
+      "fecha": "2025-07-11",
+      "cantidad": 77,
+      "costoUnitario": 0,
+      "proveedorId": "",
+      "factura": "",
+      "destino": "Ciclo ciclo-3",
+      "createdAt": "2025-07-01T08:00:00.000Z",
+      "updatedAt": "2025-07-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-158",
+      "productoId": "producto-11",
+      "tipo": "salida",
+      "fecha": "2025-12-08",
+      "cantidad": 52,
+      "costoUnitario": 0,
+      "proveedorId": "",
+      "factura": "",
+      "destino": "Ciclo ciclo-5",
+      "createdAt": "2025-12-01T08:00:00.000Z",
+      "updatedAt": "2025-12-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-159",
+      "productoId": "producto-12",
+      "tipo": "entrada",
+      "fecha": "2026-05-20",
+      "cantidad": 385,
+      "costoUnitario": 22,
+      "proveedorId": "proveedor-3",
+      "factura": "F-2048",
+      "destino": "",
+      "createdAt": "2026-05-01T08:00:00.000Z",
+      "updatedAt": "2026-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-160",
+      "productoId": "producto-12",
+      "tipo": "entrada",
+      "fecha": "2026-05-26",
+      "cantidad": 206,
+      "costoUnitario": 22,
+      "proveedorId": "proveedor-5",
+      "factura": "F-2049",
+      "destino": "",
+      "createdAt": "2026-05-01T08:00:00.000Z",
+      "updatedAt": "2026-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-161",
+      "productoId": "producto-12",
+      "tipo": "entrada",
+      "fecha": "2025-05-02",
+      "cantidad": 233,
+      "costoUnitario": 25,
+      "proveedorId": "proveedor-4",
+      "factura": "F-2050",
+      "destino": "",
+      "createdAt": "2025-05-01T08:00:00.000Z",
+      "updatedAt": "2025-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "mov-162",
+      "productoId": "producto-12",
+      "tipo": "entrada",
+      "fecha": "2026-01-21",
+      "cantidad": 101,
+      "costoUnitario": 25,
+      "proveedorId": "proveedor-1",
+      "factura": "F-2051",
+      "destino": "",
+      "createdAt": "2026-01-01T08:00:00.000Z",
+      "updatedAt": "2026-01-01T08:00:00.000Z"
+    }
+  ],
+  "requerimientos": [
+    {
+      "id": "req-1",
+      "folio": "REQ-001",
+      "fecha": "2025-02-08",
+      "solicitante": "Jefe de Campo",
+      "observaciones": "Para fertilización plantilla T-01",
+      "detalles": [
+        {
+          "productoId": "producto-2",
+          "cantidad": 100,
+          "unidadMedida": "kilogramo"
+        }
+      ],
+      "createdAt": "2025-02-08T08:00:00.000Z",
+      "updatedAt": "2025-02-08T08:00:00.000Z"
+    },
+    {
+      "id": "req-100",
+      "folio": "REQ-10",
+      "fecha": "2025-06-13",
+      "solicitante": "Jefe de Campo",
+      "observaciones": "",
+      "detalles": [
+        {
+          "productoId": "producto-7",
+          "cantidad": 70,
+          "unidadMedida": "kilogramo"
+        }
+      ],
+      "createdAt": "2025-06-01T08:00:00.000Z",
+      "updatedAt": "2025-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "req-101",
+      "folio": "REQ-11",
+      "fecha": "2025-04-19",
+      "solicitante": "Jefe de Campo",
+      "observaciones": "",
+      "detalles": [
+        {
+          "productoId": "producto-9",
+          "cantidad": 30,
+          "unidadMedida": "kilogramo"
+        }
+      ],
+      "createdAt": "2025-04-01T08:00:00.000Z",
+      "updatedAt": "2025-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "req-102",
+      "folio": "REQ-12",
+      "fecha": "2025-06-14",
+      "solicitante": "Jefe de Campo",
+      "observaciones": "",
+      "detalles": [
+        {
+          "productoId": "producto-9",
+          "cantidad": 155,
+          "unidadMedida": "kilogramo"
+        },
+        {
+          "productoId": "producto-9",
+          "cantidad": 163,
+          "unidadMedida": "kilogramo"
+        }
+      ],
+      "createdAt": "2025-06-01T08:00:00.000Z",
+      "updatedAt": "2025-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "req-103",
+      "folio": "REQ-13",
+      "fecha": "2025-12-06",
+      "solicitante": "Jefe de Campo",
+      "observaciones": "",
+      "detalles": [
+        {
+          "productoId": "producto-4",
+          "cantidad": 26,
+          "unidadMedida": "kilogramo"
+        },
+        {
+          "productoId": "producto-6",
+          "cantidad": 196,
+          "unidadMedida": "litro"
+        }
+      ],
+      "createdAt": "2025-12-01T08:00:00.000Z",
+      "updatedAt": "2025-12-01T08:00:00.000Z"
+    },
+    {
+      "id": "req-104",
+      "folio": "REQ-14",
+      "fecha": "2026-05-14",
+      "solicitante": "Jefe de Campo",
+      "observaciones": "",
+      "detalles": [
+        {
+          "productoId": "producto-5",
+          "cantidad": 41,
+          "unidadMedida": "litro"
+        }
+      ],
+      "createdAt": "2026-05-01T08:00:00.000Z",
+      "updatedAt": "2026-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "req-105",
+      "folio": "REQ-15",
+      "fecha": "2025-12-03",
+      "solicitante": "Encargado Semillero",
+      "observaciones": "",
+      "detalles": [
+        {
+          "productoId": "producto-8",
+          "cantidad": 167,
+          "unidadMedida": "kilogramo"
+        }
+      ],
+      "createdAt": "2025-12-01T08:00:00.000Z",
+      "updatedAt": "2025-12-01T08:00:00.000Z"
+    },
+    {
+      "id": "req-106",
+      "folio": "REQ-16",
+      "fecha": "2025-05-02",
+      "solicitante": "Encargado Semillero",
+      "observaciones": "",
+      "detalles": [
+        {
+          "productoId": "producto-4",
+          "cantidad": 95,
+          "unidadMedida": "kilogramo"
+        }
+      ],
+      "createdAt": "2025-05-01T08:00:00.000Z",
+      "updatedAt": "2025-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "req-107",
+      "folio": "REQ-17",
+      "fecha": "2025-08-12",
+      "solicitante": "Supervisor Rancho 1",
+      "observaciones": "",
+      "detalles": [
+        {
+          "productoId": "producto-1",
+          "cantidad": 91,
+          "unidadMedida": "litro"
+        },
+        {
+          "productoId": "producto-4",
+          "cantidad": 96,
+          "unidadMedida": "kilogramo"
+        }
+      ],
+      "createdAt": "2025-08-01T08:00:00.000Z",
+      "updatedAt": "2025-08-01T08:00:00.000Z"
+    },
+    {
+      "id": "req-108",
+      "folio": "REQ-18",
+      "fecha": "2025-07-12",
+      "solicitante": "Supervisor Rancho 2",
+      "observaciones": "",
+      "detalles": [
+        {
+          "productoId": "producto-4",
+          "cantidad": 57,
+          "unidadMedida": "kilogramo"
+        }
+      ],
+      "createdAt": "2025-07-01T08:00:00.000Z",
+      "updatedAt": "2025-07-01T08:00:00.000Z"
+    },
+    {
+      "id": "req-109",
+      "folio": "REQ-19",
+      "fecha": "2025-11-17",
+      "solicitante": "Jefe de Campo",
+      "observaciones": "",
+      "detalles": [
+        {
+          "productoId": "producto-6",
+          "cantidad": 129,
+          "unidadMedida": "litro"
+        },
+        {
+          "productoId": "producto-9",
+          "cantidad": 96,
+          "unidadMedida": "kilogramo"
+        }
+      ],
+      "createdAt": "2025-11-01T08:00:00.000Z",
+      "updatedAt": "2025-11-01T08:00:00.000Z"
+    },
+    {
+      "id": "req-110",
+      "folio": "REQ-20",
+      "fecha": "2025-01-08",
+      "solicitante": "Supervisor Rancho 2",
+      "observaciones": "",
+      "detalles": [
+        {
+          "productoId": "producto-5",
+          "cantidad": 95,
+          "unidadMedida": "litro"
+        },
+        {
+          "productoId": "producto-5",
+          "cantidad": 123,
+          "unidadMedida": "litro"
+        },
+        {
+          "productoId": "producto-5",
+          "cantidad": 54,
+          "unidadMedida": "litro"
+        }
+      ],
+      "createdAt": "2025-01-01T08:00:00.000Z",
+      "updatedAt": "2025-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "req-111",
+      "folio": "REQ-21",
+      "fecha": "2025-08-20",
+      "solicitante": "Supervisor Rancho 1",
+      "observaciones": "",
+      "detalles": [
+        {
+          "productoId": "producto-10",
+          "cantidad": 58,
+          "unidadMedida": "litro"
+        },
+        {
+          "productoId": "producto-7",
+          "cantidad": 93,
+          "unidadMedida": "kilogramo"
+        },
+        {
+          "productoId": "producto-5",
+          "cantidad": 167,
+          "unidadMedida": "litro"
+        }
+      ],
+      "createdAt": "2025-08-01T08:00:00.000Z",
+      "updatedAt": "2025-08-01T08:00:00.000Z"
+    },
+    {
+      "id": "req-112",
+      "folio": "REQ-22",
+      "fecha": "2025-03-01",
+      "solicitante": "Jefe de Campo",
+      "observaciones": "",
+      "detalles": [
+        {
+          "productoId": "producto-10",
+          "cantidad": 152,
+          "unidadMedida": "litro"
+        },
+        {
+          "productoId": "producto-6",
+          "cantidad": 86,
+          "unidadMedida": "litro"
+        }
+      ],
+      "createdAt": "2025-03-01T08:00:00.000Z",
+      "updatedAt": "2025-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "req-113",
+      "folio": "REQ-23",
+      "fecha": "2026-06-07",
+      "solicitante": "Encargado Semillero",
+      "observaciones": "",
+      "detalles": [
+        {
+          "productoId": "producto-2",
+          "cantidad": 149,
+          "unidadMedida": "kilogramo"
+        },
+        {
+          "productoId": "producto-8",
+          "cantidad": 112,
+          "unidadMedida": "kilogramo"
+        },
+        {
+          "productoId": "producto-10",
+          "cantidad": 79,
+          "unidadMedida": "litro"
+        }
+      ],
+      "createdAt": "2026-06-01T08:00:00.000Z",
+      "updatedAt": "2026-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "req-114",
+      "folio": "REQ-24",
+      "fecha": "2026-03-19",
+      "solicitante": "Supervisor Rancho 1",
+      "observaciones": "",
+      "detalles": [
+        {
+          "productoId": "producto-7",
+          "cantidad": 199,
+          "unidadMedida": "kilogramo"
+        },
+        {
+          "productoId": "producto-8",
+          "cantidad": 41,
+          "unidadMedida": "kilogramo"
+        },
+        {
+          "productoId": "producto-2",
+          "cantidad": 25,
+          "unidadMedida": "kilogramo"
+        }
+      ],
+      "createdAt": "2026-03-01T08:00:00.000Z",
+      "updatedAt": "2026-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "req-115",
+      "folio": "REQ-25",
+      "fecha": "2025-06-05",
+      "solicitante": "Supervisor Rancho 2",
+      "observaciones": "",
+      "detalles": [
+        {
+          "productoId": "producto-4",
+          "cantidad": 174,
+          "unidadMedida": "kilogramo"
+        },
+        {
+          "productoId": "producto-4",
+          "cantidad": 102,
+          "unidadMedida": "kilogramo"
+        }
+      ],
+      "createdAt": "2025-06-01T08:00:00.000Z",
+      "updatedAt": "2025-06-01T08:00:00.000Z"
+    }
+  ],
+  "cotizaciones": [
+    {
+      "id": "cot-1",
+      "requerimientoId": "req-1",
+      "proveedorId": "proveedor-1",
+      "fecha": "2025-02-09",
+      "estado": "comprada",
+      "detalles": [
+        {
+          "productoId": "producto-2",
+          "cantidad": 100,
+          "precioUnitario": 22
+        }
+      ],
+      "createdAt": "2025-02-09T08:00:00.000Z",
+      "updatedAt": "2025-02-09T08:00:00.000Z"
+    },
+    {
+      "id": "cot-100",
+      "requerimientoId": "req-100",
+      "proveedorId": "proveedor-4",
+      "fecha": "2025-06-21",
+      "estado": "comprada",
+      "detalles": [
+        {
+          "productoId": "producto-7",
+          "cantidad": 70,
+          "precioUnitario": 28
+        }
+      ],
+      "createdAt": "2025-06-01T08:00:00.000Z",
+      "updatedAt": "2025-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "cot-101",
+      "requerimientoId": "req-101",
+      "proveedorId": "proveedor-1",
+      "fecha": "2025-04-20",
+      "estado": "pendiente",
+      "detalles": [
+        {
+          "productoId": "producto-9",
+          "cantidad": 30,
+          "precioUnitario": 202
+        }
+      ],
+      "createdAt": "2025-04-01T08:00:00.000Z",
+      "updatedAt": "2025-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "cot-102",
+      "requerimientoId": "req-102",
+      "proveedorId": "proveedor-2",
+      "fecha": "2025-06-19",
+      "estado": "cotizada",
+      "detalles": [
+        {
+          "productoId": "producto-9",
+          "cantidad": 155,
+          "precioUnitario": 204
+        },
+        {
+          "productoId": "producto-9",
+          "cantidad": 163,
+          "precioUnitario": 217
+        }
+      ],
+      "createdAt": "2025-06-01T08:00:00.000Z",
+      "updatedAt": "2025-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "cot-103",
+      "requerimientoId": "req-103",
+      "proveedorId": "proveedor-2",
+      "fecha": "2025-12-17",
+      "estado": "cotizada",
+      "detalles": [
+        {
+          "productoId": "producto-4",
+          "cantidad": 26,
+          "precioUnitario": 31
+        },
+        {
+          "productoId": "producto-6",
+          "cantidad": 196,
+          "precioUnitario": 91
+        }
+      ],
+      "createdAt": "2025-12-01T08:00:00.000Z",
+      "updatedAt": "2025-12-01T08:00:00.000Z"
+    },
+    {
+      "id": "cot-104",
+      "requerimientoId": "req-104",
+      "proveedorId": "proveedor-3",
+      "fecha": "2026-05-10",
+      "estado": "cotizada",
+      "detalles": [
+        {
+          "productoId": "producto-5",
+          "cantidad": 41,
+          "precioUnitario": 335
+        }
+      ],
+      "createdAt": "2026-05-01T08:00:00.000Z",
+      "updatedAt": "2026-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "cot-105",
+      "requerimientoId": "req-105",
+      "proveedorId": "proveedor-3",
+      "fecha": "2025-12-19",
+      "estado": "pendiente",
+      "detalles": [
+        {
+          "productoId": "producto-8",
+          "cantidad": 167,
+          "precioUnitario": 33
+        }
+      ],
+      "createdAt": "2025-12-01T08:00:00.000Z",
+      "updatedAt": "2025-12-01T08:00:00.000Z"
+    },
+    {
+      "id": "cot-106",
+      "requerimientoId": "req-106",
+      "proveedorId": "proveedor-2",
+      "fecha": "2025-05-20",
+      "estado": "comprada",
+      "detalles": [
+        {
+          "productoId": "producto-4",
+          "cantidad": 95,
+          "precioUnitario": 31
+        }
+      ],
+      "createdAt": "2025-05-01T08:00:00.000Z",
+      "updatedAt": "2025-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "cot-107",
+      "requerimientoId": "req-107",
+      "proveedorId": "proveedor-2",
+      "fecha": "2025-08-19",
+      "estado": "pendiente",
+      "detalles": [
+        {
+          "productoId": "producto-1",
+          "cantidad": 91,
+          "precioUnitario": 286
+        },
+        {
+          "productoId": "producto-4",
+          "cantidad": 96,
+          "precioUnitario": 31
+        }
+      ],
+      "createdAt": "2025-08-01T08:00:00.000Z",
+      "updatedAt": "2025-08-01T08:00:00.000Z"
+    },
+    {
+      "id": "cot-108",
+      "requerimientoId": "req-108",
+      "proveedorId": "proveedor-4",
+      "fecha": "2025-07-02",
+      "estado": "pendiente",
+      "detalles": [
+        {
+          "productoId": "producto-4",
+          "cantidad": 57,
+          "precioUnitario": 30
+        }
+      ],
+      "createdAt": "2025-07-01T08:00:00.000Z",
+      "updatedAt": "2025-07-01T08:00:00.000Z"
+    },
+    {
+      "id": "cot-109",
+      "requerimientoId": "req-109",
+      "proveedorId": "proveedor-3",
+      "fecha": "2025-11-22",
+      "estado": "cotizada",
+      "detalles": [
+        {
+          "productoId": "producto-6",
+          "cantidad": 129,
+          "precioUnitario": 92
+        },
+        {
+          "productoId": "producto-9",
+          "cantidad": 96,
+          "precioUnitario": 206
+        }
+      ],
+      "createdAt": "2025-11-01T08:00:00.000Z",
+      "updatedAt": "2025-11-01T08:00:00.000Z"
+    },
+    {
+      "id": "cot-110",
+      "requerimientoId": "req-110",
+      "proveedorId": "proveedor-2",
+      "fecha": "2025-01-10",
+      "estado": "cotizada",
+      "detalles": [
+        {
+          "productoId": "producto-5",
+          "cantidad": 95,
+          "precioUnitario": 336
+        },
+        {
+          "productoId": "producto-5",
+          "cantidad": 123,
+          "precioUnitario": 318
+        },
+        {
+          "productoId": "producto-5",
+          "cantidad": 54,
+          "precioUnitario": 335
+        }
+      ],
+      "createdAt": "2025-01-01T08:00:00.000Z",
+      "updatedAt": "2025-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "cot-111",
+      "requerimientoId": "req-111",
+      "proveedorId": "proveedor-2",
+      "fecha": "2025-08-10",
+      "estado": "comprada",
+      "detalles": [
+        {
+          "productoId": "producto-10",
+          "cantidad": 58,
+          "precioUnitario": 115
+        },
+        {
+          "productoId": "producto-7",
+          "cantidad": 93,
+          "precioUnitario": 28
+        },
+        {
+          "productoId": "producto-5",
+          "cantidad": 167,
+          "precioUnitario": 317
+        }
+      ],
+      "createdAt": "2025-08-01T08:00:00.000Z",
+      "updatedAt": "2025-08-01T08:00:00.000Z"
+    },
+    {
+      "id": "cot-112",
+      "requerimientoId": "req-112",
+      "proveedorId": "proveedor-3",
+      "fecha": "2025-03-22",
+      "estado": "comprada",
+      "detalles": [
+        {
+          "productoId": "producto-10",
+          "cantidad": 152,
+          "precioUnitario": 126
+        },
+        {
+          "productoId": "producto-6",
+          "cantidad": 86,
+          "precioUnitario": 92
+        }
+      ],
+      "createdAt": "2025-03-01T08:00:00.000Z",
+      "updatedAt": "2025-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "cot-113",
+      "requerimientoId": "req-113",
+      "proveedorId": "proveedor-5",
+      "fecha": "2026-06-14",
+      "estado": "pendiente",
+      "detalles": [
+        {
+          "productoId": "producto-2",
+          "cantidad": 149,
+          "precioUnitario": 21
+        },
+        {
+          "productoId": "producto-8",
+          "cantidad": 112,
+          "precioUnitario": 37
+        },
+        {
+          "productoId": "producto-10",
+          "cantidad": 79,
+          "precioUnitario": 125
+        }
+      ],
+      "createdAt": "2026-06-01T08:00:00.000Z",
+      "updatedAt": "2026-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "cot-114",
+      "requerimientoId": "req-114",
+      "proveedorId": "proveedor-5",
+      "fecha": "2026-03-11",
+      "estado": "cotizada",
+      "detalles": [
+        {
+          "productoId": "producto-7",
+          "cantidad": 199,
+          "precioUnitario": 27
+        },
+        {
+          "productoId": "producto-8",
+          "cantidad": 41,
+          "precioUnitario": 34
+        },
+        {
+          "productoId": "producto-2",
+          "cantidad": 25,
+          "precioUnitario": 22
+        }
+      ],
+      "createdAt": "2026-03-01T08:00:00.000Z",
+      "updatedAt": "2026-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "cot-115",
+      "requerimientoId": "req-115",
+      "proveedorId": "proveedor-4",
+      "fecha": "2025-06-13",
+      "estado": "comprada",
+      "detalles": [
+        {
+          "productoId": "producto-4",
+          "cantidad": 174,
+          "precioUnitario": 30
+        },
+        {
+          "productoId": "producto-4",
+          "cantidad": 102,
+          "precioUnitario": 31
+        }
+      ],
+      "createdAt": "2025-06-01T08:00:00.000Z",
+      "updatedAt": "2025-06-01T08:00:00.000Z"
+    }
+  ],
+  "ordenesCompra": [
+    {
+      "id": "oc-1",
+      "folio": "OC-001",
+      "fecha": "2025-02-09",
+      "proveedorId": "proveedor-1",
+      "estado": "surtida",
+      "detalles": [
+        {
+          "productoId": "producto-2",
+          "cantidad": 100,
+          "precioUnitario": 22
+        }
+      ],
+      "createdAt": "2025-02-09T08:00:00.000Z",
+      "updatedAt": "2025-02-09T08:00:00.000Z"
+    },
+    {
+      "id": "oc-100",
+      "folio": "OC-10",
+      "fecha": "2025-06-07",
+      "proveedorId": "proveedor-4",
+      "estado": "borrador",
+      "detalles": [
+        {
+          "productoId": "producto-7",
+          "cantidad": 70,
+          "precioUnitario": 28
+        }
+      ],
+      "createdAt": "2025-06-01T08:00:00.000Z",
+      "updatedAt": "2025-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "oc-101",
+      "folio": "OC-11",
+      "fecha": "2025-04-01",
+      "proveedorId": "proveedor-1",
+      "estado": "parcial",
+      "detalles": [
+        {
+          "productoId": "producto-9",
+          "cantidad": 30,
+          "precioUnitario": 202
+        }
+      ],
+      "createdAt": "2025-04-01T08:00:00.000Z",
+      "updatedAt": "2025-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "oc-102",
+      "folio": "OC-12",
+      "fecha": "2025-06-23",
+      "proveedorId": "proveedor-2",
+      "estado": "parcial",
+      "detalles": [
+        {
+          "productoId": "producto-9",
+          "cantidad": 155,
+          "precioUnitario": 204
+        },
+        {
+          "productoId": "producto-9",
+          "cantidad": 163,
+          "precioUnitario": 217
+        }
+      ],
+      "createdAt": "2025-06-01T08:00:00.000Z",
+      "updatedAt": "2025-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "oc-103",
+      "folio": "OC-13",
+      "fecha": "2025-12-05",
+      "proveedorId": "proveedor-2",
+      "estado": "autorizada",
+      "detalles": [
+        {
+          "productoId": "producto-4",
+          "cantidad": 26,
+          "precioUnitario": 31
+        },
+        {
+          "productoId": "producto-6",
+          "cantidad": 196,
+          "precioUnitario": 91
+        }
+      ],
+      "createdAt": "2025-12-01T08:00:00.000Z",
+      "updatedAt": "2025-12-01T08:00:00.000Z"
+    },
+    {
+      "id": "oc-104",
+      "folio": "OC-14",
+      "fecha": "2026-05-04",
+      "proveedorId": "proveedor-3",
+      "estado": "autorizada",
+      "detalles": [
+        {
+          "productoId": "producto-5",
+          "cantidad": 41,
+          "precioUnitario": 335
+        }
+      ],
+      "createdAt": "2026-05-01T08:00:00.000Z",
+      "updatedAt": "2026-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "oc-105",
+      "folio": "OC-15",
+      "fecha": "2025-12-22",
+      "proveedorId": "proveedor-3",
+      "estado": "borrador",
+      "detalles": [
+        {
+          "productoId": "producto-8",
+          "cantidad": 167,
+          "precioUnitario": 33
+        }
+      ],
+      "createdAt": "2025-12-01T08:00:00.000Z",
+      "updatedAt": "2025-12-01T08:00:00.000Z"
+    },
+    {
+      "id": "oc-106",
+      "folio": "OC-16",
+      "fecha": "2025-05-20",
+      "proveedorId": "proveedor-2",
+      "estado": "surtida",
+      "detalles": [
+        {
+          "productoId": "producto-4",
+          "cantidad": 95,
+          "precioUnitario": 31
+        }
+      ],
+      "createdAt": "2025-05-01T08:00:00.000Z",
+      "updatedAt": "2025-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "oc-107",
+      "folio": "OC-17",
+      "fecha": "2025-08-07",
+      "proveedorId": "proveedor-2",
+      "estado": "surtida",
+      "detalles": [
+        {
+          "productoId": "producto-1",
+          "cantidad": 91,
+          "precioUnitario": 286
+        },
+        {
+          "productoId": "producto-4",
+          "cantidad": 96,
+          "precioUnitario": 31
+        }
+      ],
+      "createdAt": "2025-08-01T08:00:00.000Z",
+      "updatedAt": "2025-08-01T08:00:00.000Z"
+    },
+    {
+      "id": "oc-108",
+      "folio": "OC-18",
+      "fecha": "2025-07-01",
+      "proveedorId": "proveedor-4",
+      "estado": "parcial",
+      "detalles": [
+        {
+          "productoId": "producto-4",
+          "cantidad": 57,
+          "precioUnitario": 30
+        }
+      ],
+      "createdAt": "2025-07-01T08:00:00.000Z",
+      "updatedAt": "2025-07-01T08:00:00.000Z"
+    },
+    {
+      "id": "oc-109",
+      "folio": "OC-19",
+      "fecha": "2025-11-17",
+      "proveedorId": "proveedor-3",
+      "estado": "surtida",
+      "detalles": [
+        {
+          "productoId": "producto-6",
+          "cantidad": 129,
+          "precioUnitario": 92
+        },
+        {
+          "productoId": "producto-9",
+          "cantidad": 96,
+          "precioUnitario": 206
+        }
+      ],
+      "createdAt": "2025-11-01T08:00:00.000Z",
+      "updatedAt": "2025-11-01T08:00:00.000Z"
+    },
+    {
+      "id": "oc-110",
+      "folio": "OC-20",
+      "fecha": "2025-01-03",
+      "proveedorId": "proveedor-2",
+      "estado": "parcial",
+      "detalles": [
+        {
+          "productoId": "producto-5",
+          "cantidad": 95,
+          "precioUnitario": 336
+        },
+        {
+          "productoId": "producto-5",
+          "cantidad": 123,
+          "precioUnitario": 318
+        },
+        {
+          "productoId": "producto-5",
+          "cantidad": 54,
+          "precioUnitario": 335
+        }
+      ],
+      "createdAt": "2025-01-01T08:00:00.000Z",
+      "updatedAt": "2025-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "oc-111",
+      "folio": "OC-21",
+      "fecha": "2025-08-22",
+      "proveedorId": "proveedor-2",
+      "estado": "autorizada",
+      "detalles": [
+        {
+          "productoId": "producto-10",
+          "cantidad": 58,
+          "precioUnitario": 115
+        },
+        {
+          "productoId": "producto-7",
+          "cantidad": 93,
+          "precioUnitario": 28
+        },
+        {
+          "productoId": "producto-5",
+          "cantidad": 167,
+          "precioUnitario": 317
+        }
+      ],
+      "createdAt": "2025-08-01T08:00:00.000Z",
+      "updatedAt": "2025-08-01T08:00:00.000Z"
+    },
+    {
+      "id": "oc-112",
+      "folio": "OC-22",
+      "fecha": "2025-03-08",
+      "proveedorId": "proveedor-3",
+      "estado": "parcial",
+      "detalles": [
+        {
+          "productoId": "producto-10",
+          "cantidad": 152,
+          "precioUnitario": 126
+        },
+        {
+          "productoId": "producto-6",
+          "cantidad": 86,
+          "precioUnitario": 92
+        }
+      ],
+      "createdAt": "2025-03-01T08:00:00.000Z",
+      "updatedAt": "2025-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "oc-113",
+      "folio": "OC-23",
+      "fecha": "2026-06-09",
+      "proveedorId": "proveedor-5",
+      "estado": "autorizada",
+      "detalles": [
+        {
+          "productoId": "producto-2",
+          "cantidad": 149,
+          "precioUnitario": 21
+        },
+        {
+          "productoId": "producto-8",
+          "cantidad": 112,
+          "precioUnitario": 37
+        },
+        {
+          "productoId": "producto-10",
+          "cantidad": 79,
+          "precioUnitario": 125
+        }
+      ],
+      "createdAt": "2026-06-01T08:00:00.000Z",
+      "updatedAt": "2026-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "oc-114",
+      "folio": "OC-24",
+      "fecha": "2026-03-12",
+      "proveedorId": "proveedor-5",
+      "estado": "parcial",
+      "detalles": [
+        {
+          "productoId": "producto-7",
+          "cantidad": 199,
+          "precioUnitario": 27
+        },
+        {
+          "productoId": "producto-8",
+          "cantidad": 41,
+          "precioUnitario": 34
+        },
+        {
+          "productoId": "producto-2",
+          "cantidad": 25,
+          "precioUnitario": 22
+        }
+      ],
+      "createdAt": "2026-03-01T08:00:00.000Z",
+      "updatedAt": "2026-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "oc-115",
+      "folio": "OC-25",
+      "fecha": "2025-06-01",
+      "proveedorId": "proveedor-4",
+      "estado": "autorizada",
+      "detalles": [
+        {
+          "productoId": "producto-4",
+          "cantidad": 174,
+          "precioUnitario": 30
+        },
+        {
+          "productoId": "producto-4",
+          "cantidad": 102,
+          "precioUnitario": 31
+        }
+      ],
+      "createdAt": "2025-06-01T08:00:00.000Z",
+      "updatedAt": "2025-06-01T08:00:00.000Z"
+    }
+  ],
+  "recepciones": [
+    {
+      "id": "rec-1",
+      "ordenCompraId": "oc-1",
+      "factura": "F-1001",
+      "fecha": "2025-02-10",
+      "detalles": [
+        {
+          "productoId": "producto-2",
+          "cantidad": 100,
+          "costoUnitario": 22
+        }
+      ],
+      "createdAt": "2025-02-10T08:00:00.000Z",
+      "updatedAt": "2025-02-10T08:00:00.000Z"
+    },
+    {
+      "id": "rec-100",
+      "ordenCompraId": "oc-101",
+      "factura": "F-3000",
+      "fecha": "2025-04-08",
+      "detalles": [
+        {
+          "productoId": "producto-9",
+          "cantidad": 30,
+          "costoUnitario": 202
+        }
+      ],
+      "createdAt": "2025-04-01T08:00:00.000Z",
+      "updatedAt": "2025-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "rec-101",
+      "ordenCompraId": "oc-102",
+      "factura": "F-3001",
+      "fecha": "2025-06-17",
+      "detalles": [
+        {
+          "productoId": "producto-9",
+          "cantidad": 155,
+          "costoUnitario": 204
+        },
+        {
+          "productoId": "producto-9",
+          "cantidad": 163,
+          "costoUnitario": 217
+        }
+      ],
+      "createdAt": "2025-06-01T08:00:00.000Z",
+      "updatedAt": "2025-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "rec-102",
+      "ordenCompraId": "oc-106",
+      "factura": "F-3002",
+      "fecha": "2025-05-25",
+      "detalles": [
+        {
+          "productoId": "producto-4",
+          "cantidad": 95,
+          "costoUnitario": 31
+        }
+      ],
+      "createdAt": "2025-05-01T08:00:00.000Z",
+      "updatedAt": "2025-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "rec-103",
+      "ordenCompraId": "oc-107",
+      "factura": "F-3003",
+      "fecha": "2025-08-06",
+      "detalles": [
+        {
+          "productoId": "producto-1",
+          "cantidad": 91,
+          "costoUnitario": 286
+        },
+        {
+          "productoId": "producto-4",
+          "cantidad": 96,
+          "costoUnitario": 31
+        }
+      ],
+      "createdAt": "2025-08-01T08:00:00.000Z",
+      "updatedAt": "2025-08-01T08:00:00.000Z"
+    },
+    {
+      "id": "rec-104",
+      "ordenCompraId": "oc-108",
+      "factura": "F-3004",
+      "fecha": "2025-07-03",
+      "detalles": [
+        {
+          "productoId": "producto-4",
+          "cantidad": 57,
+          "costoUnitario": 30
+        }
+      ],
+      "createdAt": "2025-07-01T08:00:00.000Z",
+      "updatedAt": "2025-07-01T08:00:00.000Z"
+    },
+    {
+      "id": "rec-105",
+      "ordenCompraId": "oc-109",
+      "factura": "F-3005",
+      "fecha": "2025-11-23",
+      "detalles": [
+        {
+          "productoId": "producto-6",
+          "cantidad": 129,
+          "costoUnitario": 92
+        },
+        {
+          "productoId": "producto-9",
+          "cantidad": 96,
+          "costoUnitario": 206
+        }
+      ],
+      "createdAt": "2025-11-01T08:00:00.000Z",
+      "updatedAt": "2025-11-01T08:00:00.000Z"
+    },
+    {
+      "id": "rec-106",
+      "ordenCompraId": "oc-110",
+      "factura": "F-3006",
+      "fecha": "2025-01-07",
+      "detalles": [
+        {
+          "productoId": "producto-5",
+          "cantidad": 95,
+          "costoUnitario": 336
+        },
+        {
+          "productoId": "producto-5",
+          "cantidad": 123,
+          "costoUnitario": 318
+        },
+        {
+          "productoId": "producto-5",
+          "cantidad": 54,
+          "costoUnitario": 335
+        }
+      ],
+      "createdAt": "2025-01-01T08:00:00.000Z",
+      "updatedAt": "2025-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "rec-107",
+      "ordenCompraId": "oc-112",
+      "factura": "F-3007",
+      "fecha": "2025-03-21",
+      "detalles": [
+        {
+          "productoId": "producto-10",
+          "cantidad": 152,
+          "costoUnitario": 126
+        },
+        {
+          "productoId": "producto-6",
+          "cantidad": 86,
+          "costoUnitario": 92
+        }
+      ],
+      "createdAt": "2025-03-01T08:00:00.000Z",
+      "updatedAt": "2025-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "rec-108",
+      "ordenCompraId": "oc-114",
+      "factura": "F-3008",
+      "fecha": "2026-03-21",
+      "detalles": [
+        {
+          "productoId": "producto-7",
+          "cantidad": 199,
+          "costoUnitario": 27
+        },
+        {
+          "productoId": "producto-8",
+          "cantidad": 41,
+          "costoUnitario": 34
+        },
+        {
+          "productoId": "producto-2",
+          "cantidad": 25,
+          "costoUnitario": 22
+        }
+      ],
+      "createdAt": "2026-03-01T08:00:00.000Z",
+      "updatedAt": "2026-03-01T08:00:00.000Z"
+    }
+  ],
+  "cuentasPorPagar": [
+    {
+      "id": "cxp-1",
+      "proveedorId": "proveedor-1",
+      "factura": "F-1001",
+      "importe": 2200,
+      "fechaVencimiento": "2025-03-12",
+      "estado": "pagada",
+      "createdAt": "2025-02-10T08:00:00.000Z",
+      "updatedAt": "2025-02-10T08:00:00.000Z"
+    },
+    {
+      "id": "cxp-100",
+      "proveedorId": "proveedor-1",
+      "factura": "F-3000",
+      "importe": 6060,
+      "fechaVencimiento": "2025-05-21",
+      "estado": "pagada",
+      "createdAt": "2025-04-01T08:00:00.000Z",
+      "updatedAt": "2025-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "cxp-101",
+      "proveedorId": "proveedor-2",
+      "factura": "F-3001",
+      "importe": 66991,
+      "fechaVencimiento": "2025-07-16",
+      "estado": "pagada",
+      "createdAt": "2025-06-01T08:00:00.000Z",
+      "updatedAt": "2025-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "cxp-102",
+      "proveedorId": "proveedor-2",
+      "factura": "F-3002",
+      "importe": 2945,
+      "fechaVencimiento": "2025-06-24",
+      "estado": "vencida",
+      "createdAt": "2025-05-01T08:00:00.000Z",
+      "updatedAt": "2025-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "cxp-103",
+      "proveedorId": "proveedor-2",
+      "factura": "F-3003",
+      "importe": 29002,
+      "fechaVencimiento": "2025-09-20",
+      "estado": "vencida",
+      "createdAt": "2025-08-01T08:00:00.000Z",
+      "updatedAt": "2025-08-01T08:00:00.000Z"
+    },
+    {
+      "id": "cxp-104",
+      "proveedorId": "proveedor-4",
+      "factura": "F-3004",
+      "importe": 1710,
+      "fechaVencimiento": "2025-08-10",
+      "estado": "vencida",
+      "createdAt": "2025-07-01T08:00:00.000Z",
+      "updatedAt": "2025-07-01T08:00:00.000Z"
+    },
+    {
+      "id": "cxp-105",
+      "proveedorId": "proveedor-3",
+      "factura": "F-3005",
+      "importe": 31644,
+      "fechaVencimiento": "2025-12-16",
+      "estado": "pagada",
+      "createdAt": "2025-11-01T08:00:00.000Z",
+      "updatedAt": "2025-11-01T08:00:00.000Z"
+    },
+    {
+      "id": "cxp-106",
+      "proveedorId": "proveedor-2",
+      "factura": "F-3006",
+      "importe": 89124,
+      "fechaVencimiento": "2025-02-28",
+      "estado": "pendiente",
+      "createdAt": "2025-01-01T08:00:00.000Z",
+      "updatedAt": "2025-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "cxp-107",
+      "proveedorId": "proveedor-3",
+      "factura": "F-3007",
+      "importe": 27064,
+      "fechaVencimiento": "2025-04-27",
+      "estado": "pagada",
+      "createdAt": "2025-03-01T08:00:00.000Z",
+      "updatedAt": "2025-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "cxp-108",
+      "proveedorId": "proveedor-5",
+      "factura": "F-3008",
+      "importe": 7317,
+      "fechaVencimiento": "2026-04-28",
+      "estado": "vencida",
+      "createdAt": "2026-03-01T08:00:00.000Z",
+      "updatedAt": "2026-03-01T08:00:00.000Z"
+    }
+  ],
+  "valesSalida": [
+    {
+      "id": "vale-1",
+      "folio": "VS-001",
+      "fecha": "2025-03-12",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-1",
+      "cicloId": "ciclo-1",
+      "detalles": [
+        {
+          "productoId": "producto-2",
+          "cantidad": 30,
+          "costoUnitario": 22
+        }
+      ],
+      "createdAt": "2025-03-12T08:00:00.000Z",
+      "updatedAt": "2025-03-12T08:00:00.000Z"
+    },
+    {
+      "id": "vale-100",
+      "folio": "VS-10",
+      "fecha": "2025-01-20",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-3",
+      "cicloId": "ciclo-6",
+      "detalles": [
+        {
+          "productoId": "producto-10",
+          "cantidad": 23,
+          "costoUnitario": 121
+        },
+        {
+          "productoId": "producto-3",
+          "cantidad": 9,
+          "costoUnitario": 142
+        }
+      ],
+      "createdAt": "2025-01-01T08:00:00.000Z",
+      "updatedAt": "2025-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-101",
+      "folio": "VS-11",
+      "fecha": "2025-01-21",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-8",
+      "cicloId": "ciclo-4",
+      "detalles": [
+        {
+          "productoId": "producto-3",
+          "cantidad": 58,
+          "costoUnitario": 146
+        },
+        {
+          "productoId": "producto-3",
+          "cantidad": 27,
+          "costoUnitario": 141
+        }
+      ],
+      "createdAt": "2025-01-01T08:00:00.000Z",
+      "updatedAt": "2025-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-102",
+      "folio": "VS-12",
+      "fecha": "2025-02-14",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-8",
+      "cicloId": "ciclo-4",
+      "detalles": [
+        {
+          "productoId": "producto-1",
+          "cantidad": 56,
+          "costoUnitario": 289
+        },
+        {
+          "productoId": "producto-1",
+          "cantidad": 43,
+          "costoUnitario": 275
+        }
+      ],
+      "createdAt": "2025-02-01T08:00:00.000Z",
+      "updatedAt": "2025-02-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-103",
+      "folio": "VS-13",
+      "fecha": "2025-03-06",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-3",
+      "cicloId": "ciclo-6",
+      "detalles": [
+        {
+          "productoId": "producto-5",
+          "cantidad": 48,
+          "costoUnitario": 327
+        },
+        {
+          "productoId": "producto-2",
+          "cantidad": 22,
+          "costoUnitario": 21
+        }
+      ],
+      "createdAt": "2025-03-01T08:00:00.000Z",
+      "updatedAt": "2025-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-104",
+      "folio": "VS-14",
+      "fecha": "2025-04-18",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-4",
+      "cicloId": "ciclo-6",
+      "detalles": [
+        {
+          "productoId": "producto-1",
+          "cantidad": 37,
+          "costoUnitario": 274
+        },
+        {
+          "productoId": "producto-11",
+          "cantidad": 24,
+          "costoUnitario": 6
+        },
+        {
+          "productoId": "producto-11",
+          "cantidad": 39,
+          "costoUnitario": 6
+        }
+      ],
+      "createdAt": "2025-04-01T08:00:00.000Z",
+      "updatedAt": "2025-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-105",
+      "folio": "VS-15",
+      "fecha": "2025-05-26",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-3",
+      "cicloId": "ciclo-6",
+      "detalles": [
+        {
+          "productoId": "producto-4",
+          "cantidad": 40,
+          "costoUnitario": 30
+        },
+        {
+          "productoId": "producto-7",
+          "cantidad": 24,
+          "costoUnitario": 29
+        },
+        {
+          "productoId": "producto-12",
+          "cantidad": 36,
+          "costoUnitario": 23
+        }
+      ],
+      "createdAt": "2025-05-01T08:00:00.000Z",
+      "updatedAt": "2025-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-106",
+      "folio": "VS-16",
+      "fecha": "2025-06-06",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-3",
+      "cicloId": "ciclo-6",
+      "detalles": [
+        {
+          "productoId": "producto-3",
+          "cantidad": 22,
+          "costoUnitario": 142
+        }
+      ],
+      "createdAt": "2025-06-01T08:00:00.000Z",
+      "updatedAt": "2025-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-107",
+      "folio": "VS-17",
+      "fecha": "2025-06-19",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-1",
+      "cicloId": "ciclo-3",
+      "detalles": [
+        {
+          "productoId": "producto-12",
+          "cantidad": 36,
+          "costoUnitario": 24
+        }
+      ],
+      "createdAt": "2025-06-01T08:00:00.000Z",
+      "updatedAt": "2025-06-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-108",
+      "folio": "VS-18",
+      "fecha": "2025-07-27",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-3",
+      "cicloId": "ciclo-6",
+      "detalles": [
+        {
+          "productoId": "producto-11",
+          "cantidad": 40,
+          "costoUnitario": 6
+        },
+        {
+          "productoId": "producto-1",
+          "cantidad": 34,
+          "costoUnitario": 269
+        },
+        {
+          "productoId": "producto-3",
+          "cantidad": 49,
+          "costoUnitario": 136
+        }
+      ],
+      "createdAt": "2025-07-01T08:00:00.000Z",
+      "updatedAt": "2025-07-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-109",
+      "folio": "VS-19",
+      "fecha": "2025-07-05",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-8",
+      "cicloId": "ciclo-4",
+      "detalles": [
+        {
+          "productoId": "producto-1",
+          "cantidad": 44,
+          "costoUnitario": 288
+        },
+        {
+          "productoId": "producto-4",
+          "cantidad": 35,
+          "costoUnitario": 31
+        },
+        {
+          "productoId": "producto-8",
+          "cantidad": 49,
+          "costoUnitario": 35
+        }
+      ],
+      "createdAt": "2025-07-01T08:00:00.000Z",
+      "updatedAt": "2025-07-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-110",
+      "folio": "VS-20",
+      "fecha": "2025-08-24",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-3",
+      "parcelaId": "parcela-5",
+      "plantillaId": "plantilla-6",
+      "cicloId": "ciclo-5",
+      "detalles": [
+        {
+          "productoId": "producto-12",
+          "cantidad": 28,
+          "costoUnitario": 24
+        }
+      ],
+      "createdAt": "2025-08-01T08:00:00.000Z",
+      "updatedAt": "2025-08-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-111",
+      "folio": "VS-21",
+      "fecha": "2025-08-08",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-3",
+      "cicloId": "ciclo-6",
+      "detalles": [
+        {
+          "productoId": "producto-3",
+          "cantidad": 17,
+          "costoUnitario": 134
+        },
+        {
+          "productoId": "producto-2",
+          "cantidad": 55,
+          "costoUnitario": 21
+        }
+      ],
+      "createdAt": "2025-08-01T08:00:00.000Z",
+      "updatedAt": "2025-08-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-112",
+      "folio": "VS-22",
+      "fecha": "2025-09-14",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-1",
+      "cicloId": "ciclo-1",
+      "detalles": [
+        {
+          "productoId": "producto-7",
+          "cantidad": 53,
+          "costoUnitario": 29
+        },
+        {
+          "productoId": "producto-7",
+          "cantidad": 31,
+          "costoUnitario": 28
+        },
+        {
+          "productoId": "producto-7",
+          "cantidad": 56,
+          "costoUnitario": 29
+        }
+      ],
+      "createdAt": "2025-09-01T08:00:00.000Z",
+      "updatedAt": "2025-09-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-113",
+      "folio": "VS-23",
+      "fecha": "2025-10-07",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-2",
+      "cicloId": "ciclo-3",
+      "detalles": [
+        {
+          "productoId": "producto-11",
+          "cantidad": 10,
+          "costoUnitario": 6
+        },
+        {
+          "productoId": "producto-12",
+          "cantidad": 25,
+          "costoUnitario": 25
+        },
+        {
+          "productoId": "producto-7",
+          "cantidad": 29,
+          "costoUnitario": 28
+        }
+      ],
+      "createdAt": "2025-10-01T08:00:00.000Z",
+      "updatedAt": "2025-10-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-114",
+      "folio": "VS-24",
+      "fecha": "2025-10-23",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-8",
+      "cicloId": "ciclo-4",
+      "detalles": [
+        {
+          "productoId": "producto-6",
+          "cantidad": 17,
+          "costoUnitario": 98
+        },
+        {
+          "productoId": "producto-3",
+          "cantidad": 49,
+          "costoUnitario": 142
+        }
+      ],
+      "createdAt": "2025-10-01T08:00:00.000Z",
+      "updatedAt": "2025-10-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-115",
+      "folio": "VS-25",
+      "fecha": "2025-11-26",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-8",
+      "cicloId": "ciclo-4",
+      "detalles": [
+        {
+          "productoId": "producto-5",
+          "cantidad": 48,
+          "costoUnitario": 307
+        },
+        {
+          "productoId": "producto-10",
+          "cantidad": 21,
+          "costoUnitario": 122
+        },
+        {
+          "productoId": "producto-11",
+          "cantidad": 8,
+          "costoUnitario": 6
+        }
+      ],
+      "createdAt": "2025-11-01T08:00:00.000Z",
+      "updatedAt": "2025-11-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-116",
+      "folio": "VS-26",
+      "fecha": "2025-11-04",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-3",
+      "parcelaId": "parcela-5",
+      "plantillaId": "plantilla-6",
+      "cicloId": "ciclo-5",
+      "detalles": [
+        {
+          "productoId": "producto-9",
+          "cantidad": 24,
+          "costoUnitario": 218
+        },
+        {
+          "productoId": "producto-8",
+          "cantidad": 36,
+          "costoUnitario": 33
+        }
+      ],
+      "createdAt": "2025-11-01T08:00:00.000Z",
+      "updatedAt": "2025-11-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-117",
+      "folio": "VS-27",
+      "fecha": "2025-12-15",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-4",
+      "plantillaId": "plantilla-8",
+      "cicloId": "ciclo-4",
+      "detalles": [
+        {
+          "productoId": "producto-2",
+          "cantidad": 33,
+          "costoUnitario": 22
+        }
+      ],
+      "createdAt": "2025-12-01T08:00:00.000Z",
+      "updatedAt": "2025-12-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-118",
+      "folio": "VS-28",
+      "fecha": "2025-12-14",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-3",
+      "parcelaId": "parcela-5",
+      "plantillaId": "plantilla-7",
+      "cicloId": "ciclo-5",
+      "detalles": [
+        {
+          "productoId": "producto-6",
+          "cantidad": 30,
+          "costoUnitario": 97
+        }
+      ],
+      "createdAt": "2025-12-01T08:00:00.000Z",
+      "updatedAt": "2025-12-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-119",
+      "folio": "VS-29",
+      "fecha": "2026-01-21",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-3",
+      "parcelaId": "parcela-5",
+      "plantillaId": "plantilla-6",
+      "cicloId": "ciclo-5",
+      "detalles": [
+        {
+          "productoId": "producto-3",
+          "cantidad": 41,
+          "costoUnitario": 135
+        },
+        {
+          "productoId": "producto-8",
+          "cantidad": 15,
+          "costoUnitario": 36
+        },
+        {
+          "productoId": "producto-12",
+          "cantidad": 42,
+          "costoUnitario": 23
+        }
+      ],
+      "createdAt": "2026-01-01T08:00:00.000Z",
+      "updatedAt": "2026-01-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-120",
+      "folio": "VS-30",
+      "fecha": "2026-02-25",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-2",
+      "cicloId": "ciclo-3",
+      "detalles": [
+        {
+          "productoId": "producto-4",
+          "cantidad": 10,
+          "costoUnitario": 30
+        },
+        {
+          "productoId": "producto-2",
+          "cantidad": 26,
+          "costoUnitario": 22
+        },
+        {
+          "productoId": "producto-11",
+          "cantidad": 13,
+          "costoUnitario": 6
+        }
+      ],
+      "createdAt": "2026-02-01T08:00:00.000Z",
+      "updatedAt": "2026-02-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-121",
+      "folio": "VS-31",
+      "fecha": "2026-03-16",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-3",
+      "cicloId": "ciclo-6",
+      "detalles": [
+        {
+          "productoId": "producto-3",
+          "cantidad": 13,
+          "costoUnitario": 134
+        },
+        {
+          "productoId": "producto-5",
+          "cantidad": 46,
+          "costoUnitario": 332
+        },
+        {
+          "productoId": "producto-2",
+          "cantidad": 19,
+          "costoUnitario": 22
+        }
+      ],
+      "createdAt": "2026-03-01T08:00:00.000Z",
+      "updatedAt": "2026-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-122",
+      "folio": "VS-32",
+      "fecha": "2026-03-02",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-1",
+      "cicloId": "ciclo-3",
+      "detalles": [
+        {
+          "productoId": "producto-1",
+          "cantidad": 23,
+          "costoUnitario": 290
+        }
+      ],
+      "createdAt": "2026-03-01T08:00:00.000Z",
+      "updatedAt": "2026-03-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-123",
+      "folio": "VS-33",
+      "fecha": "2026-04-22",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-2",
+      "cicloId": "ciclo-3",
+      "detalles": [
+        {
+          "productoId": "producto-1",
+          "cantidad": 50,
+          "costoUnitario": 291
+        },
+        {
+          "productoId": "producto-3",
+          "cantidad": 42,
+          "costoUnitario": 140
+        },
+        {
+          "productoId": "producto-10",
+          "cantidad": 28,
+          "costoUnitario": 115
+        }
+      ],
+      "createdAt": "2026-04-01T08:00:00.000Z",
+      "updatedAt": "2026-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-124",
+      "folio": "VS-34",
+      "fecha": "2026-04-07",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-4",
+      "cicloId": "ciclo-6",
+      "detalles": [
+        {
+          "productoId": "producto-1",
+          "cantidad": 39,
+          "costoUnitario": 273
+        }
+      ],
+      "createdAt": "2026-04-01T08:00:00.000Z",
+      "updatedAt": "2026-04-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-125",
+      "folio": "VS-35",
+      "fecha": "2026-05-04",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-2",
+      "parcelaId": "parcela-3",
+      "plantillaId": "plantilla-3",
+      "cicloId": "ciclo-6",
+      "detalles": [
+        {
+          "productoId": "producto-2",
+          "cantidad": 5,
+          "costoUnitario": 21
+        }
+      ],
+      "createdAt": "2026-05-01T08:00:00.000Z",
+      "updatedAt": "2026-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-126",
+      "folio": "VS-36",
+      "fecha": "2026-05-01",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-1",
+      "cicloId": "ciclo-1",
+      "detalles": [
+        {
+          "productoId": "producto-2",
+          "cantidad": 51,
+          "costoUnitario": 22
+        },
+        {
+          "productoId": "producto-10",
+          "cantidad": 16,
+          "costoUnitario": 118
+        }
+      ],
+      "createdAt": "2026-05-01T08:00:00.000Z",
+      "updatedAt": "2026-05-01T08:00:00.000Z"
+    },
+    {
+      "id": "vale-127",
+      "folio": "VS-37",
+      "fecha": "2026-06-04",
+      "responsable": "Almacén",
+      "ranchoId": "rancho-1",
+      "parcelaId": "parcela-1",
+      "plantillaId": "plantilla-1",
+      "cicloId": "ciclo-1",
+      "detalles": [
+        {
+          "productoId": "producto-5",
+          "cantidad": 48,
+          "costoUnitario": 322
+        }
+      ],
+      "createdAt": "2026-06-01T08:00:00.000Z",
+      "updatedAt": "2026-06-01T08:00:00.000Z"
+    }
+  ]
+}
