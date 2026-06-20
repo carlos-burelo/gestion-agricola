@@ -1,11 +1,13 @@
-import type { SemilleroFila } from "@/presentation/reports-queries"
+﻿﻿import type { SemilleroFila } from "@/presentation/reports-queries"
 import { ReportDocument, ReportKpis, ReportTable, mxn } from "./report-shell"
 
 export function SemilleroDoc({
   generadoEl,
+  folio,
   data,
 }: {
   generadoEl: string
+  folio: string
   data: SemilleroFila[]
 }) {
   const costoTotal = data.reduce((a, f) => a + f.costoTotal, 0)
@@ -16,6 +18,7 @@ export function SemilleroDoc({
       titulo="Costo de planta de semillero"
       subtitulo="Costo unitario por planta producida"
       generadoEl={generadoEl}
+      folio={folio}
     >
       <ReportKpis
         items={[

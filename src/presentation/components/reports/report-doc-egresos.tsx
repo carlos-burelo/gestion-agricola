@@ -1,12 +1,14 @@
-import type { EgresoMes } from "@/lib/accounting"
+﻿﻿import type { EgresoMes } from "@/lib/accounting"
 import { ReportDocument, ReportKpis, ReportTable, mxn } from "./report-shell"
 
 export function EgresosDoc({
   generadoEl,
+  folio,
   filtros,
   data,
 }: {
   generadoEl: string
+  folio: string
   filtros?: string
   data: EgresoMes[]
 }) {
@@ -16,6 +18,7 @@ export function EgresosDoc({
     <ReportDocument
       titulo="Egresos por periodo (cuentas por pagar)"
       generadoEl={generadoEl}
+      folio={folio}
       filtros={filtros}
     >
       <ReportKpis

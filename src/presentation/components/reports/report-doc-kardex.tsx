@@ -1,12 +1,14 @@
-import { formatDate } from "@/lib/dates"
+﻿﻿import { formatDate } from "@/lib/dates"
 import type { KardexProducto } from "@/presentation/reports-queries"
 import { ReportDocument, ReportKpis, ReportTable, mxn } from "./report-shell"
 
 export function KardexDoc({
   generadoEl,
+  folio,
   data,
 }: {
   generadoEl: string
+  folio: string
   data: KardexProducto
 }) {
   const last = data.filas[data.filas.length - 1]
@@ -21,6 +23,7 @@ export function KardexDoc({
       titulo="Kardex PEPS"
       subtitulo={data.producto}
       generadoEl={generadoEl}
+      folio={folio}
     >
       <ReportKpis
         items={[

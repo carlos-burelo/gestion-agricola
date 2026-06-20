@@ -1,13 +1,15 @@
-import type { EstadoCuentaReporte } from "@/lib/accounting"
+﻿﻿import type { EstadoCuentaReporte } from "@/lib/accounting"
 import { formatDate } from "@/lib/dates"
 import { ReportDocument, ReportKpis, ReportTable, mxn } from "./report-shell"
 
 export function EstadoCuentaDoc({
   generadoEl,
+  folio,
   filtros,
   data,
 }: {
   generadoEl: string
+  folio: string
   filtros?: string
   data: EstadoCuentaReporte
 }) {
@@ -17,6 +19,7 @@ export function EstadoCuentaDoc({
       titulo="Estado de cuenta por proveedor"
       subtitulo={data.proveedor}
       generadoEl={generadoEl}
+      folio={folio}
       filtros={filtros}
     >
       <ReportKpis
@@ -35,7 +38,7 @@ export function EstadoCuentaDoc({
           { key: "importe", label: "Importe", align: "right" },
         ]}
         rows={data.filas.map((f) => ({
-          factura: f.factura || "—",
+          factura: f.factura || "â€”",
           fecha: formatDate(f.fecha),
           vencimiento: formatDate(f.vencimiento),
           estado: f.estado,

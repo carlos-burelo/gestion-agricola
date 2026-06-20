@@ -1,11 +1,13 @@
-import type { InventarioFila } from "@/presentation/reports-queries"
+﻿﻿import type { InventarioFila } from "@/presentation/reports-queries"
 import { ReportDocument, ReportKpis, ReportTable, mxn } from "./report-shell"
 
 export function InventarioDoc({
   generadoEl,
+  folio,
   inventario,
 }: {
   generadoEl: string
+  folio: string
   inventario: InventarioFila[]
 }) {
   const valorTotal = inventario.reduce((a, f) => a + f.valorInventario, 0)

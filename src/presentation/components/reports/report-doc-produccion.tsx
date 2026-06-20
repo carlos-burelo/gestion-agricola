@@ -1,14 +1,16 @@
-import type { ProduccionMes } from "@/presentation/reports-queries"
+﻿﻿import type { ProduccionMes } from "@/presentation/reports-queries"
 import { ReportDocument, ReportKpis, ReportTable } from "./report-shell"
 
 const num = (n: number) => n.toLocaleString("es-MX")
 
 export function ProduccionDoc({
   generadoEl,
+  folio,
   filtros,
   data,
 }: {
   generadoEl: string
+  folio: string
   filtros?: string
   data: ProduccionMes[]
 }) {
@@ -19,6 +21,7 @@ export function ProduccionDoc({
       titulo="Producción de plantas"
       subtitulo="Plantas sembradas y producidas por mes"
       generadoEl={generadoEl}
+      folio={folio}
       filtros={filtros}
     >
       <ReportKpis

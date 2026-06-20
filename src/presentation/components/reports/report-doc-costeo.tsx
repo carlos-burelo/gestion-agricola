@@ -1,11 +1,13 @@
-import type { CosteoNivel } from "@/presentation/reports-queries"
+﻿﻿import type { CosteoNivel } from "@/presentation/reports-queries"
 import { ReportDocument, ReportKpis, ReportTable, mxn } from "./report-shell"
 
 export function CosteoDoc({
   generadoEl,
+  folio,
   data,
 }: {
   generadoEl: string
+  folio: string
   data: CosteoNivel
 }) {
   const manoObra = data.filas.reduce((a, f) => a + f.manoObra, 0)
@@ -16,6 +18,7 @@ export function CosteoDoc({
       titulo="Costeo agrícola"
       subtitulo={data.titulo}
       generadoEl={generadoEl}
+      folio={folio}
     >
       <ReportKpis
         items={[

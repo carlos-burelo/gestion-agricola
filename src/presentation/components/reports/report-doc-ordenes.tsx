@@ -1,26 +1,29 @@
-import { formatDate } from "@/lib/dates"
+﻿﻿import { formatDate } from "@/lib/dates"
 import type { OrdenFila } from "@/presentation/reports-queries"
 import { ReportDocument, ReportKpis, ReportTable, mxn } from "./report-shell"
 
 export function OrdenesDoc({
   generadoEl,
+  folio,
   filtros,
   data,
 }: {
   generadoEl: string
+  folio: string
   filtros?: string
   data: OrdenFila[]
 }) {
   const total = data.reduce((a, o) => a + o.total, 0)
   return (
     <ReportDocument
-      titulo="Órdenes de compra"
+      titulo="Ã“rdenes de compra"
       generadoEl={generadoEl}
+      folio={folio}
       filtros={filtros}
     >
       <ReportKpis
         items={[
-          { label: "Órdenes", value: data.length.toLocaleString("es-MX") },
+          { label: "Ã“rdenes", value: data.length.toLocaleString("es-MX") },
           { label: "Monto total", value: mxn(total) },
           {
             label: "Promedio por orden",

@@ -30,9 +30,10 @@ import {
   estadoCuenta,
   filtrarPorFecha,
 } from "@/lib/accounting"
-import { toDateInput } from "@/lib/dates"
+import { formatDateLong, toDateInput } from "@/lib/dates"
 import { cn } from "@/lib/utils"
 import type { ReportesContext } from "@/presentation/reports-queries"
+import { generarFolio } from "./report-shell"
 import { AgingView } from "./aging-view"
 import { CosteoView } from "./costeo-view"
 import { EgresosView } from "./egresos-view"
@@ -73,12 +74,12 @@ const CATALOGO: {
 
 const ESTADOS_ORDEN = ["borrador", "autorizada", "parcial", "surtida", "cancelada"]
 const ALL = "__all"
-const hoyStr = () => toDateInput()
+const hoyStr = () => formatDateLong(toDateInput())
 
 export function ReportesHub({ ctx }: { ctx: ReportesContext }) {
   const [sel, setSel] = useState<ReportId>("aging")
-  const [desde, setDesde] = useState("")
-  const [hasta, setHasta] = useState("")
+  const [desde, setDesde] = useState(() => toDateInput(new Date(new Date().getFullYear(), 0, 1)))
+  const [hasta, setHasta] = useState(() => toDateInput())
   const [proveedorId, setProveedorId] = useState(ctx.proveedores[0]?.id ?? "")
   const [nivel, setNivel] = useState<NivelCosteo>("ranchoId")
   const [productoId, setProductoId] = useState(ctx.kardex[0]?.productoId ?? "")
@@ -137,34 +138,35 @@ export function ReportesHub({ ctx }: { ctx: ReportesContext }) {
     try {
       const { pdf } = await import("@react-pdf/renderer")
       const g = hoyStr()
+      const folio = generarFolio()
       let doc: ReactElement
       if (sel === "aging") {
         const { AgingDoc } = await import("./report-doc-aging")
-        doc = <AgingDoc generadoEl={g} filtros={rango} data={agingData} />
+        doc = <AgingDoc generadoEl={g} folio={folio} filtros={rango} data={agingData} />
       } else if (sel === "estado") {
         const { EstadoCuentaDoc } = await import("./report-doc-estado-cuenta")
-        doc = <EstadoCuentaDoc generadoEl={g} filtros={rango} data={estadoData} />
+        doc = <EstadoCuentaDoc generadoEl={g} folio={folio} filtros={rango} data={estadoData} />
       } else if (sel === "egresos") {
         const { EgresosDoc } = await import("./report-doc-egresos")
-        doc = <EgresosDoc generadoEl={g} filtros={rango} data={egresosData} />
+        doc = <EgresosDoc generadoEl={g} folio={folio} filtros={rango} data={egresosData} />
       } else if (sel === "costeo" && costeoSel) {
         const { CosteoDoc } = await import("./report-doc-costeo")
-        doc = <CosteoDoc generadoEl={g} data={costeoSel} />
+        doc = <CosteoDoc generadoEl={g} folio={folio} data={costeoSel} />
       } else if (sel === "semillero") {
         const { SemilleroDoc } = await import("./report-doc-semillero")
-        doc = <SemilleroDoc generadoEl={g} data={ctx.semilleros} />
+        doc = <SemilleroDoc generadoEl={g} folio={folio} data={ctx.semilleros} />
       } else if (sel === "kardex" && kardexSel) {
         const { KardexDoc } = await import("./report-doc-kardex")
-        doc = <KardexDoc generadoEl={g} data={kardexSel} />
+        doc = <KardexDoc generadoEl={g} folio={folio} data={kardexSel} />
       } else if (sel === "ordenes") {
         const { OrdenesDoc } = await import("./report-doc-ordenes")
-        doc = <OrdenesDoc generadoEl={g} filtros={rango} data={ordenesData} />
+        doc = <OrdenesDoc generadoEl={g} folio={folio} filtros={rango} data={ordenesData} />
       } else if (sel === "produccion") {
         const { ProduccionDoc } = await import("./report-doc-produccion")
-        doc = <ProduccionDoc generadoEl={g} filtros={rango} data={produccionData} />
+        doc = <ProduccionDoc generadoEl={g} folio={folio} filtros={rango} data={produccionData} />
       } else {
         const { InventarioDoc } = await import("./report-doc-inventario")
-        doc = <InventarioDoc generadoEl={g} inventario={ctx.inventario} />
+        doc = <InventarioDoc generadoEl={g} folio={folio} inventario={ctx.inventario} />
       }
       const blob = await pdf(doc as Parameters<typeof pdf>[0]).toBlob()
       const url = URL.createObjectURL(blob)
@@ -311,7 +313,7 @@ export function ReportesHub({ ctx }: { ctx: ReportesContext }) {
           {sinFiltros && (
             <span className="text-sm text-muted-foreground">Sin filtros para este reporte.</span>
           )}
-          <Button onClick={imprimir} disabled={busy} variant="outline" className="ml-auto">
+          <Button onClick={imprimir} disabled={busy} className="ml-auto">
             <Printer className="size-4" />
             {busy ? "Generando…" : "Imprimir"}
           </Button>
