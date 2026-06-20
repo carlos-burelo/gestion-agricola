@@ -13,12 +13,16 @@ import type { MezclaCosto } from "@/core/application/analytics-service"
 import { EmptyState } from "@/presentation/components/empty-state"
 
 const COLORS = ["var(--chart-1)", "var(--chart-2)", "var(--chart-4)"]
-const config = {
-  valor: { label: "Costo" },
-} satisfies ChartConfig
 
 export function DonutMezcla({ data }: { data: MezclaCosto[] }) {
   if (data.length === 0) return <EmptyState />
+  // Build a per-category config so the legend/tooltip resolve labels + colors.
+  const config: ChartConfig = Object.fromEntries(
+    data.map((d, i) => [
+      d.categoria,
+      { label: d.categoria, color: COLORS[i % COLORS.length] },
+    ]),
+  )
   return (
     <ChartContainer config={config} className="mx-auto aspect-square h-64">
       <PieChart>
