@@ -7,6 +7,7 @@ import { TraceabilityService } from "@/core/application/traceability-service"
 import type { BaseEntity, CollectionName } from "@/core/domain/entities"
 import type { Repository, UnitOfWork } from "@/core/domain/repositories"
 import { JsonUnitOfWork } from "./persistence/json-repository"
+import { SqlUnitOfWork } from "./persistence/sql/sql-unit-of-work"
 
 /**
  * Composition root. This is the ONLY module that decides which concrete
@@ -14,7 +15,8 @@ import { JsonUnitOfWork } from "./persistence/json-repository"
  * swap `JsonUnitOfWork` for e.g. `SqlUnitOfWork` here — every consumer keeps
  * importing the same factory functions and nothing else changes.
  */
-const uow: UnitOfWork = new JsonUnitOfWork()
+const uow: UnitOfWork =
+  process.env.DB_DRIVER === "json" ? new JsonUnitOfWork() : new SqlUnitOfWork()
 
 export function repository<T extends BaseEntity>(
   collection: CollectionName,
