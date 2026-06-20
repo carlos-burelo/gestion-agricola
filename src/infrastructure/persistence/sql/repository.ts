@@ -1,5 +1,5 @@
 import "server-only"
-import { and, eq, getTableColumns } from "drizzle-orm"
+import { and, asc, eq, getTableColumns } from "drizzle-orm"
 import type { BaseEntity } from "@/core/domain/entities"
 import { NotFoundError } from "@/core/domain/errors"
 import type {
@@ -21,8 +21,17 @@ export class DrizzleRepository<T extends BaseEntity> implements Repository<T> {
     return getTableColumns(this.cfg.table) as Record<string, unknown>
   }
 
+  /** Stable deterministic order (matches JSON insertion semantics). */
+  private order() {
+    const c = this.cols()
+    return [asc(c.createdAt as never), asc(c.id as never)]
+  }
+
   async findAll(): Promise<T[]> {
-    const rows = await db.select().from(this.cfg.table)
+    const rows = await db
+      .select()
+      .from(this.cfg.table)
+      .orderBy(...this.order())
     return rows.map((r) =>
       toEntity<T>(r, this.cfg.dateFields, this.cfg.nullableFields),
     )
@@ -51,6 +60,7 @@ export class DrizzleRepository<T extends BaseEntity> implements Repository<T> {
       .select()
       .from(this.cfg.table)
       .where(and(...conds))
+      .orderBy(...this.order())
     return rows.map((r) =>
       toEntity<T>(r, this.cfg.dateFields, this.cfg.nullableFields),
     )

@@ -1,5 +1,5 @@
 import "server-only"
-import { and, eq, getTableColumns, inArray } from "drizzle-orm"
+import { and, asc, eq, getTableColumns, inArray } from "drizzle-orm"
 import type { BaseEntity } from "@/core/domain/entities"
 import { NotFoundError } from "@/core/domain/errors"
 import type {
@@ -28,6 +28,12 @@ export class AggregateRepository<T extends BaseEntity>
     return getTableColumns(this.cfg.child) as Record<string, unknown>
   }
 
+  /** Stable deterministic order for parents (matches JSON insertion). */
+  private order() {
+    const c = this.parentCols()
+    return [asc(c.createdAt as never), asc(c.id as never)]
+  }
+
   /** Quita id/fk de la fila hija para exponer sólo los campos de la línea. */
   private stripLine(
     childRow: Record<string, unknown>,
@@ -48,6 +54,7 @@ export class AggregateRepository<T extends BaseEntity>
       .select()
       .from(this.cfg.child)
       .where(inArray(fkCol, ids))
+      .orderBy(asc(this.childCols().id as never))
     const byParent = new Map<string, Record<string, unknown>[]>()
     for (const c of childRows) {
       const key = (c as Record<string, unknown>)[this.cfg.parentFk] as string
@@ -63,7 +70,10 @@ export class AggregateRepository<T extends BaseEntity>
   }
 
   async findAll(): Promise<T[]> {
-    const rows = await db.select().from(this.cfg.table)
+    const rows = await db
+      .select()
+      .from(this.cfg.table)
+      .orderBy(...this.order())
     return this.hydrate(rows)
   }
 
@@ -86,7 +96,8 @@ export class AggregateRepository<T extends BaseEntity>
           .select()
           .from(this.cfg.table)
           .where(and(...conds))
-      : await db.select().from(this.cfg.table)
+          .orderBy(...this.order())
+      : await db.select().from(this.cfg.table).orderBy(...this.order())
     return this.hydrate(rows)
   }
 
