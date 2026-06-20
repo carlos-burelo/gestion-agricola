@@ -3,6 +3,7 @@
 import { useState, useTransition } from "react"
 import { toast } from "sonner"
 import { Button } from "@/components/ui/button"
+import { DatePicker } from "@/components/ui/date-picker"
 import {
   Dialog,
   DialogContent,
@@ -156,11 +157,10 @@ function renderInput(
       )
     case "date":
       return (
-        <Input
+        <DatePicker
           id={field.name}
-          type="date"
           value={value}
-          onChange={(e) => setField(field.name, e.target.value)}
+          onChange={(v) => setField(field.name, v)}
         />
       )
     case "select":
