@@ -18,6 +18,7 @@ import {
   SelectValue,
 } from "@/components/ui/select"
 import type { TraceStep } from "@/core/application/traceability-service"
+import { formatDate } from "@/lib/dates"
 import { trazarAction } from "@/presentation/actions/operations-actions"
 
 interface ReqOption {
@@ -101,7 +102,7 @@ export function TraceView({ requerimientos }: { requerimientos: ReqOption[] }) {
                   <div className="flex items-center justify-between">
                     <h3 className="font-semibold">{step.etapa}</h3>
                     <span className="text-sm text-muted-foreground">
-                      {step.fecha || "—"}
+                      {formatDate(step.fecha, "long")}
                     </span>
                   </div>
                   <p className="text-sm">

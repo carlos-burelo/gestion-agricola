@@ -27,6 +27,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { formatDate, toDateInput } from "@/lib/dates"
 import {
   getKardexAction,
   registrarSalidaAction,
@@ -118,7 +119,7 @@ export function KardexView({ productos }: { productos: ProductoOption[] }) {
                 id="fecha"
                 name="fecha"
                 type="date"
-                defaultValue={new Date().toISOString().slice(0, 10)}
+                defaultValue={toDateInput()}
                 required
               />
             </div>
@@ -182,7 +183,7 @@ export function KardexView({ productos }: { productos: ProductoOption[] }) {
                 ) : (
                   rows.map((r) => (
                     <TableRow key={r.movimientoId}>
-                      <TableCell>{r.fecha}</TableCell>
+                      <TableCell>{formatDate(r.fecha)}</TableCell>
                       <TableCell>
                         <StatusBadge estado={r.tipo} />
                       </TableCell>

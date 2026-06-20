@@ -1,24 +1,13 @@
+import { formatDate } from "@/lib/dates"
 import type { FieldConfig } from "@/presentation/config/modules"
 import { cn } from "@/lib/utils"
 import { StatusBadge } from "./status-badge"
 
 const MONEY = ["costo", "importe", "precio", "valor"]
-const MONTHS = [
-  "ene", "feb", "mar", "abr", "may", "jun",
-  "jul", "ago", "sep", "oct", "nov", "dic",
-]
 
 function isMoney(name: string): boolean {
   const n = name.toLowerCase()
   return MONEY.some((k) => n.includes(k))
-}
-
-function formatDate(v: string): string {
-  const d = new Date(v)
-  if (Number.isNaN(d.getTime())) return v
-  return `${String(d.getUTCDate()).padStart(2, "0")} ${MONTHS[d.getUTCMonth()]} ${String(
-    d.getUTCFullYear(),
-  ).slice(2)}`
 }
 
 /** Plain-text value used for sorting and global search. */
