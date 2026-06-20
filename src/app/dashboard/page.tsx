@@ -1,17 +1,20 @@
 import { Boxes, Leaf, MapPin, Sprout } from "lucide-react"
-import Link from "next/link"
 import type { Ciclo } from "@/core/domain/entities"
-import { analyticsService, inventoryService } from "@/infrastructure/container"
+import {
+  analyticsService,
+  costingService,
+  inventoryService,
+} from "@/infrastructure/container"
 import { ChartCard } from "@/presentation/components/chart-card"
 import { AreaCostos } from "@/presentation/components/charts/area-costos"
+import { BarCosteoNivel } from "@/presentation/components/charts/bar-costeo-nivel"
 import { BarTopProductos } from "@/presentation/components/charts/bar-top-productos"
 import { DonutMezcla } from "@/presentation/components/charts/donut-mezcla"
 import { LinePlantas } from "@/presentation/components/charts/line-plantas"
 import { PageHeader } from "@/presentation/components/page-header"
-import { SectionHeader } from "@/presentation/components/section-header"
 import { StatCard } from "@/presentation/components/stat-card"
-import { MODULES } from "@/presentation/config/modules"
-import { loadRecords } from "@/presentation/queries"
+import { getModuleBySlug } from "@/presentation/config/modules"
+import { loadLabelMap, loadRecords } from "@/presentation/queries"
 
 const currency = (n: number) =>
   new Intl.NumberFormat("es-MX", {
@@ -22,21 +25,30 @@ const currency = (n: number) =>
 
 export default async function DashboardHome() {
   const analytics = analyticsService()
-  const [ranchos, parcelas, ciclos, existencias, costosMes, plantasMes, mezcla] =
-    await Promise.all([
-      loadRecords("ranchos"),
-      loadRecords("parcelas"),
-      loadRecords<Ciclo>("ciclos"),
-      inventoryService().existencias(),
-      analytics.costosPorMes(),
-      analytics.plantasPorMes(),
-      analytics.mezclaCostos(),
-    ])
+  const costing = costingService()
+  const [
+    ranchos,
+    parcelas,
+    ciclos,
+    existencias,
+    costosMes,
+    plantasMes,
+    mezcla,
+    costoRancho,
+    ranchoLabels,
+  ] = await Promise.all([
+    loadRecords("ranchos"),
+    loadRecords("parcelas"),
+    loadRecords<Ciclo>("ciclos"),
+    inventoryService().existencias(),
+    analytics.costosPorMes(),
+    analytics.plantasPorMes(),
+    analytics.mezclaCostos(),
+    costing.resumenPorNivel("ranchoId"),
+    loadLabelMap(getModuleBySlug("ranchos")!),
+  ])
 
-  const valorInventario = existencias.reduce(
-    (a, e) => a + e.valorInventario,
-    0,
-  )
+  const valorInventario = existencias.reduce((a, e) => a + e.valorInventario, 0)
   const ciclosActivos = ciclos.filter((c) => c.estado === "activo").length
 
   const topProductos = [...existencias]
@@ -84,7 +96,7 @@ export default async function DashboardHome() {
       <PageHeader
         badge="Sistema de gestión agrícola"
         title="Producción de Piña"
-        description="Control de costos e inversiones por rancho, parcela, plantilla y ciclo, con trazabilidad completa de la cadena de compras."
+        description="Indicadores y analítica de costos, inventario y producción por rancho, parcela, plantilla y ciclo."
       />
 
       <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
@@ -95,10 +107,7 @@ export default async function DashboardHome() {
 
       <section className="grid gap-6 lg:grid-cols-3">
         <div className="lg:col-span-2">
-          <ChartCard
-            title="Costos por mes"
-            description="Mano de obra vs. insumos"
-          >
+          <ChartCard title="Costos por mes" description="Mano de obra vs. insumos">
             <AreaCostos data={costosMes} />
           </ChartCard>
         </div>
@@ -123,19 +132,12 @@ export default async function DashboardHome() {
       </section>
 
       <section>
-        <SectionHeader title="Accesos rápidos" />
-        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-          {MODULES.map((m) => (
-            <Link
-              key={m.slug}
-              href={`/dashboard/${m.slug}`}
-              className="rounded-lg border border-border bg-card p-3 text-sm transition-colors hover:border-primary"
-            >
-              <p className="font-medium text-foreground">{m.title}</p>
-              <p className="mt-0.5 text-xs text-muted-foreground">{m.group}</p>
-            </Link>
-          ))}
-        </div>
+        <ChartCard
+          title="Costos por rancho"
+          description="Mano de obra vs. insumos acumulados por unidad productiva"
+        >
+          <BarCosteoNivel rows={costoRancho} labels={ranchoLabels} />
+        </ChartCard>
       </section>
     </div>
   )
