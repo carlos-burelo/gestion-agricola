@@ -83,7 +83,7 @@ export function SidebarNav() {
                 <Leaf className="size-5" />
               </span>
               <span className="flex flex-col gap-0.5 leading-none">
-                <span className="font-semibold">AgroPiña</span>
+                <span className="font-semibold">Gestion agricola</span>
                 <span className="text-xs text-sidebar-foreground/70">
                   Gestión de producción
                 </span>

@@ -9,9 +9,16 @@ import { useEffect, useRef, useState, useTransition } from "react"
 import { toast } from "sonner"
 import { TerraDraw, TerraDrawPolygonMode } from "terra-draw"
 import { TerraDrawMapLibreGLAdapter } from "terra-draw-maplibre-gl-adapter"
-import { Pencil, Save, X } from "lucide-react"
+import { Save, X } from "lucide-react"
 import { Map, MapControls, type MapRef, useMap } from "@/components/ui/map"
 import { Button } from "@/components/ui/button"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import type { GeoPolygon } from "@/core/domain/entities"
 import { saveParcelaGeometria } from "@/presentation/actions/geo-actions"
 import type { ParcelaMapa } from "@/presentation/geo-queries"
@@ -190,12 +197,31 @@ export function FieldMap({ parcelas: initial }: { parcelas: ParcelaMapa[] }) {
   const [pending, startTransition] = useTransition()
   const mapRef = useRef<MapRef>(null)
   const drawRef = useRef<TerraDraw | null>(null)
+  // Ignore polygon clicks while drawing so the edit target can't change.
+  const editingRef = useRef(false)
+  editingRef.current = editing
 
   const style = satellite ? SATELLITE_STYLE : STREET_STYLE
   const first = parcelas.find((p) => p.geometria)
   const center = (first?.geometria?.coordinates[0][0] as [number, number]) ?? [
     -95.87, 18.1,
   ]
+
+  // Picker over ALL parcelas (incl. unmapped) so any can be defined; unmapped
+  // first so they are easy to reach.
+  const parcelaOptions = [...parcelas]
+    .sort((a, b) => {
+      const am = a.geometria ? 1 : 0
+      const bm = b.geometria ? 1 : 0
+      if (am !== bm) return am - bm
+      return a.identificador.localeCompare(b.identificador)
+    })
+    .map((p) => ({
+      id: p.id,
+      label: `${p.identificador} · ${p.ranchoNombre}${
+        p.geometria ? " ✓" : " (sin límites)"
+      }`,
+    }))
 
   function startEditing() {
     const map = mapRef.current
@@ -214,6 +240,7 @@ export function FieldMap({ parcelas: initial }: { parcelas: ParcelaMapa[] }) {
     drawRef.current?.stop()
     drawRef.current = null
     setEditing(false)
+    setSelected(null)
   }
 
   function saveEditing() {
@@ -268,56 +295,77 @@ export function FieldMap({ parcelas: initial }: { parcelas: ParcelaMapa[] }) {
         <ParcelLayer
           parcelas={parcelas}
           selectedId={selected?.id ?? null}
-          onSelect={(id) =>
+          onSelect={(id) => {
+            if (editingRef.current) return
             setSelected(parcelas.find((p) => p.id === id) ?? null)
-          }
+          }}
         />
       </Map>
 
-      <div className="absolute left-3 top-3 z-10 flex gap-2">
-        <Button
-          size="sm"
-          variant={satellite ? "default" : "outline"}
-          onClick={() => setSatellite(true)}
-        >
-          Satélite
-        </Button>
-        <Button
-          size="sm"
-          variant={!satellite ? "default" : "outline"}
-          onClick={() => setSatellite(false)}
-        >
-          Calle
-        </Button>
-      </div>
-
-      {/* Edit controls */}
-      <div className="absolute bottom-3 left-3 z-10 flex items-center gap-2">
-        {editing ? (
-          <>
-            <span className="rounded-md bg-background/80 px-2 py-1 text-xs text-muted-foreground backdrop-blur">
-              Dibuja el polígono de {selected?.identificador} y guarda
-            </span>
-            <Button size="sm" onClick={saveEditing} disabled={pending}>
-              <Save className="size-4" /> Guardar
-            </Button>
-            <Button size="sm" variant="outline" onClick={stopEditing}>
-              <X className="size-4" /> Cancelar
-            </Button>
-          </>
-        ) : (
-          selected && (
-            <Button size="sm" variant="secondary" onClick={startEditing}>
-              <Pencil className="size-4" /> Editar límites de{" "}
-              {selected.identificador}
-            </Button>
-          )
+      <div className="absolute left-3 top-3 z-10 flex flex-col gap-2">
+        <div className="flex gap-2">
+          <Button
+            size="sm"
+            variant={satellite ? "default" : "outline"}
+            onClick={() => setSatellite(true)}
+          >
+            Satélite
+          </Button>
+          <Button
+            size="sm"
+            variant={!satellite ? "default" : "outline"}
+            onClick={() => setSatellite(false)}
+          >
+            Calle
+          </Button>
+        </div>
+        {!editing && (
+          <Select
+            value={selected?.id ?? ""}
+            onValueChange={(id) => {
+              if (!id) return
+              setSelected(parcelas.find((p) => p.id === id) ?? null)
+            }}
+            items={Object.fromEntries(parcelaOptions.map((p) => [p.id, p.label]))}
+          >
+            <SelectTrigger className="h-9 w-64 bg-background">
+              <SelectValue placeholder="Definir parcela…" />
+            </SelectTrigger>
+            <SelectContent>
+              {parcelaOptions.map((p) => (
+                <SelectItem key={p.id} value={p.id}>
+                  {p.label}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
         )}
       </div>
 
+      {/* Edit controls (shown only while drawing; panel is closed then) */}
+      {editing && (
+        <div className="absolute bottom-3 left-3 right-3 z-10 flex flex-wrap items-center gap-2">
+          <span className="rounded-md bg-background/80 px-2 py-1 text-xs text-muted-foreground backdrop-blur">
+            {selected?.geometria
+              ? "Arrastra los vértices (click en el borde añade puntos) y guarda"
+              : "Dibuja el polígono punto por punto y guarda"}{" "}
+            · {selected?.identificador}
+          </span>
+          <Button size="sm" onClick={saveEditing} disabled={pending}>
+            <Save className="size-4" /> Guardar
+          </Button>
+          <Button size="sm" variant="outline" onClick={stopEditing}>
+            <X className="size-4" /> Cancelar
+          </Button>
+        </div>
+      )}
+
       <ParcelaDetailPanel
         parcela={panelOpen ? selected : null}
-        onClose={() => setSelected(null)}
+        onEdit={startEditing}
+        onClose={() => {
+          if (!editing) setSelected(null)
+        }}
       />
     </div>
   )
