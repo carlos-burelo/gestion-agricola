@@ -44,9 +44,7 @@ export class TraceabilityService {
     })
     if (!req) return steps
 
-    const [cot] = await this.cotizaciones.findWhere(
-      (c) => c.requerimientoId === req.id,
-    )
+    const [cot] = await this.cotizaciones.findBy({ requerimientoId: req.id })
     steps.push({
       etapa: "Cotización",
       referencia: cot?.id ?? "—",
@@ -57,7 +55,7 @@ export class TraceabilityService {
 
     const proveedorId = cot?.proveedorId
     const [orden] = proveedorId
-      ? await this.ordenes.findWhere((o) => o.proveedorId === proveedorId)
+      ? await this.ordenes.findBy({ proveedorId })
       : []
     steps.push({
       etapa: "Orden de compra",
@@ -68,7 +66,7 @@ export class TraceabilityService {
     })
 
     const [recepcion] = orden
-      ? await this.recepciones.findWhere((r) => r.ordenCompraId === orden.id)
+      ? await this.recepciones.findBy({ ordenCompraId: orden.id })
       : []
     steps.push({
       etapa: "Recepción / Factura",
@@ -81,7 +79,7 @@ export class TraceabilityService {
     })
 
     const [cxp] = recepcion
-      ? await this.cuentas.findWhere((c) => c.factura === recepcion.factura)
+      ? await this.cuentas.findBy({ factura: recepcion.factura })
       : []
     steps.push({
       etapa: "Cuenta por pagar",

@@ -27,6 +27,8 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
+import { DatePicker } from "@/components/ui/date-picker"
+import { formatDate, toDateInput } from "@/lib/dates"
 import {
   getKardexAction,
   registrarSalidaAction,
@@ -47,6 +49,7 @@ export function KardexView({ productos }: { productos: ProductoOption[] }) {
   const [rows, setRows] = useState<KardexRow[]>([])
   const [loaded, setLoaded] = useState(false)
   const [error, setError] = useState<string | null>(null)
+  const [fecha, setFecha] = useState(toDateInput())
   const [pending, startTransition] = useTransition()
 
   const load = (id: string) => {
@@ -114,12 +117,11 @@ export function KardexView({ productos }: { productos: ProductoOption[] }) {
             </div>
             <div className="grid gap-2">
               <Label htmlFor="fecha">Fecha</Label>
-              <Input
+              <DatePicker
                 id="fecha"
                 name="fecha"
-                type="date"
-                defaultValue={new Date().toISOString().slice(0, 10)}
-                required
+                value={fecha}
+                onChange={setFecha}
               />
             </div>
             <div className="grid gap-2">
@@ -182,7 +184,7 @@ export function KardexView({ productos }: { productos: ProductoOption[] }) {
                 ) : (
                   rows.map((r) => (
                     <TableRow key={r.movimientoId}>
-                      <TableCell>{r.fecha}</TableCell>
+                      <TableCell>{formatDate(r.fecha)}</TableCell>
                       <TableCell>
                         <StatusBadge estado={r.tipo} />
                       </TableCell>

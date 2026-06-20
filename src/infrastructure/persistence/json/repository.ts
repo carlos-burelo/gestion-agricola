@@ -7,7 +7,7 @@ import type {
   UnitOfWork,
   UpdateEntity,
 } from "@/core/domain/repositories"
-import { jsonDatastore } from "./json-datastore"
+import { jsonDatastore } from "./datastore"
 
 function nowIso(): string {
   return new Date().toISOString()
@@ -35,9 +35,10 @@ export class JsonRepository<T extends BaseEntity> implements Repository<T> {
     return rows.find((row) => row.id === id) ?? null
   }
 
-  async findWhere(predicate: (entity: T) => boolean): Promise<T[]> {
+  async findBy(criteria: Partial<T>): Promise<T[]> {
     const rows = await jsonDatastore.read<T>(this.collection)
-    return rows.filter(predicate)
+    const entries = Object.entries(criteria) as [keyof T, unknown][]
+    return rows.filter((row) => entries.every(([k, v]) => row[k] === v))
   }
 
   async create(data: NewEntity<T>): Promise<T> {

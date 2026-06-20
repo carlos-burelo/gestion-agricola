@@ -8,6 +8,7 @@ import {
   inventoryService,
   traceabilityService,
 } from "@/infrastructure/container"
+import { toDateInput } from "@/lib/dates"
 
 export interface ActionResult<T = unknown> {
   ok: boolean
@@ -31,7 +32,7 @@ export async function registrarSalidaAction(
     await inventoryService().registrarSalida({
       productoId: String(formData.get("productoId") ?? ""),
       cantidad: Number(formData.get("cantidad") ?? 0),
-      fecha: String(formData.get("fecha") ?? new Date().toISOString().slice(0, 10)),
+      fecha: String(formData.get("fecha") ?? toDateInput()),
       destino: String(formData.get("destino") ?? ""),
     })
     revalidatePath("/dashboard/kardex")

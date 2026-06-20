@@ -1,5 +1,6 @@
 import type { Requerimiento } from "@/core/domain/entities"
 import { repository } from "@/infrastructure/container"
+import { formatDate } from "@/lib/dates"
 import { PageHeader } from "@/presentation/components/page-header"
 import { TraceView } from "@/presentation/components/trace-view"
 
@@ -7,7 +8,7 @@ export default async function TrazabilidadPage() {
   const reqs = await repository<Requerimiento>("requerimientos").findAll()
   const options = reqs.map((r) => ({
     value: r.id,
-    label: `${r.folio} — ${r.solicitante} (${r.fecha})`,
+    label: `${r.folio} — ${r.solicitante} (${formatDate(r.fecha)})`,
   }))
 
   return (

@@ -1,6 +1,7 @@
 "use client"
 
-import { MapPin } from "lucide-react"
+import { MapPin, PencilRuler } from "lucide-react"
+import { Button } from "@/components/ui/button"
 import {
   Sheet,
   SheetContent,
@@ -21,9 +22,11 @@ const currency = (n: number) =>
 export function ParcelaDetailPanel({
   parcela,
   onClose,
+  onEdit,
 }: {
   parcela: ParcelaMapa | null
   onClose: () => void
+  onEdit: () => void
 }) {
   return (
     <Sheet open={!!parcela} onOpenChange={(o) => !o && onClose()}>
@@ -54,6 +57,10 @@ export function ParcelaDetailPanel({
                 Esta parcela aún no tiene límites dibujados.
               </p>
             )}
+            <Button onClick={onEdit} className="w-full">
+              <PencilRuler className="size-4" />
+              {parcela.geometria ? "Editar límites" : "Definir límites"}
+            </Button>
           </div>
         )}
       </SheetContent>

@@ -1,6 +1,6 @@
 "use client"
 
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts"
+import { Bar, BarChart, CartesianGrid, LabelList, XAxis, YAxis } from "recharts"
 import {
   ChartContainer,
   ChartTooltip,
@@ -13,6 +13,10 @@ const config = {
   valor: { label: "Valor", color: "var(--chart-1)" },
 } satisfies ChartConfig
 
+/** Compact label: 35000 → "35k", 4 → "4". */
+const compact = (v: number) =>
+  Math.abs(v) >= 1000 ? `${Math.round(v / 1000)}k` : `${v}`
+
 export function BarTopProductos({
   data,
 }: {
@@ -21,9 +25,9 @@ export function BarTopProductos({
   if (data.length === 0) return <EmptyState />
   return (
     <ChartContainer config={config} className="h-64 w-full">
-      <BarChart data={data} layout="vertical" margin={{ left: 8, right: 8 }}>
+      <BarChart data={data} layout="vertical" margin={{ left: 8, right: 36 }}>
         <CartesianGrid horizontal={false} strokeDasharray="3 3" />
-        <XAxis type="number" tickLine={false} axisLine={false} />
+        <XAxis type="number" tickLine={false} axisLine={false} hide />
         <YAxis
           type="category"
           dataKey="nombre"
@@ -32,7 +36,15 @@ export function BarTopProductos({
           width={120}
         />
         <ChartTooltip content={<ChartTooltipContent />} />
-        <Bar dataKey="valor" fill="var(--chart-1)" radius={4} />
+        <Bar dataKey="valor" fill="var(--chart-1)" radius={4}>
+          <LabelList
+            dataKey="valor"
+            position="right"
+            className="fill-foreground"
+            fontSize={11}
+            formatter={(v) => compact(Number(v) || 0)}
+          />
+        </Bar>
       </BarChart>
     </ChartContainer>
   )

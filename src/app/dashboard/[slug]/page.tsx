@@ -1,7 +1,9 @@
 import { notFound } from "next/navigation"
+import { cn } from "@/lib/utils"
 import { PageHeader } from "@/presentation/components/page-header"
 import { RecordStats } from "@/presentation/components/record-stats"
 import { RecordTable } from "@/presentation/components/record-table"
+import { getModuleTheme } from "@/presentation/config/module-theme"
 import { getModuleBySlug, MODULES } from "@/presentation/config/modules"
 import {
   loadLabelMap,
@@ -39,9 +41,22 @@ export default async function ModulePage({
     loadLabelMap(config),
   ])
 
+  const { Icon, tile, badge } = getModuleTheme(config)
+
   return (
     <div className="flex flex-col gap-6">
       <PageHeader
+        icon={
+          <span
+            className={cn(
+              "flex size-12 shrink-0 items-center justify-center rounded-xl",
+              tile,
+            )}
+          >
+            <Icon className="size-6" />
+          </span>
+        }
+        accentClassName={badge}
         badge={config.group}
         title={config.title}
         description={config.description}

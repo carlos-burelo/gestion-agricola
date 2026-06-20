@@ -205,9 +205,9 @@ export function RecordTable({
   const rows = table.getRowModel().rows
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="overflow-hidden rounded-lg border border-border bg-card">
       {/* Toolbar */}
-      <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-2 border-b border-border px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="relative w-full sm:max-w-xs">
           <Search className="absolute left-2.5 top-1/2 size-4 -translate-y-1/2 text-muted-foreground" />
           <Input
@@ -277,15 +277,17 @@ export function RecordTable({
       </div>
 
       {/* Table */}
-      <div className="overflow-x-auto rounded-lg border border-border bg-card">
-        <Table>
+      <Table>
           <TableHeader>
             {table.getHeaderGroups().map((hg) => (
-              <TableRow key={hg.id}>
+              <TableRow key={hg.id} className="bg-muted/30 hover:bg-muted/30">
                 {hg.headers.map((h) => (
                   <TableHead
                     key={h.id}
-                    className={cn(h.column.id === "__actions" && "text-right")}
+                    className={cn(
+                      "px-4",
+                      h.column.id === "__actions" && "text-right",
+                    )}
                   >
                     {h.isPlaceholder
                       ? null
@@ -318,6 +320,7 @@ export function RecordTable({
                     <TableCell
                       key={cell.id}
                       className={cn(
+                        "px-4 py-3",
                         cell.column.id === "__actions" && "text-right",
                       )}
                     >
@@ -329,10 +332,9 @@ export function RecordTable({
             )}
           </TableBody>
         </Table>
-      </div>
 
       {/* Pagination */}
-      <div className="flex flex-col items-center justify-between gap-2 sm:flex-row">
+      <div className="flex flex-col items-center justify-between gap-2 border-t border-border px-4 py-3 sm:flex-row">
         <p className="text-sm text-muted-foreground">
           {filtered.toLocaleString("es-MX")} registro
           {filtered === 1 ? "" : "s"}

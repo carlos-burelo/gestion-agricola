@@ -26,7 +26,8 @@ export type UpdateEntity<T extends BaseEntity> = Partial<NewEntity<T>>
 export interface Repository<T extends BaseEntity> {
   findAll(): Promise<T[]>
   findById(id: string): Promise<T | null>
-  findWhere(predicate: (entity: T) => boolean): Promise<T[]>
+  /** Returns rows where every key in `criteria` matches by strict equality. */
+  findBy(criteria: Partial<T>): Promise<T[]>
   create(data: NewEntity<T>): Promise<T>
   update(id: string, data: UpdateEntity<T>): Promise<T>
   delete(id: string): Promise<void>
