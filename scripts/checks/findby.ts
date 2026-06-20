@@ -1,5 +1,5 @@
 import assert from "node:assert/strict"
-import { JsonRepository } from "@/infrastructure/persistence/json-repository"
+import { JsonRepository } from "@/infrastructure/persistence/json/repository"
 import type { MovimientoInventario } from "@/core/domain/entities"
 
 async function main() {

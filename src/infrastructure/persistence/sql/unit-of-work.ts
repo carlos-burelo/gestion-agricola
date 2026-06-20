@@ -2,7 +2,7 @@ import "server-only"
 import type { BaseEntity } from "@/core/domain/entities"
 import type { Repository, UnitOfWork } from "@/core/domain/repositories"
 import { AggregateRepository } from "./aggregate-repository"
-import { DrizzleRepository } from "./drizzle-repository"
+import { DrizzleRepository } from "./repository"
 import { aggConfigs } from "./table-config"
 
 export class SqlUnitOfWork implements UnitOfWork {

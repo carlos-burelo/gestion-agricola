@@ -6,8 +6,8 @@ import { InventoryService } from "@/core/application/inventory-service"
 import { TraceabilityService } from "@/core/application/traceability-service"
 import type { BaseEntity, CollectionName } from "@/core/domain/entities"
 import type { Repository, UnitOfWork } from "@/core/domain/repositories"
-import { JsonUnitOfWork } from "./persistence/json-repository"
-import { SqlUnitOfWork } from "./persistence/sql/sql-unit-of-work"
+import { JsonUnitOfWork } from "./persistence/json/repository"
+import { SqlUnitOfWork } from "./persistence/sql/unit-of-work"
 
 /**
  * Composition root. This is the ONLY module that decides which concrete

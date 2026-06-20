@@ -7,7 +7,7 @@ import type {
   UnitOfWork,
   UpdateEntity,
 } from "@/core/domain/repositories"
-import { jsonDatastore } from "./json-datastore"
+import { jsonDatastore } from "./datastore"
 
 function nowIso(): string {
   return new Date().toISOString()
