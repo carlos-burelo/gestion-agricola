@@ -1,6 +1,6 @@
 "use client"
 
-import { Bar, BarChart, CartesianGrid, XAxis, YAxis } from "recharts"
+import { Bar, BarChart, CartesianGrid, XAxis } from "recharts"
 import {
   ChartContainer,
   ChartTooltip,
@@ -30,10 +30,9 @@ export function BarCosteoNivel({
   }))
   return (
     <ChartContainer config={config} className="h-72 w-full">
-      <BarChart data={data} margin={{ left: 4, right: 8 }}>
+      <BarChart data={data} margin={{ left: 8, right: 8 }}>
         <CartesianGrid vertical={false} strokeDasharray="3 3" />
         <XAxis dataKey="nombre" tickLine={false} axisLine={false} tickMargin={8} />
-        <YAxis tickLine={false} axisLine={false} width={56} />
         <ChartTooltip content={<ChartTooltipContent />} />
         <Bar dataKey="manoObra" stackId="a" fill="var(--chart-1)" radius={[0, 0, 4, 4]} />
         <Bar dataKey="insumos" stackId="a" fill="var(--chart-2)" radius={[4, 4, 0, 0]} />
