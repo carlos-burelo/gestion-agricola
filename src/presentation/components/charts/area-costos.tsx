@@ -3,6 +3,8 @@
 import { Area, AreaChart, CartesianGrid, XAxis, YAxis } from "recharts"
 import {
   ChartContainer,
+  ChartLegend,
+  ChartLegendContent,
   ChartTooltip,
   ChartTooltipContent,
   type ChartConfig,
@@ -48,6 +50,7 @@ export function AreaCostos({ data }: { data: PuntoMensual[] }) {
           stroke="var(--chart-2)"
           fill="url(#fillIn)"
         />
+        <ChartLegend content={<ChartLegendContent />} />
       </AreaChart>
     </ChartContainer>
   )

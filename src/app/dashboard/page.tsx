@@ -19,6 +19,7 @@ import { BarCosteoNivel } from "@/presentation/components/charts/bar-costeo-nive
 import { BarTopProductos } from "@/presentation/components/charts/bar-top-productos"
 import { DonutMezcla } from "@/presentation/components/charts/donut-mezcla"
 import { LinePlantas } from "@/presentation/components/charts/line-plantas"
+import { RadarCostos } from "@/presentation/components/charts/radar-costos"
 import { PageHeader } from "@/presentation/components/page-header"
 import { StatCard } from "@/presentation/components/stat-card"
 import { loadRecords } from "@/presentation/queries"
@@ -92,6 +93,13 @@ export default async function DashboardHome() {
 
   const sparkCostos = costosMes.map((m) => m.total)
   const totalPlantas = plantasMes.reduce((a, b) => a + b.plantas, 0)
+
+  // Radar: mano de obra vs insumos por rancho (nombre corto sin "Rancho ").
+  const costoRadar = costoRancho.map((r) => ({
+    rancho: (ranchoLabels[r.clave] ?? r.clave).replace(/^Rancho\s+/i, ""),
+    manoObra: Math.round(r.manoObra),
+    insumos: Math.round(r.insumos),
+  }))
 
   // Distribuciones por estado / agrupaciones (derivadas de datos reales).
   const ciclosPorEstado = (
@@ -231,6 +239,15 @@ export default async function DashboardHome() {
         </ChartCard>
         <ChartCard title="Costos por ciclo" description="Mano de obra vs. insumos">
           <BarCosteoNivel rows={costoCiclo} labels={cicloLabels} />
+        </ChartCard>
+      </section>
+
+      <section>
+        <ChartCard
+          title="Perfil de costos por rancho"
+          description="Comparativo mano de obra vs. insumos por unidad productiva"
+        >
+          <RadarCostos data={costoRadar} />
         </ChartCard>
       </section>
 
