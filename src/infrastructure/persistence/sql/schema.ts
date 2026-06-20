@@ -183,9 +183,8 @@ export const movimientosInventario = pgTable("movimientos_inventario", {
   fecha: timestamp("fecha", { withTimezone: true }).notNull(),
   cantidad: doublePrecision("cantidad").notNull(),
   costoUnitario: doublePrecision("costo_unitario").notNull(),
-  proveedorId: text("proveedor_id")
-    .notNull()
-    .references(() => proveedores.id),
+  // Nullable: las salidas no tienen proveedor (NULL ↔ "" en el dominio).
+  proveedorId: text("proveedor_id").references(() => proveedores.id),
   factura: text("factura").notNull(),
   destino: text("destino").notNull(),
   ...audit,

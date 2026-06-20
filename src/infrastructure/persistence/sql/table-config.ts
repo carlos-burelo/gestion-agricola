@@ -6,6 +6,8 @@ const AUDIT = ["createdAt", "updatedAt"]
 export interface FlatConfig {
   table: PgTable
   dateFields: string[]
+  /** Columnas FK opcionales: "" en el dominio ↔ NULL en la base. */
+  nullableFields?: string[]
 }
 export interface AggConfig {
   table: PgTable
@@ -36,6 +38,7 @@ export const flatConfigs: Record<string, FlatConfig> = {
   movimientosInventario: {
     table: s.movimientosInventario,
     dateFields: ["fecha", ...AUDIT],
+    nullableFields: ["proveedorId"],
   },
   cuentasPorPagar: {
     table: s.cuentasPorPagar,
@@ -81,28 +84,38 @@ export const aggConfigs: Record<string, AggConfig> = {
   },
 }
 
-/** Convierte una fila de Drizzle a entidad de dominio (Date → ISO string). */
+/** Convierte una fila de Drizzle a entidad de dominio (Date → ISO string,
+ * NULL → "" para FKs opcionales). */
 export function toEntity<T>(
   row: Record<string, unknown>,
   dateFields: string[],
+  nullableFields: string[] = [],
 ): T {
   const out: Record<string, unknown> = { ...row }
   for (const f of dateFields) {
     const v = out[f]
     if (v instanceof Date) out[f] = v.toISOString()
   }
+  for (const f of nullableFields) {
+    if (out[f] === null || out[f] === undefined) out[f] = ""
+  }
   return out as T
 }
 
-/** Convierte datos de dominio a fila insertable (ISO string → Date). */
+/** Convierte datos de dominio a fila insertable (ISO string → Date,
+ * "" → NULL para FKs opcionales). */
 export function toRow(
   data: Record<string, unknown>,
   dateFields: string[],
+  nullableFields: string[] = [],
 ): Record<string, unknown> {
   const out: Record<string, unknown> = { ...data }
   for (const f of dateFields) {
     const v = out[f]
     if (typeof v === "string") out[f] = new Date(v)
+  }
+  for (const f of nullableFields) {
+    if (out[f] === "") out[f] = null
   }
   return out
 }

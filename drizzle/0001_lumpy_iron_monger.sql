@@ -1,0 +1,1 @@
+ALTER TABLE "movimientos_inventario" ALTER COLUMN "proveedor_id" DROP NOT NULL;
