@@ -44,7 +44,7 @@ export class InventoryService {
   /** Builds the PEPS kardex for a product, computing running balances. */
   async kardex(productoId: string): Promise<KardexRow[]> {
     const movs = this.sortByDate(
-      await this.movimientos.findWhere((m) => m.productoId === productoId),
+      await this.movimientos.findBy({ productoId }),
     )
 
     // FIFO layers: each entrada adds a layer; each salida consumes oldest first.
@@ -100,9 +100,7 @@ export class InventoryService {
 
   /** Current quantity on hand for a product (entradas - salidas). */
   async existencia(productoId: string): Promise<number> {
-    const movs = await this.movimientos.findWhere(
-      (m) => m.productoId === productoId,
-    )
+    const movs = await this.movimientos.findBy({ productoId })
     return movs.reduce(
       (acc, m) => acc + (m.tipo === "entrada" ? m.cantidad : -m.cantidad),
       0,
