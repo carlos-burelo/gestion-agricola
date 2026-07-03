@@ -44,6 +44,32 @@ export const flatConfigs: Record<string, FlatConfig> = {
     table: s.cuentasPorPagar,
     dateFields: ["fechaVencimiento", ...AUDIT],
   },
+  categorias: {
+    table: s.categorias,
+    dateFields: AUDIT,
+    nullableFields: ["parentId"],
+  },
+  cuentas: { table: s.cuentas, dateFields: AUDIT },
+  usuarios: { table: s.usuarios, dateFields: AUDIT },
+  usuarioCuentas: { table: s.usuarioCuentas, dateFields: AUDIT },
+  traspasos: {
+    table: s.traspasos,
+    dateFields: ["fecha", ...AUDIT],
+    nullableFields: ["referencia", "creadoPor"],
+  },
+  movimientos: {
+    table: s.movimientos,
+    dateFields: ["fecha", ...AUDIT],
+    nullableFields: [
+      "categoriaId",
+      "beneficiario",
+      "referencia",
+      "folio",
+      "descripcion",
+      "traspasoId",
+      "creadoPor",
+    ],
+  },
 }
 
 export const aggConfigs: Record<string, AggConfig> = {
