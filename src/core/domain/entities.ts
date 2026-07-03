@@ -325,9 +325,13 @@ export interface Movimiento extends BaseEntity {
   /** "" = movimiento generado por un traspaso (sin categoría propia). */
   categoriaId: string
   monto: number
+  /** "" = sin beneficiario registrado. */
   beneficiario: string
+  /** "" = sin referencia. */
   referencia: string
+  /** "" = sin folio. */
   folio: string
+  /** "" = sin descripción. */
   descripcion: string
   /** "" = movimiento normal (no viene de un traspaso). */
   traspasoId: string
