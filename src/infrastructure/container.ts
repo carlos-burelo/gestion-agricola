@@ -74,3 +74,5 @@ export function tesoreriaService(): TesoreriaService {
     repository("movimientos"),
   )
 }
+
+export { crearTraspaso } from "./persistence/sql/tesoreria"
