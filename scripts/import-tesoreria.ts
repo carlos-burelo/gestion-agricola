@@ -251,23 +251,34 @@ async function main() {
   }
 
   // Algunas categorías hoja (TRASPASO *, y PRESTAMOS > BANCARIOS/EXTERNOS/
-  // TRABAJADORES/SOCIOS) están declaradas arriba solo como "egreso", pero en
-  // el ledger real el mismo CONCEPTO también aparece del lado ENTRADA (p.ej.
+  // TRABAJADORES/SOCIOS) están declaradas arriba solo como "egreso". En el
+  // Excel real, el mismo CONCEPTO también aparece del lado ENTRADA (p.ej.
   // "TRASPASO MGZ121" es la salida en la cuenta origen Y la entrada en la
   // cuenta destino del mismo traspaso; un préstamo recibido es ENTRADA con
-  // CONCEPTO "SOCIOS"/"BANCARIOS"/etc.). Es la misma categoría de negocio en
-  // ambos lados — el Excel no duplica el nombre con un tipo distinto para
-  // eso. Si una categoría hoja solo tiene un tipo resuelto, ese mismo id
-  // sirve para las dos direcciones; si tiene ambos tipos (caso normal), cada
-  // dirección usa el suyo sin fallback.
+  // CONCEPTO "SOCIOS"/"BANCARIOS"/etc.) — el propio Excel modela esto con
+  // bloques ENTRADA/SALIDA separados (dos SUMIFS por nombre) en su matriz
+  // mensual, es decir SÍ son categorías bidireccionales en el negocio real,
+  // pero nuestra taxonomía (CATEGORIAS arriba) todavía solo define el lado
+  // egreso para ellas.
+  //
+  // Por eso esta función NO hace fallback al tipo contrario cuando la
+  // dirección propia de la fila no tiene id: hacerlo mezclaría movimientos
+  // de tipo "entrada" dentro de categorías tipo "egreso", lo cual rompe en
+  // silencio el filtro estricto `direccion === direccionEsperada[categoria.tipo]`
+  // de calcularMatrizMensual (Task 5) — esas filas simplemente desaparecerían
+  // de la matriz mensual sin que "sin categoría resuelta" las marcara (el
+  // categoriaId no sería null, solo del tipo equivocado). Esas ~1,376 filas
+  // ENTRADA de traspasos/préstamos quedan con categoriaId = null: el dinero
+  // se importa correctamente (direccion/monto/cuentaId íntegros, por lo que
+  // calcularSaldo y la reconciliación de saldos no se ven afectados), solo
+  // falta extender la taxonomía con el lado ingreso de estas categorías en
+  // un futuro paso para que aparezcan en el desglose de la matriz mensual.
   function resuelveCategoriaId(conceptoCrudo: string, direccion: "entrada" | "salida"): string {
     const concepto = ALIAS_CONCEPTO[normaliza(conceptoCrudo)] ?? conceptoCrudo
     const clave = normaliza(concepto)
     const entrada = lookupCategoria.get(clave)
     if (!entrada) return ""
-    const directo = direccion === "entrada" ? entrada.ingreso : entrada.egreso
-    if (directo) return directo
-    return entrada.ingreso ?? entrada.egreso ?? ""
+    return (direccion === "entrada" ? entrada.ingreso : entrada.egreso) ?? ""
   }
 
   // 2. Cuentas.
@@ -342,6 +353,14 @@ async function main() {
 
   console.log(`Total movimientos importados: ${totalMovimientos}`)
   console.log(`Movimientos sin categoría resuelta (categoriaId null): ${sinCategoria}`)
+  console.log(
+    "  (esperado: >0 — estas filas corresponden a traspasos/préstamos de entrada; " +
+      "la taxonomía actual solo modela el lado egreso de esas categorías, fiel al " +
+      "patrón del Excel origen, que las trata como bloques ENTRADA/SALIDA separados. " +
+      "Quedan importadas con saldo correcto (direccion/monto/cuentaId íntegros) pero " +
+      "sin categoría en la matriz mensual, pendiente de extender la taxonomía en un " +
+      "futuro paso.)",
+  )
 
   await sql.end()
 }
