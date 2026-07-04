@@ -1,9 +1,15 @@
+import { redirect } from "next/navigation"
 import { PageHeader } from "@/presentation/components/page-header"
+import { getCurrentUser } from "@/infrastructure/auth/current-user"
 import { repository } from "@/infrastructure/container"
 import type { Cuenta, Usuario, UsuarioCuenta } from "@/core/domain/entities"
 import { crearUsuario } from "./actions"
 
 export default async function UsuariosPage() {
+  const actor = await getCurrentUser()
+  if (!actor) redirect("/login")
+  if (actor.rol !== "admin") redirect("/dashboard/tesoreria")
+
   const [usuarios, cuentas, usuarioCuentas] = await Promise.all([
     repository<Usuario>("usuarios").findAll(),
     repository<Cuenta>("cuentas").findAll(),
