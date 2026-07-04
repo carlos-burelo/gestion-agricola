@@ -13,6 +13,7 @@ import {
 	LayoutGrid,
 	Leaf,
 	type LucideIcon,
+	LineChart,
 	MapIcon,
 	MapPin,
 	MapPinned,
@@ -20,9 +21,11 @@ import {
 	Package,
 	PackageCheck,
 	Receipt,
+	Repeat2,
 	ShoppingCart,
 	Sprout,
 	Truck,
+	UserCog,
 	Wallet,
 } from "lucide-react";
 import Image from "next/image";
@@ -48,6 +51,13 @@ const TOOLS: { slug: string; title: string; icon: LucideIcon }[] = [
 	{ slug: "costeo", title: "Costeo agrícola", icon: BarChart3 },
 	{ slug: "trazabilidad", title: "Trazabilidad", icon: GitBranch },
 	{ slug: "reportes", title: "Reportes", icon: ClipboardList },
+];
+
+const TESORERIA_LINKS: { slug: string; title: string; icon: LucideIcon }[] = [
+	{ slug: "tesoreria", title: "Cuentas", icon: Wallet },
+	{ slug: "tesoreria/traspasos", title: "Traspasos", icon: Repeat2 },
+	{ slug: "tesoreria/reportes/mensual", title: "Reportes", icon: LineChart },
+	{ slug: "tesoreria/usuarios", title: "Usuarios", icon: UserCog },
 ];
 
 /** Icon per module slug so the icon-collapsed rail stays legible. */
@@ -137,6 +147,27 @@ export function SidebarNav() {
 						</SidebarGroup>
 					);
 				})}
+
+				<SidebarGroup>
+					<SidebarGroupLabel>Tesorería</SidebarGroupLabel>
+					<SidebarMenu>
+						{TESORERIA_LINKS.map((t) => {
+							const href = `/dashboard/${t.slug}`;
+							return (
+								<SidebarMenuItem key={t.slug}>
+									<SidebarMenuButton
+										isActive={pathname === href}
+										tooltip={t.title}
+										render={<Link href={href} />}
+									>
+										<t.icon />
+										<span>{t.title}</span>
+									</SidebarMenuButton>
+								</SidebarMenuItem>
+							);
+						})}
+					</SidebarMenu>
+				</SidebarGroup>
 
 				<SidebarGroup>
 					<SidebarGroupLabel>Análisis</SidebarGroupLabel>
