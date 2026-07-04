@@ -7,17 +7,14 @@ import { TesoreriaService } from "@/core/application/tesoreria-service"
 import { TraceabilityService } from "@/core/application/traceability-service"
 import type { BaseEntity, CollectionName } from "@/core/domain/entities"
 import type { Repository, UnitOfWork } from "@/core/domain/repositories"
-import { JsonUnitOfWork } from "./persistence/json/repository"
 import { SqlUnitOfWork } from "./persistence/sql/unit-of-work"
 
 /**
  * Composition root. This is the ONLY module that decides which concrete
- * implementations satisfy the domain ports. To migrate to a real database,
- * swap `JsonUnitOfWork` for e.g. `SqlUnitOfWork` here — every consumer keeps
- * importing the same factory functions and nothing else changes.
+ * implementation satisfies the domain ports. Every consumer imports the same
+ * factory functions below and never touches `SqlUnitOfWork` directly.
  */
-const uow: UnitOfWork =
-  process.env.DB_DRIVER === "json" ? new JsonUnitOfWork() : new SqlUnitOfWork()
+const uow: UnitOfWork = new SqlUnitOfWork()
 
 export function repository<T extends BaseEntity>(
   collection: CollectionName,

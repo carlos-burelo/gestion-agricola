@@ -51,7 +51,6 @@ const AGG: CollectionName[] = [
   "valesSalida",
 ]
 const COLLECTIONS = Object.keys(EXPECTED) as CollectionName[]
-const driver = process.env.DB_DRIVER ?? "sql"
 const round = (n: number) => Number(n.toFixed(2))
 const byId = <T extends { id: string }>(rows: T[]) =>
   [...rows].sort((a, b) => a.id.localeCompare(b.id))
@@ -254,20 +253,18 @@ async function mutations() {
     "agg count restored",
     (await repository("requerimientos").count()) === reqBefore,
   )
-  // cascade: child rows gone (SQL only, raw check)
-  if (driver === "sql") {
-    const sql = postgres(process.env.DATABASE_URL!)
-    const rows = await sql.unsafe(
-      "select count(*)::int as n from detalle_requerimiento where requerimiento_id = $1",
-      [req.id],
-    )
-    ok("agg cascade children", rows[0].n === 0, `left ${rows[0].n}`)
-    await sql.end()
-  }
+  // cascade: child rows gone (raw check against Postgres)
+  const sql = postgres(process.env.DATABASE_URL!)
+  const rows = await sql.unsafe(
+    "select count(*)::int as n from detalle_requerimiento where requerimiento_id = $1",
+    [req.id],
+  )
+  ok("agg cascade children", rows[0].n === 0, `left ${rows[0].n}`)
+  await sql.end()
 }
 
 async function main() {
-  console.log(`=== query battery (driver=${driver}) ===`)
+  console.log("=== query battery ===")
   await reads()
   if (process.env.MUTATE === "1") await mutations()
   console.log(`FINGERPRINT ${JSON.stringify(fp)}`)

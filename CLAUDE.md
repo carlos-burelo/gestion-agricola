@@ -27,9 +27,9 @@ instead of formatting inline.
 
 ## Persistence
 
-PostgreSQL via Drizzle (`src/infrastructure/persistence/sql/`), JSON adapter
-kept behind `DB_DRIVER=json`. Repository ports in `src/core/domain`. See the
-project memory for dev setup (docker port 5433, etc.).
+PostgreSQL via Drizzle (`src/infrastructure/persistence/sql/`). Repository
+ports in `src/core/domain`. See the project memory for dev setup (docker port
+5433, etc.).
 
 ## Verification
 
