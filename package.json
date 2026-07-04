@@ -12,7 +12,8 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:seed": "tsx scripts/db/seed.ts",
-    "db:reset": "drizzle-kit migrate && tsx scripts/db/seed.ts",
+    "db:seed-admin": "tsx scripts/db/seed-admin.ts",
+    "db:reset": "drizzle-kit migrate && tsx scripts/db/seed.ts && tsx scripts/db/seed-admin.ts",
     "db:import-tesoreria": "tsx scripts/import-tesoreria.ts"
   },
   "dependencies": {
