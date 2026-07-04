@@ -15,3 +15,6 @@ node_modules
 .next/
 .DS_Store
 tsconfig.tsbuildinfo
+
+# Datos financieros reales (histórico de tesorería) — nunca commitear
+scripts/data/*.xlsx
