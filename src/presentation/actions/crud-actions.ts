@@ -2,13 +2,26 @@
 
 import { revalidatePath } from "next/cache"
 import type { BaseEntity } from "@/core/domain/entities"
-import { DomainError } from "@/core/domain/errors"
+import { BusinessRuleError, DomainError } from "@/core/domain/errors"
 import { crudService } from "@/infrastructure/container"
+import { getCurrentUser } from "@/infrastructure/auth/current-user"
 import { getModuleBySlug } from "@/presentation/config/modules"
 
 export interface ActionResult {
   ok: boolean
   error?: string
+}
+
+const SLUGS_ADMIN_ONLY = new Set(["cuentas", "categorias"])
+
+async function verificaPermisoModulo(slug: string): Promise<void> {
+  if (!SLUGS_ADMIN_ONLY.has(slug)) return
+  const actor = await getCurrentUser()
+  if (!actor || actor.rol !== "admin") {
+    throw new BusinessRuleError(
+      "Solo un administrador puede modificar cuentas o categorías.",
+    )
+  }
 }
 
 /**
@@ -46,6 +59,7 @@ export async function createRecord(
   raw: Record<string, string>,
 ): Promise<ActionResult> {
   try {
+    await verificaPermisoModulo(slug)
     const { config, data } = coerce(slug, raw)
     await crudService<BaseEntity>(config.collection).create(data as never)
     revalidatePath(`/dashboard/${slug}`)
@@ -61,6 +75,7 @@ export async function updateRecord(
   raw: Record<string, string>,
 ): Promise<ActionResult> {
   try {
+    await verificaPermisoModulo(slug)
     const { config, data } = coerce(slug, raw)
     await crudService<BaseEntity>(config.collection).update(id, data as never)
     revalidatePath(`/dashboard/${slug}`)
@@ -75,6 +90,7 @@ export async function deleteRecord(
   id: string,
 ): Promise<ActionResult> {
   try {
+    await verificaPermisoModulo(slug)
     const config = getModuleBySlug(slug)
     if (!config) throw new DomainError(`Módulo desconocido: ${slug}`)
     await crudService<BaseEntity>(config.collection).remove(id)

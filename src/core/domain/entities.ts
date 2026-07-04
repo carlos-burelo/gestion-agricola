@@ -265,6 +265,80 @@ export interface ValeSalida extends BaseEntity {
   detalles: DetalleVale[]
 }
 
+/* -------------------------------------------------------------------------- */
+/* 14. Tesorería                                                              */
+/* -------------------------------------------------------------------------- */
+
+export type TipoCategoria = "ingreso" | "egreso"
+
+export interface Categoria extends BaseEntity {
+  nombre: string
+  tipo: TipoCategoria
+  /** "" = categoría raíz (sin padre). */
+  parentId: string
+  orden: number
+  estado: EstadoActivo
+}
+
+export type TipoCuenta = "banco" | "efectivo" | "persona" | "reserva"
+
+export interface Cuenta extends BaseEntity {
+  nombre: string
+  tipo: TipoCuenta
+  moneda: string
+  saldoInicial: number
+  estado: EstadoActivo
+}
+
+export type RolUsuario = "admin" | "persona"
+
+export interface Usuario extends BaseEntity {
+  nombre: string
+  email: string
+  passwordHash: string
+  rol: RolUsuario
+  estado: EstadoActivo
+}
+
+export interface UsuarioCuenta extends BaseEntity {
+  usuarioId: string
+  cuentaId: string
+}
+
+export interface Traspaso extends BaseEntity {
+  fecha: string
+  cuentaOrigenId: string
+  cuentaDestinoId: string
+  monto: number
+  /** "" = sin referencia. */
+  referencia: string
+  /** "" = sin autor (import histórico). */
+  creadoPor: string
+}
+
+export type DireccionMovimiento = "entrada" | "salida"
+
+export interface Movimiento extends BaseEntity {
+  cuentaId: string
+  fecha: string
+  direccion: DireccionMovimiento
+  /** "" = movimiento generado por un traspaso (sin categoría propia). */
+  categoriaId: string
+  monto: number
+  /** "" = sin beneficiario registrado. */
+  beneficiario: string
+  /** "" = sin referencia. */
+  referencia: string
+  /** "" = sin folio. */
+  folio: string
+  /** "" = sin descripción. */
+  descripcion: string
+  /** "" = movimiento normal (no viene de un traspaso). */
+  traspasoId: string
+  /** "" = sin autor (import histórico). */
+  creadoPor: string
+}
+
 /**
  * Registry mapping every collection name to its entity type. This is the single
  * source of truth that ties the persistence layer, the application services and
@@ -288,6 +362,12 @@ export interface CollectionMap {
   recepciones: Recepcion
   cuentasPorPagar: CuentaPorPagar
   valesSalida: ValeSalida
+  categorias: Categoria
+  cuentas: Cuenta
+  usuarios: Usuario
+  usuarioCuentas: UsuarioCuenta
+  traspasos: Traspaso
+  movimientos: Movimiento
 }
 
 export type CollectionName = keyof CollectionMap

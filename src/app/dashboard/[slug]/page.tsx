@@ -18,6 +18,7 @@ const RESERVED = new Set([
   "trazabilidad",
   "reportes",
   "mapa",
+  "tesoreria",
 ])
 
 export function generateStaticParams() {

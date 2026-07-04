@@ -3,6 +3,7 @@ import { AnalyticsService } from "@/core/application/analytics-service"
 import { CostingService } from "@/core/application/costing-service"
 import { CrudService } from "@/core/application/crud-service"
 import { InventoryService } from "@/core/application/inventory-service"
+import { TesoreriaService } from "@/core/application/tesoreria-service"
 import { TraceabilityService } from "@/core/application/traceability-service"
 import type { BaseEntity, CollectionName } from "@/core/domain/entities"
 import type { Repository, UnitOfWork } from "@/core/domain/repositories"
@@ -65,3 +66,13 @@ export function traceabilityService(): TraceabilityService {
     repository("valesSalida"),
   )
 }
+
+export function tesoreriaService(): TesoreriaService {
+  return new TesoreriaService(
+    repository("cuentas"),
+    repository("categorias"),
+    repository("movimientos"),
+  )
+}
+
+export { crearTraspaso } from "./persistence/sql/tesoreria"

@@ -9,14 +9,20 @@ import {
   LandPlot,
   LayoutGrid,
   Leaf,
+  Link2,
   type LucideIcon,
   NotebookPen,
   PackageCheck,
   PackageMinus,
+  Receipt,
   RefreshCw,
+  Repeat,
   ShoppingCart,
   Sprout,
+  Tags,
   Tractor,
+  Users,
+  Wallet,
 } from "lucide-react"
 import type { CollectionName } from "@/core/domain/entities"
 import type { ModuleConfig } from "./modules"
@@ -76,6 +82,12 @@ const ICONS: Record<CollectionName, LucideIcon> = {
   recepciones: PackageCheck,
   cuentasPorPagar: CreditCard,
   valesSalida: PackageMinus,
+  categorias: Tags,
+  cuentas: Wallet,
+  usuarios: Users,
+  usuarioCuentas: Link2,
+  traspasos: Repeat,
+  movimientos: Receipt,
 }
 
 export interface ModuleTheme {

@@ -15,6 +15,13 @@
       "when": 1781930585072,
       "tag": "0001_lumpy_iron_monger",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1783111167795,
+      "tag": "0002_exotic_iron_monger",
+      "breakpoints": true
     }
   ]
 }

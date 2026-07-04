@@ -510,6 +510,62 @@ export const MODULES: ModuleConfig[] = [
       },
     ],
   },
+  {
+    slug: "categorias",
+    collection: "categorias",
+    title: "Categorías",
+    singular: "Categoría",
+    description: "Árbol de categorías de ingreso/egreso de tesorería.",
+    group: "Tesorería",
+    fields: [
+      { name: "nombre", label: "Nombre", type: "text", required: true },
+      {
+        name: "tipo",
+        label: "Tipo",
+        type: "select",
+        options: [
+          { value: "ingreso", label: "Ingreso" },
+          { value: "egreso", label: "Egreso" },
+        ],
+        required: true,
+      },
+      {
+        name: "parentId",
+        label: "Categoría padre",
+        type: "reference",
+        reference: { collection: "categorias", labelField: "nombre" },
+        helper: "Vacío = categoría raíz.",
+      },
+      { name: "orden", label: "Orden", type: "number", required: true },
+      { name: "estado", label: "Estado", type: "select", options: estadoActivo },
+    ],
+  },
+  {
+    slug: "cuentas",
+    collection: "cuentas",
+    title: "Cuentas",
+    singular: "Cuenta",
+    description: "Cuentas de tesorería: bancos, efectivo, persona y reserva.",
+    group: "Tesorería",
+    fields: [
+      { name: "nombre", label: "Nombre", type: "text", required: true },
+      {
+        name: "tipo",
+        label: "Tipo",
+        type: "select",
+        options: [
+          { value: "banco", label: "Banco" },
+          { value: "efectivo", label: "Efectivo" },
+          { value: "persona", label: "Persona" },
+          { value: "reserva", label: "Reserva" },
+        ],
+        required: true,
+      },
+      { name: "moneda", label: "Moneda", type: "text", required: true },
+      { name: "saldoInicial", label: "Saldo inicial", type: "number", required: true },
+      { name: "estado", label: "Estado", type: "select", options: estadoActivo },
+    ],
+  },
 ]
 
 export function getModuleBySlug(slug: string): ModuleConfig | undefined {
@@ -521,4 +577,5 @@ export const MODULE_GROUPS = [
   "Producción",
   "Mano de obra",
   "Compras e inventario",
+  "Tesorería",
 ] as const

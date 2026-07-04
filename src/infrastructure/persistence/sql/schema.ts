@@ -1,4 +1,5 @@
 import {
+  type AnyPgColumn,
   boolean,
   doublePrecision,
   integer,
@@ -37,6 +38,18 @@ export const estadoCuentaPorPagar = pgEnum("estado_cuenta_por_pagar", [
   "vencida",
 ])
 export const tipoMovimiento = pgEnum("tipo_movimiento", ["entrada", "salida"])
+export const tipoCategoria = pgEnum("tipo_categoria", ["ingreso", "egreso"])
+export const tipoCuenta = pgEnum("tipo_cuenta", [
+  "banco",
+  "efectivo",
+  "persona",
+  "reserva",
+])
+export const rolUsuario = pgEnum("rol_usuario", ["admin", "persona"])
+export const direccionMovimiento = pgEnum("direccion_movimiento_financiero", [
+  "entrada",
+  "salida",
+])
 
 // Columnas de auditoría compartidas.
 const audit = {
@@ -326,4 +339,79 @@ export const detalleVale = pgTable("detalle_vale", {
     .references(() => productos.id),
   cantidad: doublePrecision("cantidad").notNull(),
   costoUnitario: doublePrecision("costo_unitario").notNull(),
+})
+
+// 14. Tesorería
+export const categorias = pgTable("categorias", {
+  id: text("id").primaryKey(),
+  nombre: text("nombre").notNull(),
+  tipo: tipoCategoria("tipo").notNull(),
+  parentId: text("parent_id").references((): AnyPgColumn => categorias.id),
+  orden: integer("orden").notNull(),
+  estado: estadoActivo("estado").notNull(),
+  ...audit,
+})
+
+export const cuentas = pgTable("cuentas", {
+  id: text("id").primaryKey(),
+  nombre: text("nombre").notNull(),
+  tipo: tipoCuenta("tipo").notNull(),
+  moneda: text("moneda").notNull(),
+  saldoInicial: doublePrecision("saldo_inicial").notNull(),
+  estado: estadoActivo("estado").notNull(),
+  ...audit,
+})
+
+export const usuarios = pgTable("usuarios", {
+  id: text("id").primaryKey(),
+  nombre: text("nombre").notNull(),
+  email: text("email").notNull().unique(),
+  passwordHash: text("password_hash").notNull(),
+  rol: rolUsuario("rol").notNull(),
+  estado: estadoActivo("estado").notNull(),
+  ...audit,
+})
+
+export const usuarioCuentas = pgTable("usuario_cuentas", {
+  id: text("id").primaryKey(),
+  usuarioId: text("usuario_id")
+    .notNull()
+    .references(() => usuarios.id),
+  cuentaId: text("cuenta_id")
+    .notNull()
+    .references(() => cuentas.id),
+  ...audit,
+})
+
+export const traspasos = pgTable("traspasos", {
+  id: text("id").primaryKey(),
+  fecha: timestamp("fecha", { withTimezone: true }).notNull(),
+  cuentaOrigenId: text("cuenta_origen_id")
+    .notNull()
+    .references(() => cuentas.id),
+  cuentaDestinoId: text("cuenta_destino_id")
+    .notNull()
+    .references(() => cuentas.id),
+  monto: doublePrecision("monto").notNull(),
+  referencia: text("referencia"),
+  creadoPor: text("creado_por").references(() => usuarios.id),
+  ...audit,
+})
+
+export const movimientos = pgTable("movimientos", {
+  id: text("id").primaryKey(),
+  cuentaId: text("cuenta_id")
+    .notNull()
+    .references(() => cuentas.id),
+  fecha: timestamp("fecha", { withTimezone: true }).notNull(),
+  direccion: direccionMovimiento("direccion").notNull(),
+  categoriaId: text("categoria_id").references(() => categorias.id),
+  monto: doublePrecision("monto").notNull(),
+  beneficiario: text("beneficiario"),
+  referencia: text("referencia"),
+  folio: text("folio"),
+  descripcion: text("descripcion"),
+  traspasoId: text("traspaso_id").references(() => traspasos.id),
+  creadoPor: text("creado_por").references(() => usuarios.id),
+  ...audit,
 })
