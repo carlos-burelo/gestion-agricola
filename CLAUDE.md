@@ -33,6 +33,10 @@ ports in `src/core/domain`. See the project memory for dev setup (docker port
 
 ## Verification
 
-No ESLint/test runner wired. Verify with `pnpm exec tsc --noEmit` (or
+No ESLint/unit-test runner wired. Verify with `pnpm exec tsc --noEmit` (or
 `./node_modules/.bin/tsc --noEmit` if the pnpm wrapper misbehaves) plus route
 probes against `next dev`. Don't run `next build` while `next dev` is running.
+
+Playwright E2E lives in `e2e/` (`pnpm test:e2e`). `playwright.config.ts`
+reuses whatever `next dev` is already running on port 3000
+(`reuseExistingServer: true`) instead of spawning a second instance.

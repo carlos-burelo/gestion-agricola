@@ -18,3 +18,9 @@ tsconfig.tsbuildinfo
 
 # Datos financieros reales (histórico de tesorería) — nunca commitear
 scripts/data/*.xlsx
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
