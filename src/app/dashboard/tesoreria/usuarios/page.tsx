@@ -3,6 +3,28 @@ import { PageHeader } from "@/presentation/components/page-header"
 import { getCurrentUser } from "@/infrastructure/auth/current-user"
 import { repository } from "@/infrastructure/container"
 import type { Cuenta, Usuario, UsuarioCuenta } from "@/core/domain/entities"
+import { Badge } from "@/components/ui/badge"
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { Checkbox } from "@/components/ui/checkbox"
+import { Field, FieldGroup, FieldLabel, FieldLegend, FieldSet } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 import { crearUsuario } from "./actions"
 
 export default async function UsuariosPage() {
@@ -29,53 +51,86 @@ export default async function UsuariosPage() {
         description="Acceso al sistema de tesorería: quién puede capturar qué cuenta."
         badge="Tesorería"
       />
-      <div className="rounded-xl border">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b bg-muted/40 text-left">
-              <th className="p-2">Nombre</th>
-              <th className="p-2">Correo</th>
-              <th className="p-2">Rol</th>
-              <th className="p-2">Cuentas asignadas</th>
-            </tr>
-          </thead>
-          <tbody>
+      <Card>
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>Nombre</TableHead>
+              <TableHead>Correo</TableHead>
+              <TableHead>Rol</TableHead>
+              <TableHead>Cuentas asignadas</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {usuarios.map((u) => (
-              <tr key={u.id} className="border-b last:border-0">
-                <td className="p-2">{u.nombre}</td>
-                <td className="p-2">{u.email}</td>
-                <td className="p-2">{u.rol}</td>
-                <td className="p-2">
+              <TableRow key={u.id}>
+                <TableCell>{u.nombre}</TableCell>
+                <TableCell>{u.email}</TableCell>
+                <TableCell>
+                  <Badge variant={u.rol === "admin" ? "default" : "secondary"}>{u.rol}</Badge>
+                </TableCell>
+                <TableCell>
                   {u.rol === "admin" ? "Todas" : (cuentasPorUsuario.get(u.id) ?? []).join(", ") || "—"}
-                </td>
-              </tr>
+                </TableCell>
+              </TableRow>
             ))}
-          </tbody>
-        </table>
-      </div>
+          </TableBody>
+        </Table>
+      </Card>
 
-      <form action={crearUsuario} className="max-w-lg space-y-3 rounded-xl border p-4">
-        <h2 className="text-sm font-semibold">Nuevo usuario</h2>
-        <input name="nombre" placeholder="Nombre" required className="w-full rounded-md border px-3 py-2 text-sm" />
-        <input name="email" type="email" placeholder="Correo" required className="w-full rounded-md border px-3 py-2 text-sm" />
-        <input name="password" type="password" placeholder="Contraseña (mín. 8 caracteres)" required minLength={8} className="w-full rounded-md border px-3 py-2 text-sm" />
-        <select name="rol" className="w-full rounded-md border px-3 py-2 text-sm">
-          <option value="persona">Persona (solo sus cuentas)</option>
-          <option value="admin">Admin (todas las cuentas)</option>
-        </select>
-        <fieldset className="space-y-1">
-          <legend className="text-xs text-muted-foreground">Cuentas (solo aplica a rol persona)</legend>
-          {cuentas.map((c) => (
-            <label key={c.id} className="flex items-center gap-2 text-sm">
-              <input type="checkbox" name="cuentaIds" value={c.id} />
-              {c.nombre}
-            </label>
-          ))}
-        </fieldset>
-        <button type="submit" className="rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground">
-          Crear usuario
-        </button>
-      </form>
+      <Card className="max-w-lg">
+        <CardHeader>
+          <CardTitle>Nuevo usuario</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <form action={crearUsuario}>
+            <FieldGroup>
+              <Field>
+                <FieldLabel htmlFor="nombre">Nombre</FieldLabel>
+                <Input id="nombre" name="nombre" required />
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="email">Correo</FieldLabel>
+                <Input id="email" name="email" type="email" required />
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="password">Contraseña</FieldLabel>
+                <Input id="password" name="password" type="password" required minLength={8} />
+              </Field>
+              <Field>
+                <FieldLabel htmlFor="rol">Rol</FieldLabel>
+                <Select name="rol" defaultValue="persona">
+                  <SelectTrigger id="rol" className="w-full">
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
+                    <SelectGroup>
+                      <SelectItem value="persona">Persona (solo sus cuentas)</SelectItem>
+                      <SelectItem value="admin">Admin (todas las cuentas)</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+              </Field>
+              <FieldSet>
+                <FieldLegend variant="label">Cuentas (solo aplica a rol persona)</FieldLegend>
+                <FieldGroup data-slot="checkbox-group">
+                  {cuentas.map((c) => (
+                    <Field key={c.id} orientation="horizontal">
+                      <Checkbox id={`cuenta-${c.id}`} name="cuentaIds" value={c.id} />
+                      <FieldLabel htmlFor={`cuenta-${c.id}`} className="font-normal">
+                        {c.nombre}
+                      </FieldLabel>
+                    </Field>
+                  ))}
+                </FieldGroup>
+              </FieldSet>
+              <Field>
+                <Button type="submit">Crear usuario</Button>
+              </Field>
+            </FieldGroup>
+          </form>
+        </CardContent>
+      </Card>
     </div>
   )
 }

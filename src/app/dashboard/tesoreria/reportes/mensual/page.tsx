@@ -3,6 +3,26 @@ import { PageHeader } from "@/presentation/components/page-header"
 import { getCurrentUser } from "@/infrastructure/auth/current-user"
 import { repository, tesoreriaService } from "@/infrastructure/container"
 import type { Cuenta } from "@/core/domain/entities"
+import { Button } from "@/components/ui/button"
+import { Card } from "@/components/ui/card"
+import { Field } from "@/components/ui/field"
+import { Input } from "@/components/ui/input"
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table"
 
 const MESES = [
   "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
@@ -34,56 +54,65 @@ export default async function ReporteMensualPage({
     <div className="flex flex-col gap-6">
       <PageHeader title="Matriz mensual" description="Categoría × cuenta, con totales." badge="Tesorería" />
 
-      <form className="flex gap-2" method="get">
-        <select name="mes" defaultValue={mes} className="rounded-md border px-3 py-2 text-sm">
-          {MESES.map((nombre, i) => (
-            <option key={nombre} value={i + 1}>{nombre}</option>
-          ))}
-        </select>
-        <input name="anio" type="number" defaultValue={anio} className="w-28 rounded-md border px-3 py-2 text-sm" />
-        <button type="submit" className="rounded-md bg-primary px-3 py-2 text-sm font-medium text-primary-foreground">
-          Ver
-        </button>
+      <form className="flex items-end gap-2" method="get">
+        <Field className="w-40">
+          <Select name="mes" defaultValue={String(mes)}>
+            <SelectTrigger className="w-full">
+              <SelectValue />
+            </SelectTrigger>
+            <SelectContent>
+              <SelectGroup>
+                {MESES.map((nombre, i) => (
+                  <SelectItem key={nombre} value={String(i + 1)}>{nombre}</SelectItem>
+                ))}
+              </SelectGroup>
+            </SelectContent>
+          </Select>
+        </Field>
+        <Field className="w-28">
+          <Input name="anio" type="number" defaultValue={anio} />
+        </Field>
+        <Button type="submit">Ver</Button>
       </form>
 
-      <div className="overflow-x-auto rounded-xl border">
-        <table className="w-full text-sm">
-          <thead>
-            <tr className="border-b bg-muted/40 text-left">
-              <th className="sticky left-0 bg-muted/40 p-2">Categoría</th>
+      <Card className="overflow-x-auto">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead className="sticky left-0 bg-muted/40">Categoría</TableHead>
               {cuentas.map((c) => (
-                <th key={c.id} className="p-2 text-right whitespace-nowrap">{c.nombre}</th>
+                <TableHead key={c.id} className="text-right">{c.nombre}</TableHead>
               ))}
-              <th className="p-2 text-right whitespace-nowrap font-semibold">Total</th>
-            </tr>
-          </thead>
-          <tbody>
+              <TableHead className="text-right font-semibold">Total</TableHead>
+            </TableRow>
+          </TableHeader>
+          <TableBody>
             {matriz.filas.map((f) => (
-              <tr key={f.categoriaId} className="border-b last:border-0">
-                <td
-                  className="sticky left-0 bg-background p-2 whitespace-nowrap"
+              <TableRow key={f.categoriaId}>
+                <TableCell
+                  className="sticky left-0 bg-background"
                   style={{ paddingLeft: `${8 + f.nivel * 16}px`, fontWeight: f.nivel === 0 ? 600 : 400 }}
                 >
                   {f.nombre}
-                </td>
+                </TableCell>
                 {cuentas.map((c) => (
-                  <td key={c.id} className="p-2 text-right">
+                  <TableCell key={c.id} className="text-right">
                     {f.porCuenta[c.id] ? fmt(f.porCuenta[c.id]) : "—"}
-                  </td>
+                  </TableCell>
                 ))}
-                <td className="p-2 text-right font-medium">{fmt(f.total)}</td>
-              </tr>
+                <TableCell className="text-right font-medium">{fmt(f.total)}</TableCell>
+              </TableRow>
             ))}
-            <tr className="border-t-2 font-semibold">
-              <td className="sticky left-0 bg-background p-2">Total</td>
+            <TableRow className="border-t-2 font-semibold">
+              <TableCell className="sticky left-0 bg-background">Total</TableCell>
               {cuentas.map((c) => (
-                <td key={c.id} className="p-2 text-right">{fmt(matriz.totalesPorCuenta[c.id] ?? 0)}</td>
+                <TableCell key={c.id} className="text-right">{fmt(matriz.totalesPorCuenta[c.id] ?? 0)}</TableCell>
               ))}
-              <td className="p-2 text-right">{fmt(matriz.totalGeneral)}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+              <TableCell className="text-right">{fmt(matriz.totalGeneral)}</TableCell>
+            </TableRow>
+          </TableBody>
+        </Table>
+      </Card>
     </div>
   )
 }

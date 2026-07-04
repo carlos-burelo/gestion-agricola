@@ -33,7 +33,7 @@ export default async function TesoreriaPage() {
           <Link
             key={c.id}
             href={`/dashboard/tesoreria/${c.id}`}
-            className="rounded-xl border p-4 transition hover:border-primary"
+            className="rounded-xl bg-card p-4 text-card-foreground ring-1 ring-foreground/10 transition hover:ring-primary/50"
           >
             <p className="text-xs text-muted-foreground">{c.tipo} · {c.moneda}</p>
             <p className="font-medium">{c.nombre}</p>
