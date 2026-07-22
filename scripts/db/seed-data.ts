@@ -1,4 +1,5 @@
 import { fakerES_MX as faker } from "@faker-js/faker"
+import { hashPassword } from "@/infrastructure/auth/password"
 
 faker.seed(2026)
 
@@ -374,9 +375,12 @@ export function generateSeedData() {
     { id: "gasto-ext-3", tipoGasto: "operativo", catGastoId: "cat-op-1", familiarId: "", bancoCuentaId: "cuenta-2", monto: 8500, fecha: "2025-06-18", folioFactura: "FAC-REFAC-9901", observaciones: "Reparación de embrague tractor John Deere.", createdAt: ts(2025, 6, 18), updatedAt: ts(2025, 6, 18) },
   ]
 
+  const adminPasswordHash = hashPassword(process.env.ADMIN_PASSWORD ?? "admin123")
+  const userPasswordHash = hashPassword("operador123")
+
   const usuarios = [
-    { id: "usr-admin", nombre: "Administrador General", email: "admin@agropina.mx", passwordHash: "scrypt:45e1...", rol: "admin", estado: "activo", createdAt: ts(2025, 1, 1), updatedAt: ts(2025, 1, 1) },
-    { id: "usr-operador-1", nombre: "Operador de Cajas Campo", email: "cajas@agropina.mx", passwordHash: "scrypt:45e1...", rol: "persona", estado: "activo", createdAt: ts(2025, 1, 10), updatedAt: ts(2025, 1, 10) },
+    { id: "usr-admin", nombre: "Administrador General", email: "admin@agropina.mx", passwordHash: adminPasswordHash, rol: "admin", estado: "activo", createdAt: ts(2025, 1, 1), updatedAt: ts(2025, 1, 1) },
+    { id: "usr-operador-1", nombre: "Operador de Cajas Campo", email: "cajas@agropina.mx", passwordHash: userPasswordHash, rol: "persona", estado: "activo", createdAt: ts(2025, 1, 10), updatedAt: ts(2025, 1, 10) },
   ]
 
   const usuarioCuentas = [
