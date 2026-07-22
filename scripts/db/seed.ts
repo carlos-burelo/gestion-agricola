@@ -1,6 +1,4 @@
 import "dotenv/config"
-import { readFile } from "node:fs/promises"
-import path from "node:path"
 import { drizzle } from "drizzle-orm/postgres-js"
 import postgres from "postgres"
 import * as schema from "@/infrastructure/persistence/sql/schema"
@@ -9,8 +7,8 @@ import {
   flatConfigs,
   toRow,
 } from "@/infrastructure/persistence/sql/table-config"
+import { generateSeedData } from "./seed-data"
 
-// Orden de inserción respetando FKs (padres antes que hijos).
 const ORDER = [
   "ranchos",
   "parcelas",
@@ -19,6 +17,7 @@ const ORDER = [
   "siembras",
   "semilleros",
   "actividades",
+  "trabajadores",
   "registrosActividad",
   "productos",
   "proveedores",
@@ -29,26 +28,45 @@ const ORDER = [
   "recepciones",
   "cuentasPorPagar",
   "valesSalida",
+  "clientes",
+  "catGastosOperativos",
+  "catGastosFinancieros",
+  "catGastosAdministrativos",
+  "catGastosFamilia",
+  "familiares",
+  "cuentas",
+  "ventasPina",
+  "ventasGanado",
+  "anticiposClientes",
+  "abonosClientes",
+  "prestamosBancarios",
+  "prestamosExternos",
+  "abonosPrestamos",
+  "transferenciasHijuelos",
+  "cargosComisiones",
+  "gastosExternos",
+  "usuarios",
+  "usuarioCuentas",
 ] as const
 
 async function main() {
   const sql = postgres(process.env.DATABASE_URL!)
   const db = drizzle(sql, { schema })
 
-  const file = path.join(process.cwd(), ".data", "database.json")
-  const data = JSON.parse(await readFile(file, "utf-8")) as Record<
-    string,
-    Record<string, unknown>[]
-  >
+  const data = generateSeedData() as Record<string, Record<string, unknown>[]>
 
-  // Vaciar todo (hijas por CASCADE).
   await sql`
     TRUNCATE TABLE
       ranchos, parcelas, plantillas, ciclos, siembras, semilleros,
-      actividades, registros_actividad, productos, proveedores,
+      actividades, trabajadores, registros_actividad, productos, proveedores,
       movimientos_inventario, requerimientos, detalle_requerimiento,
       cotizaciones, detalle_cotizacion, ordenes_compra, detalle_orden_compra,
-      recepciones, detalle_recepcion, cuentas_por_pagar, vales_salida, detalle_vale
+      recepciones, detalle_recepcion, cuentas_por_pagar, vales_salida, detalle_vale,
+      clientes, cat_gastos_operativos, cat_gastos_financieros, cat_gastos_administrativos,
+      cat_gastos_familia, familiares, cuentas, ventas_pina, ventas_ganado,
+      anticipos_clientes, abonos_clientes, prestamos_bancarios, prestamos_externos,
+      abonos_prestamos, transferencias_hijuelos, cargos_comisiones, gastos_externos,
+      usuarios, usuario_cuentas
     RESTART IDENTITY CASCADE
   `
 
@@ -75,6 +93,10 @@ async function main() {
       }
     } else {
       const cfg = flatConfigs[name]
+      if (!cfg) {
+        console.warn(`No config found for ${name}`)
+        continue
+      }
       const values = rows.map((r) =>
         toRow(r, cfg.dateFields, cfg.nullableFields),
       )
@@ -86,6 +108,7 @@ async function main() {
   console.log("OK seed")
   await sql.end()
 }
+
 main().catch((e) => {
   console.error(e)
   process.exit(1)

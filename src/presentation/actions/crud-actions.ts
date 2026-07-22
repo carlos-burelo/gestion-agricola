@@ -63,6 +63,7 @@ export async function createRecord(
     const { config, data } = coerce(slug, raw)
     await crudService<BaseEntity>(config.collection).create(data as never)
     revalidatePath(`/dashboard/${slug}`)
+    revalidatePath("/dashboard/catalogos")
     return { ok: true }
   } catch (error) {
     return { ok: false, error: toMessage(error) }
@@ -79,6 +80,7 @@ export async function updateRecord(
     const { config, data } = coerce(slug, raw)
     await crudService<BaseEntity>(config.collection).update(id, data as never)
     revalidatePath(`/dashboard/${slug}`)
+    revalidatePath("/dashboard/catalogos")
     return { ok: true }
   } catch (error) {
     return { ok: false, error: toMessage(error) }
@@ -95,6 +97,7 @@ export async function deleteRecord(
     if (!config) throw new DomainError(`Módulo desconocido: ${slug}`)
     await crudService<BaseEntity>(config.collection).remove(id)
     revalidatePath(`/dashboard/${slug}`)
+    revalidatePath("/dashboard/catalogos")
     return { ok: true }
   } catch (error) {
     return { ok: false, error: toMessage(error) }

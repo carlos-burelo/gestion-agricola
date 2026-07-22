@@ -45,13 +45,26 @@ export const tipoCuenta = pgEnum("tipo_cuenta", [
   "persona",
   "reserva",
 ])
+export const titularTipo = pgEnum("titular_tipo", [
+  "cliente",
+  "proveedor",
+  "trabajador",
+  "familiar",
+  "negocio",
+])
 export const rolUsuario = pgEnum("rol_usuario", ["admin", "persona"])
 export const direccionMovimiento = pgEnum("direccion_movimiento_financiero", [
   "entrada",
   "salida",
 ])
+export const tipoPagoVenta = pgEnum("tipo_pago_venta", ["contado", "cxc"])
+export const estadoVenta = pgEnum("estado_venta", ["pagada", "pendiente", "parcial"])
+export const estadoAnticipo = pgEnum("estado_anticipo", ["pendiente", "aplicado"])
+export const tipoPrestamo = pgEnum("tipo_prestamo", ["bancario", "externo"])
+export const estadoPrestamo = pgEnum("estado_prestamo", ["activo", "liquidado"])
+export const tipoGastoExterno = pgEnum("tipo_gasto_externo", ["operativo", "administrativo", "familiar"])
 
-// Columnas de auditoría compartidas.
+// Audit columns
 const audit = {
   createdAt: timestamp("created_at", { withTimezone: true }).notNull(),
   updatedAt: timestamp("updated_at", { withTimezone: true }).notNull(),
@@ -116,7 +129,6 @@ export const siembras = pgTable("siembras", {
   ...audit,
 })
 
-// 3. Semilleros
 export const semilleros = pgTable("semilleros", {
   id: text("id").primaryKey(),
   parcelaId: text("parcela_id")
@@ -132,11 +144,21 @@ export const semilleros = pgTable("semilleros", {
   ...audit,
 })
 
-// 4. Mano de obra
+// 3. Mano de obra y Trabajadores
 export const actividades = pgTable("actividades", {
   id: text("id").primaryKey(),
   nombre: text("nombre").notNull(),
   descripcion: text("descripcion").notNull(),
+  ...audit,
+})
+
+export const trabajadores = pgTable("trabajadores", {
+  id: text("id").primaryKey(),
+  nombre: text("nombre").notNull(),
+  puesto: text("puesto").notNull(),
+  salarioBase: doublePrecision("salario_base").notNull(),
+  telefono: text("telefono").notNull(),
+  estado: estadoActivo("estado").notNull(),
   ...audit,
 })
 
@@ -146,6 +168,7 @@ export const registrosActividad = pgTable("registros_actividad", {
   actividadId: text("actividad_id")
     .notNull()
     .references(() => actividades.id),
+  trabajadorId: text("trabajador_id").references(() => trabajadores.id),
   ranchoId: text("rancho_id")
     .notNull()
     .references(() => ranchos.id),
@@ -164,7 +187,7 @@ export const registrosActividad = pgTable("registros_actividad", {
   ...audit,
 })
 
-// 5. Productos
+// 4. Productos y Proveedores
 export const productos = pgTable("productos", {
   id: text("id").primaryKey(),
   ingredienteActivo: text("ingrediente_activo").notNull(),
@@ -174,7 +197,6 @@ export const productos = pgTable("productos", {
   ...audit,
 })
 
-// 6. Proveedores
 export const proveedores = pgTable("proveedores", {
   id: text("id").primaryKey(),
   razonSocial: text("razon_social").notNull(),
@@ -183,10 +205,10 @@ export const proveedores = pgTable("proveedores", {
   telefonoSecundario: text("telefono_secundario").notNull(),
   whatsapp: text("whatsapp").notNull(),
   email: text("email").notNull(),
+  estado: estadoActivo("estado").notNull(),
   ...audit,
 })
 
-// 7. Inventario
 export const movimientosInventario = pgTable("movimientos_inventario", {
   id: text("id").primaryKey(),
   productoId: text("producto_id")
@@ -196,14 +218,13 @@ export const movimientosInventario = pgTable("movimientos_inventario", {
   fecha: timestamp("fecha", { withTimezone: true }).notNull(),
   cantidad: doublePrecision("cantidad").notNull(),
   costoUnitario: doublePrecision("costo_unitario").notNull(),
-  // Nullable: las salidas no tienen proveedor (NULL ↔ "" en el dominio).
   proveedorId: text("proveedor_id").references(() => proveedores.id),
   factura: text("factura").notNull(),
   destino: text("destino").notNull(),
   ...audit,
 })
 
-// 8. Requerimientos (+ líneas)
+// 5. Requerimientos, Compras y Vales
 export const requerimientos = pgTable("requerimientos", {
   id: text("id").primaryKey(),
   folio: text("folio").notNull(),
@@ -212,6 +233,7 @@ export const requerimientos = pgTable("requerimientos", {
   observaciones: text("observaciones").notNull(),
   ...audit,
 })
+
 export const detalleRequerimiento = pgTable("detalle_requerimiento", {
   id: serial("id").primaryKey(),
   requerimientoId: text("requerimiento_id")
@@ -224,7 +246,6 @@ export const detalleRequerimiento = pgTable("detalle_requerimiento", {
   unidadMedida: text("unidad_medida").notNull(),
 })
 
-// 9. Cotizaciones (+ líneas)
 export const cotizaciones = pgTable("cotizaciones", {
   id: text("id").primaryKey(),
   requerimientoId: text("requerimiento_id")
@@ -237,6 +258,7 @@ export const cotizaciones = pgTable("cotizaciones", {
   estado: estadoCotizacion("estado").notNull(),
   ...audit,
 })
+
 export const detalleCotizacion = pgTable("detalle_cotizacion", {
   id: serial("id").primaryKey(),
   cotizacionId: text("cotizacion_id")
@@ -249,7 +271,6 @@ export const detalleCotizacion = pgTable("detalle_cotizacion", {
   precioUnitario: doublePrecision("precio_unitario").notNull(),
 })
 
-// 10. Órdenes de compra (+ líneas)
 export const ordenesCompra = pgTable("ordenes_compra", {
   id: text("id").primaryKey(),
   folio: text("folio").notNull(),
@@ -260,6 +281,7 @@ export const ordenesCompra = pgTable("ordenes_compra", {
   estado: estadoOrdenCompra("estado").notNull(),
   ...audit,
 })
+
 export const detalleOrdenCompra = pgTable("detalle_orden_compra", {
   id: serial("id").primaryKey(),
   ordenCompraId: text("orden_compra_id")
@@ -272,7 +294,6 @@ export const detalleOrdenCompra = pgTable("detalle_orden_compra", {
   precioUnitario: doublePrecision("precio_unitario").notNull(),
 })
 
-// 11. Recepciones (+ líneas)
 export const recepciones = pgTable("recepciones", {
   id: text("id").primaryKey(),
   ordenCompraId: text("orden_compra_id")
@@ -282,6 +303,7 @@ export const recepciones = pgTable("recepciones", {
   fecha: timestamp("fecha", { withTimezone: true }).notNull(),
   ...audit,
 })
+
 export const detalleRecepcion = pgTable("detalle_recepcion", {
   id: serial("id").primaryKey(),
   recepcionId: text("recepcion_id")
@@ -294,7 +316,6 @@ export const detalleRecepcion = pgTable("detalle_recepcion", {
   costoUnitario: doublePrecision("costo_unitario").notNull(),
 })
 
-// 12. Cuentas por pagar
 export const cuentasPorPagar = pgTable("cuentas_por_pagar", {
   id: text("id").primaryKey(),
   proveedorId: text("proveedor_id")
@@ -309,7 +330,6 @@ export const cuentasPorPagar = pgTable("cuentas_por_pagar", {
   ...audit,
 })
 
-// 13. Vales de salida (+ líneas)
 export const valesSalida = pgTable("vales_salida", {
   id: text("id").primaryKey(),
   folio: text("folio").notNull(),
@@ -329,6 +349,7 @@ export const valesSalida = pgTable("vales_salida", {
     .references(() => ciclos.id),
   ...audit,
 })
+
 export const detalleVale = pgTable("detalle_vale", {
   id: serial("id").primaryKey(),
   valeSalidaId: text("vale_salida_id")
@@ -341,7 +362,193 @@ export const detalleVale = pgTable("detalle_vale", {
   costoUnitario: doublePrecision("costo_unitario").notNull(),
 })
 
-// 14. Tesorería
+// 6. Catálogos de Gastos Clasificados y Familiares
+export const catGastosOperativos = pgTable("cat_gastos_operativos", {
+  id: text("id").primaryKey(),
+  concepto: text("concepto").notNull(),
+  descripcion: text("descripcion").notNull(),
+  estado: estadoActivo("estado").notNull(),
+  ...audit,
+})
+
+export const catGastosFinancieros = pgTable("cat_gastos_financieros", {
+  id: text("id").primaryKey(),
+  concepto: text("concepto").notNull(),
+  descripcion: text("descripcion").notNull(),
+  estado: estadoActivo("estado").notNull(),
+  ...audit,
+})
+
+export const catGastosAdministrativos = pgTable("cat_gastos_administrativos", {
+  id: text("id").primaryKey(),
+  concepto: text("concepto").notNull(),
+  descripcion: text("descripcion").notNull(),
+  estado: estadoActivo("estado").notNull(),
+  ...audit,
+})
+
+export const catGastosFamilia = pgTable("cat_gastos_familia", {
+  id: text("id").primaryKey(),
+  concepto: text("concepto").notNull(),
+  descripcion: text("descripcion").notNull(),
+  estado: estadoActivo("estado").notNull(),
+  ...audit,
+})
+
+export const familiares = pgTable("familiares", {
+  id: text("id").primaryKey(),
+  nombre: text("nombre").notNull(),
+  parentesco: text("parentesco").notNull(),
+  telefono: text("telefono").notNull(),
+  estado: estadoActivo("estado").notNull(),
+  ...audit,
+})
+
+// 7. Clientes y Ventas
+export const clientes = pgTable("clientes", {
+  id: text("id").primaryKey(),
+  nombreRazonSocial: text("nombre_razon_social").notNull(),
+  rfc: text("rfc").notNull(),
+  telefono: text("telefono").notNull(),
+  email: text("email").notNull(),
+  direccion: text("direccion").notNull(),
+  estado: estadoActivo("estado").notNull(),
+  ...audit,
+})
+
+export const ventasPina = pgTable("ventas_pina", {
+  id: text("id").primaryKey(),
+  clienteId: text("cliente_id")
+    .notNull()
+    .references(() => clientes.id),
+  folioLoteProduccion: text("folio_lote_produccion").notNull(),
+  kilosEnviados: doublePrecision("kilos_enviados").notNull(),
+  precioPorKg: doublePrecision("precio_por_kg").notNull(),
+  montoTotal: doublePrecision("monto_total").notNull(),
+  tipoPago: tipoPagoVenta("tipo_pago").notNull(),
+  bancoCuentaId: text("banco_cuenta_id").notNull(),
+  fecha: timestamp("fecha", { withTimezone: true }).notNull(),
+  estado: estadoVenta("estado").notNull(),
+  ...audit,
+})
+
+export const ventasGanado = pgTable("ventas_ganado", {
+  id: text("id").primaryKey(),
+  clienteId: text("cliente_id")
+    .notNull()
+    .references(() => clientes.id),
+  cabezasOKg: doublePrecision("cabezas_o_kg").notNull(),
+  precioUnitario: doublePrecision("precio_unitario").notNull(),
+  montoTotal: doublePrecision("monto_total").notNull(),
+  tipoPago: tipoPagoVenta("tipo_pago").notNull(),
+  bancoCuentaId: text("banco_cuenta_id").notNull(),
+  fecha: timestamp("fecha", { withTimezone: true }).notNull(),
+  estado: estadoVenta("estado").notNull(),
+  ...audit,
+})
+
+export const anticiposClientes = pgTable("anticipos_clientes", {
+  id: text("id").primaryKey(),
+  clienteId: text("cliente_id")
+    .notNull()
+    .references(() => clientes.id),
+  bancoCuentaId: text("banco_cuenta_id").notNull(),
+  monto: doublePrecision("monto").notNull(),
+  fecha: timestamp("fecha", { withTimezone: true }).notNull(),
+  formaPago: text("forma_pago").notNull(),
+  folio: text("folio").notNull(),
+  estado: estadoAnticipo("estado").notNull(),
+  ...audit,
+})
+
+export const abonosClientes = pgTable("abonos_clientes", {
+  id: text("id").primaryKey(),
+  clienteId: text("cliente_id")
+    .notNull()
+    .references(() => clientes.id),
+  ventaId: text("venta_id").notNull(),
+  bancoCuentaId: text("banco_cuenta_id").notNull(),
+  monto: doublePrecision("monto").notNull(),
+  fecha: timestamp("fecha", { withTimezone: true }).notNull(),
+  folio: text("folio").notNull(),
+  ...audit,
+})
+
+// 8. Banco, Préstamos y Transferencias Fisclo-Financieras
+export const prestamosBancarios = pgTable("prestamos_bancarios", {
+  id: text("id").primaryKey(),
+  bancoCuentaId: text("banco_cuenta_id").notNull(),
+  bancoNombre: text("banco_nombre").notNull(),
+  folio: text("folio").notNull(),
+  montoTotal: doublePrecision("monto_total").notNull(),
+  tasaInteres: doublePrecision("tasa_interes").notNull(),
+  fechaConcesion: timestamp("fecha_concesion", { withTimezone: true }).notNull(),
+  saldoPendiente: doublePrecision("saldo_pendiente").notNull(),
+  estado: estadoPrestamo("estado").notNull(),
+  ...audit,
+})
+
+export const prestamosExternos = pgTable("prestamos_externos", {
+  id: text("id").primaryKey(),
+  prestamistaNombre: text("prestamista_nombre").notNull(),
+  bancoCuentaId: text("banco_cuenta_id").notNull(),
+  folio: text("folio").notNull(),
+  montoTotal: doublePrecision("monto_total").notNull(),
+  fechaConcesion: timestamp("fecha_concesion", { withTimezone: true }).notNull(),
+  saldoPendiente: doublePrecision("saldo_pendiente").notNull(),
+  estado: estadoPrestamo("estado").notNull(),
+  ...audit,
+})
+
+export const abonosPrestamos = pgTable("abonos_prestamos", {
+  id: text("id").primaryKey(),
+  tipoPrestamo: tipoPrestamo("tipo_prestamo").notNull(),
+  prestamoId: text("prestamo_id").notNull(),
+  bancoCuentaId: text("banco_cuenta_id").notNull(),
+  monto: doublePrecision("monto").notNull(),
+  fecha: timestamp("fecha", { withTimezone: true }).notNull(),
+  folio: text("folio").notNull(),
+  ...audit,
+})
+
+export const transferenciasHijuelos = pgTable("transferencias_hijuelos", {
+  id: text("id").primaryKey(),
+  cuentaOrigenId: text("cuenta_origen_id").notNull(),
+  cuentaDestinoId: text("cuenta_destino_id").notNull(),
+  monto: doublePrecision("monto").notNull(),
+  fecha: timestamp("fecha", { withTimezone: true }).notNull(),
+  folioFiscal: text("folio_fiscal").notNull(),
+  conceptoFiscal: text("concepto_fiscal").notNull(),
+  observaciones: text("observaciones").notNull(),
+  ...audit,
+})
+
+export const cargosComisiones = pgTable("cargos_comisiones", {
+  id: text("id").primaryKey(),
+  bancoCuentaId: text("banco_cuenta_id").notNull(),
+  catGastoFinancieroId: text("cat_gasto_financiero_id").notNull(),
+  monto: doublePrecision("monto").notNull(),
+  folio: text("folio").notNull(),
+  fecha: timestamp("fecha", { withTimezone: true }).notNull(),
+  observaciones: text("observaciones").notNull(),
+  ...audit,
+})
+
+// 9. Otros Gastos (Fuera del core)
+export const gastosExternos = pgTable("gastos_externos", {
+  id: text("id").primaryKey(),
+  tipoGasto: tipoGastoExterno("tipo_gasto").notNull(),
+  catGastoId: text("cat_gasto_id").notNull(),
+  familiarId: text("familiar_id"),
+  bancoCuentaId: text("banco_cuenta_id").notNull(),
+  monto: doublePrecision("monto").notNull(),
+  fecha: timestamp("fecha", { withTimezone: true }).notNull(),
+  folioFactura: text("folio_factura").notNull(),
+  observaciones: text("observaciones").notNull(),
+  ...audit,
+})
+
+// 10. Tesorería
 export const categorias = pgTable("categorias", {
   id: text("id").primaryKey(),
   nombre: text("nombre").notNull(),
@@ -356,6 +563,10 @@ export const cuentas = pgTable("cuentas", {
   id: text("id").primaryKey(),
   nombre: text("nombre").notNull(),
   tipo: tipoCuenta("tipo").notNull(),
+  titularTipo: titularTipo("titular_tipo"),
+  titularNombre: text("titular_nombre"),
+  bancoNombre: text("banco_nombre"),
+  numeroCuenta: text("numero_cuenta"),
   moneda: text("moneda").notNull(),
   saldoInicial: doublePrecision("saldo_inicial").notNull(),
   estado: estadoActivo("estado").notNull(),

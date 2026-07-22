@@ -6,13 +6,11 @@ const AUDIT = ["createdAt", "updatedAt"]
 export interface FlatConfig {
   table: PgTable
   dateFields: string[]
-  /** Columnas FK opcionales: "" en el dominio ↔ NULL en la base. */
   nullableFields?: string[]
 }
 export interface AggConfig {
   table: PgTable
   child: PgTable
-  /** columna FK en la tabla hija que apunta al padre (propiedad TS). */
   parentFk: string
   dateFields: string[]
   childDateFields: string[]
@@ -29,9 +27,11 @@ export const flatConfigs: Record<string, FlatConfig> = {
   siembras: { table: s.siembras, dateFields: ["fecha", ...AUDIT] },
   semilleros: { table: s.semilleros, dateFields: ["fechaProduccion", ...AUDIT] },
   actividades: { table: s.actividades, dateFields: AUDIT },
+  trabajadores: { table: s.trabajadores, dateFields: AUDIT },
   registrosActividad: {
     table: s.registrosActividad,
     dateFields: ["fecha", ...AUDIT],
+    nullableFields: ["trabajadorId"],
   },
   productos: { table: s.productos, dateFields: AUDIT },
   proveedores: { table: s.proveedores, dateFields: AUDIT },
@@ -44,12 +44,36 @@ export const flatConfigs: Record<string, FlatConfig> = {
     table: s.cuentasPorPagar,
     dateFields: ["fechaVencimiento", ...AUDIT],
   },
+  catGastosOperativos: { table: s.catGastosOperativos, dateFields: AUDIT },
+  catGastosFinancieros: { table: s.catGastosFinancieros, dateFields: AUDIT },
+  catGastosAdministrativos: { table: s.catGastosAdministrativos, dateFields: AUDIT },
+  catGastosFamilia: { table: s.catGastosFamilia, dateFields: AUDIT },
+  familiares: { table: s.familiares, dateFields: AUDIT },
+  clientes: { table: s.clientes, dateFields: AUDIT },
+  ventasPina: { table: s.ventasPina, dateFields: ["fecha", ...AUDIT] },
+  ventasGanado: { table: s.ventasGanado, dateFields: ["fecha", ...AUDIT] },
+  anticiposClientes: { table: s.anticiposClientes, dateFields: ["fecha", ...AUDIT] },
+  abonosClientes: { table: s.abonosClientes, dateFields: ["fecha", ...AUDIT] },
+  prestamosBancarios: { table: s.prestamosBancarios, dateFields: ["fechaConcesion", ...AUDIT] },
+  prestamosExternos: { table: s.prestamosExternos, dateFields: ["fechaConcesion", ...AUDIT] },
+  abonosPrestamos: { table: s.abonosPrestamos, dateFields: ["fecha", ...AUDIT] },
+  transferenciasHijuelos: { table: s.transferenciasHijuelos, dateFields: ["fecha", ...AUDIT] },
+  cargosComisiones: { table: s.cargosComisiones, dateFields: ["fecha", ...AUDIT] },
+  gastosExternos: {
+    table: s.gastosExternos,
+    dateFields: ["fecha", ...AUDIT],
+    nullableFields: ["familiarId"],
+  },
   categorias: {
     table: s.categorias,
     dateFields: AUDIT,
     nullableFields: ["parentId"],
   },
-  cuentas: { table: s.cuentas, dateFields: AUDIT },
+  cuentas: {
+    table: s.cuentas,
+    dateFields: AUDIT,
+    nullableFields: ["titularTipo", "titularNombre", "bancoNombre", "numeroCuenta"],
+  },
   usuarios: { table: s.usuarios, dateFields: AUDIT },
   usuarioCuentas: { table: s.usuarioCuentas, dateFields: AUDIT },
   traspasos: {
@@ -110,8 +134,6 @@ export const aggConfigs: Record<string, AggConfig> = {
   },
 }
 
-/** Convierte una fila de Drizzle a entidad de dominio (Date → ISO string,
- * NULL → "" para FKs opcionales). */
 export function toEntity<T>(
   row: Record<string, unknown>,
   dateFields: string[],
@@ -128,8 +150,6 @@ export function toEntity<T>(
   return out as T
 }
 
-/** Convierte datos de dominio a fila insertable (ISO string → Date,
- * "" → NULL para FKs opcionales). */
 export function toRow(
   data: Record<string, unknown>,
   dateFields: string[],

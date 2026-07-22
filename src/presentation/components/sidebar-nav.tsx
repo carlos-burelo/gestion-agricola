@@ -3,34 +3,34 @@
 import {
 	ArrowLeftRight,
 	BarChart3,
+	BookOpen,
 	Boxes,
+	Building2,
+	ChevronRight,
 	ClipboardList,
-	FileOutput,
-	FileText,
-	FlaskConical,
 	GitBranch,
+	Handshake,
+	HandCoins,
+	Landmark,
 	LayoutDashboard,
-	LayoutGrid,
 	Leaf,
 	type LucideIcon,
 	LineChart,
-	MapIcon,
-	MapPin,
 	MapPinned,
-	NotebookPen,
-	Package,
-	PackageCheck,
+	Percent,
 	Receipt,
-	Repeat2,
-	ShoppingCart,
-	Sprout,
-	Truck,
+	UserCheck,
 	UserCog,
+	Users,
 	Wallet,
 } from "lucide-react";
 import Image from "next/image";
-import Link from "next/link";
 import { usePathname } from "next/navigation";
+import {
+	Collapsible,
+	CollapsibleContent,
+	CollapsibleTrigger,
+} from "@/components/ui/collapsible";
 import {
 	Sidebar,
 	SidebarContent,
@@ -41,9 +41,32 @@ import {
 	SidebarMenu,
 	SidebarMenuButton,
 	SidebarMenuItem,
+	SidebarMenuSub,
+	SidebarMenuSubButton,
+	SidebarMenuSubItem,
 	SidebarRail,
 } from "@/components/ui/sidebar";
-import { MODULE_GROUPS, MODULES } from "@/presentation/config/modules";
+
+const BANCOS_LINKS: { slug: string; title: string; icon: LucideIcon }[] = [
+	{ slug: "bancos", title: "Estado de Cuentas", icon: Wallet },
+	{ slug: "bancos/transferencias", title: "Transferencias Bancarias", icon: ArrowLeftRight },
+	{ slug: "bancos/prestamos-bancarios", title: "(e) Préstamos Bancarios", icon: Landmark },
+	{ slug: "bancos/prestamos-externos", title: "(e) Préstamo de Externos", icon: Handshake },
+	{ slug: "bancos/cargos-comisiones", title: "(s) Cargos y Comisiones", icon: Percent },
+];
+
+const CLIENTES_LINKS: { slug: string; title: string; icon: LucideIcon }[] = [
+	{ slug: "clientes", title: "Catálogo de Clientes", icon: UserCheck },
+	{ slug: "clientes/anticipos", title: "Anticipos Venta Piña", icon: Receipt },
+	{ slug: "clientes/ventas-pina", title: "Ventas de Piña", icon: Leaf },
+	{ slug: "clientes/abonos", title: "Abonos de Clientes", icon: HandCoins },
+];
+
+const OPERACIONES_LINKS: { slug: string; title: string; icon: LucideIcon }[] = [
+	{ slug: "proveedores", title: "Proveedores", icon: Building2 },
+	{ slug: "gastos-externos", title: "Otros Gastos", icon: Receipt },
+	{ slug: "trabajadores", title: "Nóminas (Mano de Obra)", icon: Users },
+];
 
 const TOOLS: { slug: string; title: string; icon: LucideIcon }[] = [
 	{ slug: "mapa", title: "Mapa de parcelas", icon: MapPinned },
@@ -53,33 +76,9 @@ const TOOLS: { slug: string; title: string; icon: LucideIcon }[] = [
 	{ slug: "reportes", title: "Reportes", icon: ClipboardList },
 ];
 
-const TESORERIA_LINKS: { slug: string; title: string; icon: LucideIcon }[] = [
-	{ slug: "tesoreria", title: "Cuentas", icon: Wallet },
-	{ slug: "tesoreria/traspasos", title: "Traspasos", icon: Repeat2 },
-	{ slug: "tesoreria/reportes/mensual", title: "Reportes", icon: LineChart },
-	{ slug: "tesoreria/usuarios", title: "Usuarios", icon: UserCog },
+const SISTEMA_LINKS: { slug: string; title: string; icon: LucideIcon }[] = [
+	{ slug: "usuarios", title: "Usuarios y Permisos", icon: UserCog },
 ];
-
-/** Icon per module slug so the icon-collapsed rail stays legible. */
-const SLUG_ICON: Record<string, LucideIcon> = {
-	ranchos: MapPin,
-	parcelas: MapIcon,
-	plantillas: LayoutGrid,
-	ciclos: Sprout,
-	siembras: Leaf,
-	semilleros: FlaskConical,
-	actividades: ClipboardList,
-	"registros-actividad": NotebookPen,
-	productos: Package,
-	proveedores: Truck,
-	movimientos: ArrowLeftRight,
-	requerimientos: FileText,
-	cotizaciones: Receipt,
-	"ordenes-compra": ShoppingCart,
-	recepciones: PackageCheck,
-	"cuentas-por-pagar": Wallet,
-	"vales-salida": FileOutput,
-};
 
 export function SidebarNav() {
 	const pathname = usePathname();
@@ -89,15 +88,14 @@ export function SidebarNav() {
 			<SidebarHeader>
 				<SidebarMenu>
 					<SidebarMenuItem>
-						<SidebarMenuButton size="lg" render={<Link href="/dashboard" />}>
+						<SidebarMenuButton size="lg" href="/dashboard">
 							<span className="flex aspect-square size-8 items-center justify-center rounded-lg bg-sidebar-primary text-sidebar-primary-foreground">
-								{/* <Leaf className="size-5" /> */}
 								<Image src="/icon.svg" alt="Logo" width={20} height={20} />
 							</span>
 							<span className="flex flex-col gap-0.5 leading-none">
-								<span className="font-semibold">DEMO</span>
+								<span className="font-semibold">SISTEMA ADMINISTRATIVO</span>
 								<span className="text-xs text-sidebar-foreground/70">
-									Gestión de producción
+									Gestión y Comercial
 								</span>
 							</span>
 						</SidebarMenuButton>
@@ -112,56 +110,43 @@ export function SidebarNav() {
 							<SidebarMenuButton
 								isActive={pathname === "/dashboard"}
 								tooltip="Resumen"
-								render={<Link href="/dashboard" />}
+								href="/dashboard"
 							>
 								<LayoutDashboard />
 								<span>Resumen</span>
 							</SidebarMenuButton>
 						</SidebarMenuItem>
+
+						{/* Clean Catálogos Link without subitems */}
+						<SidebarMenuItem>
+							<SidebarMenuButton
+								isActive={pathname.startsWith("/dashboard/catalogos")}
+								tooltip="Catálogos"
+								href="/dashboard/catalogos"
+							>
+								<BookOpen />
+								<span>Catálogos</span>
+							</SidebarMenuButton>
+						</SidebarMenuItem>
 					</SidebarMenu>
 				</SidebarGroup>
 
-				{MODULE_GROUPS.map((group) => {
-					const items = MODULES.filter((m) => m.group === group);
-					return (
-						<SidebarGroup key={group}>
-							<SidebarGroupLabel>{group}</SidebarGroupLabel>
-							<SidebarMenu>
-								{items.map((m) => {
-									const Icon = SLUG_ICON[m.slug] ?? Leaf;
-									const href = `/dashboard/${m.slug}`;
-									return (
-										<SidebarMenuItem key={m.slug}>
-											<SidebarMenuButton
-												isActive={pathname === href}
-												tooltip={m.title}
-												render={<Link href={href} />}
-											>
-												<Icon />
-												<span>{m.title}</span>
-											</SidebarMenuButton>
-										</SidebarMenuItem>
-									);
-								})}
-							</SidebarMenu>
-						</SidebarGroup>
-					);
-				})}
-
+				{/* Dedicated Bancos Module */}
 				<SidebarGroup>
-					<SidebarGroupLabel>Tesorería</SidebarGroupLabel>
+					<SidebarGroupLabel>Bancos</SidebarGroupLabel>
 					<SidebarMenu>
-						{TESORERIA_LINKS.map((t) => {
-							const href = `/dashboard/${t.slug}`;
+						{BANCOS_LINKS.map((b) => {
+							const href = `/dashboard/${b.slug}`;
+							const isActive = pathname === href || (b.slug === "bancos" && pathname === "/dashboard/bancos");
 							return (
-								<SidebarMenuItem key={t.slug}>
+								<SidebarMenuItem key={b.slug}>
 									<SidebarMenuButton
-										isActive={pathname === href}
-										tooltip={t.title}
-										render={<Link href={href} />}
+										isActive={isActive}
+										tooltip={b.title}
+										href={href}
 									>
-										<t.icon />
-										<span>{t.title}</span>
+										<b.icon />
+										<span>{b.title}</span>
 									</SidebarMenuButton>
 								</SidebarMenuItem>
 							);
@@ -169,6 +154,52 @@ export function SidebarNav() {
 					</SidebarMenu>
 				</SidebarGroup>
 
+				{/* Dedicated Clientes Module */}
+				<SidebarGroup>
+					<SidebarGroupLabel>Clientes y Ventas</SidebarGroupLabel>
+					<SidebarMenu>
+						{CLIENTES_LINKS.map((c) => {
+							const href = `/dashboard/${c.slug}`;
+							const isActive = pathname === href || (c.slug === "clientes" && pathname === "/dashboard/clientes");
+							return (
+								<SidebarMenuItem key={c.slug}>
+									<SidebarMenuButton
+										isActive={isActive}
+										tooltip={c.title}
+										href={href}
+									>
+										<c.icon />
+										<span>{c.title}</span>
+									</SidebarMenuButton>
+								</SidebarMenuItem>
+							);
+						})}
+					</SidebarMenu>
+				</SidebarGroup>
+
+				{/* Otras Operaciones */}
+				<SidebarGroup>
+					<SidebarGroupLabel>Operaciones</SidebarGroupLabel>
+					<SidebarMenu>
+						{OPERACIONES_LINKS.map((o) => {
+							const href = `/dashboard/${o.slug}`;
+							return (
+								<SidebarMenuItem key={o.slug}>
+									<SidebarMenuButton
+										isActive={pathname === href}
+										tooltip={o.title}
+										href={href}
+									>
+										<o.icon />
+										<span>{o.title}</span>
+									</SidebarMenuButton>
+								</SidebarMenuItem>
+							);
+						})}
+					</SidebarMenu>
+				</SidebarGroup>
+
+				{/* Análisis */}
 				<SidebarGroup>
 					<SidebarGroupLabel>Análisis</SidebarGroupLabel>
 					<SidebarMenu>
@@ -179,7 +210,29 @@ export function SidebarNav() {
 									<SidebarMenuButton
 										isActive={pathname === href}
 										tooltip={t.title}
-										render={<Link href={href} />}
+										href={href}
+									>
+										<t.icon />
+										<span>{t.title}</span>
+									</SidebarMenuButton>
+								</SidebarMenuItem>
+							);
+						})}
+					</SidebarMenu>
+				</SidebarGroup>
+
+				{/* Sistema */}
+				<SidebarGroup>
+					<SidebarGroupLabel>Sistema</SidebarGroupLabel>
+					<SidebarMenu>
+						{SISTEMA_LINKS.map((t) => {
+							const href = `/dashboard/${t.slug}`;
+							return (
+								<SidebarMenuItem key={t.slug}>
+									<SidebarMenuButton
+										isActive={pathname === href}
+										tooltip={t.title}
+										href={href}
 									>
 										<t.icon />
 										<span>{t.title}</span>

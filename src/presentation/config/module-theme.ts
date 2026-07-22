@@ -1,11 +1,19 @@
 import {
   ArrowLeftRight,
+  BadgeDollarSign,
+  BadgePercent,
   Building2,
   ClipboardList,
   CreditCard,
+  DollarSign,
   FileSpreadsheet,
   FileText,
   FlaskConical,
+  FolderCog,
+  HandCoins,
+  Handshake,
+  HeartHandshake,
+  Landmark,
   LandPlot,
   LayoutGrid,
   Leaf,
@@ -14,6 +22,7 @@ import {
   NotebookPen,
   PackageCheck,
   PackageMinus,
+  Percent,
   Receipt,
   RefreshCw,
   Repeat,
@@ -21,22 +30,15 @@ import {
   Sprout,
   Tags,
   Tractor,
+  UserCheck,
   Users,
   Wallet,
 } from "lucide-react"
 import type { CollectionName } from "@/core/domain/entities"
 import type { ModuleConfig } from "./modules"
 
-/**
- * Per-module visual identity: a distinct icon per collection plus an accent
- * colour derived from the module's group. Keeps the generic CRUD pages
- * recognizable at a glance instead of looking identical.
- */
-
 interface GroupTheme {
-  /** Icon-tile classes (background + foreground). */
   tile: string
-  /** Accent classes for the group badge. */
   badge: string
 }
 
@@ -53,9 +55,29 @@ const GROUPS: Record<string, GroupTheme> = {
     tile: "bg-violet-500/10 text-violet-600",
     badge: "text-violet-600",
   },
+  "Clientes y Ventas": {
+    tile: "bg-teal-500/10 text-teal-600",
+    badge: "text-teal-600",
+  },
+  "Banco y Préstamos": {
+    tile: "bg-blue-500/10 text-blue-600",
+    badge: "text-blue-600",
+  },
+  "Catálogos de Gastos": {
+    tile: "bg-rose-500/10 text-rose-600",
+    badge: "text-rose-600",
+  },
+  "Otros Gastos": {
+    tile: "bg-indigo-500/10 text-indigo-600",
+    badge: "text-indigo-600",
+  },
   "Compras e inventario": {
     tile: "bg-sky-500/10 text-sky-600",
     badge: "text-sky-600",
+  },
+  Tesorería: {
+    tile: "bg-emerald-600/10 text-emerald-700",
+    badge: "text-emerald-700",
   },
 }
 
@@ -72,6 +94,7 @@ const ICONS: Record<CollectionName, LucideIcon> = {
   siembras: Sprout,
   semilleros: Leaf,
   actividades: ClipboardList,
+  trabajadores: Users,
   registrosActividad: NotebookPen,
   productos: FlaskConical,
   proveedores: Building2,
@@ -82,6 +105,22 @@ const ICONS: Record<CollectionName, LucideIcon> = {
   recepciones: PackageCheck,
   cuentasPorPagar: CreditCard,
   valesSalida: PackageMinus,
+  catGastosOperativos: FolderCog,
+  catGastosFinancieros: Percent,
+  catGastosAdministrativos: Tags,
+  catGastosFamilia: HeartHandshake,
+  familiares: Users,
+  clientes: UserCheck,
+  ventasPina: DollarSign,
+  ventasGanado: BadgeDollarSign,
+  anticiposClientes: HandCoins,
+  abonosClientes: Receipt,
+  prestamosBancarios: Landmark,
+  prestamosExternos: Handshake,
+  abonosPrestamos: BadgePercent,
+  transferenciasHijuelos: ArrowLeftRight,
+  cargosComisiones: CreditCard,
+  gastosExternos: Receipt,
   categorias: Tags,
   cuentas: Wallet,
   usuarios: Users,

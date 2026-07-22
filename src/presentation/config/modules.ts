@@ -1,12 +1,5 @@
 import type { CollectionName } from "@/core/domain/entities"
 
-/**
- * Declarative metadata that drives the entire presentation layer. Each module
- * describes its fields once; the generic table, form and server actions all
- * read from here. Adding a column or a new module is a data change, not a code
- * change (Open/Closed Principle).
- */
-
 export type FieldType =
   | "text"
   | "number"
@@ -20,18 +13,14 @@ export interface FieldConfig {
   name: string
   label: string
   type: FieldType
-  /** Static options for `select` fields. */
   options?: { value: string; label: string }[]
-  /** Target collection + label field for `reference` fields. */
   reference?: { collection: CollectionName; labelField: string }
-  /** Hide from the table view (still editable in the form). */
   hideInTable?: boolean
   required?: boolean
   helper?: string
 }
 
 export interface ModuleConfig {
-  /** URL slug under /dashboard. */
   slug: string
   collection: CollectionName
   title: string
@@ -47,13 +36,198 @@ const estadoActivo: FieldConfig["options"] = [
 ]
 
 export const MODULES: ModuleConfig[] = [
+  /* -------------------------------------------------------------------------- */
+  /* 1. Catálogos Principales (Demo C#)                                         */
+  /* -------------------------------------------------------------------------- */
+  {
+    slug: "bancos",
+    collection: "cuentas",
+    title: "Bancos",
+    singular: "Banco / Cuenta",
+    description: "Catálogo de cuentas bancarias y fondos de efectivo.",
+    group: "Catálogos Principales",
+    fields: [
+      { name: "nombre", label: "Nombre de la Cuenta", type: "text", required: true },
+      {
+        name: "titularTipo",
+        label: "Propietario / Titular",
+        type: "select",
+        options: [
+          { value: "cliente", label: "Cliente" },
+          { value: "proveedor", label: "Proveedor" },
+          { value: "trabajador", label: "Trabajador" },
+          { value: "familiar", label: "Familiar" },
+          { value: "negocio", label: "Negocio / Empresa" },
+        ],
+      },
+      { name: "titularNombre", label: "Nombre del Titular", type: "text" },
+      { name: "bancoNombre", label: "Institución / Banco", type: "text" },
+      { name: "numeroCuenta", label: "Número de Cuenta / CLABE", type: "text" },
+      {
+        name: "tipo",
+        label: "Tipo de Operación",
+        type: "select",
+        options: [
+          { value: "banco", label: "Banco" },
+          { value: "efectivo", label: "Efectivo" },
+          { value: "persona", label: "Persona" },
+          { value: "reserva", label: "Reserva" },
+        ],
+        required: true,
+      },
+      { name: "moneda", label: "Moneda", type: "text", required: true },
+      { name: "saldoInicial", label: "Saldo Inicial ($)", type: "number", required: true },
+      { name: "estado", label: "Estado", type: "select", options: estadoActivo },
+    ],
+  },
+  {
+    slug: "clientes",
+    collection: "clientes",
+    title: "Clientes",
+    singular: "Cliente",
+    description: "Catálogo de clientes compradores.",
+    group: "Catálogos Principales",
+    fields: [
+      { name: "nombreRazonSocial", label: "Nombre / Razón social", type: "text", required: true },
+      { name: "rfc", label: "RFC", type: "text" },
+      { name: "telefono", label: "Teléfono", type: "text" },
+      { name: "email", label: "Correo electrónico", type: "text" },
+      { name: "direccion", label: "Dirección", type: "textarea", hideInTable: true },
+      { name: "estado", label: "Estado", type: "select", options: estadoActivo },
+    ],
+  },
+  {
+    slug: "proveedores",
+    collection: "proveedores",
+    title: "Proveedores",
+    singular: "Proveedor",
+    description: "Catálogo de proveedores de insumos y servicios.",
+    group: "Catálogos Principales",
+    fields: [
+      { name: "razonSocial", label: "Razón social", type: "text", required: true },
+      { name: "contacto", label: "Contacto", type: "text" },
+      { name: "telefonoPrincipal", label: "Tel. principal", type: "text" },
+      { name: "telefonoSecundario", label: "Tel. secundario", type: "text", hideInTable: true },
+      { name: "whatsapp", label: "WhatsApp", type: "text", hideInTable: true },
+      { name: "email", label: "Correo", type: "text" },
+      { name: "estado", label: "Estado", type: "select", options: estadoActivo },
+    ],
+  },
+  {
+    slug: "cat-gastos-operativos",
+    collection: "catGastosOperativos",
+    title: "Gastos Operativos",
+    singular: "Concepto Gasto Operativo",
+    description: "Conceptos de gastos de operación.",
+    group: "Catálogos Principales",
+    fields: [
+      { name: "concepto", label: "Concepto de Gasto", type: "text", required: true },
+      { name: "descripcion", label: "Descripción", type: "textarea" },
+      { name: "estado", label: "Estado", type: "select", options: estadoActivo },
+    ],
+  },
+  {
+    slug: "cat-gastos-financieros",
+    collection: "catGastosFinancieros",
+    title: "Gastos Financieros",
+    singular: "Concepto Gasto Financiero",
+    description: "Conceptos de comisiones, intereses y gastos bancarios.",
+    group: "Catálogos Principales",
+    fields: [
+      { name: "concepto", label: "Concepto Financiero", type: "text", required: true },
+      { name: "descripcion", label: "Descripción", type: "textarea" },
+      { name: "estado", label: "Estado", type: "select", options: estadoActivo },
+    ],
+  },
+  {
+    slug: "cat-gastos-administrativos",
+    collection: "catGastosAdministrativos",
+    title: "Gastos Admvos",
+    singular: "Concepto Gasto Administrativo",
+    description: "Conceptos de gastos de oficina y administración.",
+    group: "Catálogos Principales",
+    fields: [
+      { name: "concepto", label: "Concepto Administrativo", type: "text", required: true },
+      { name: "descripcion", label: "Descripción", type: "textarea" },
+      { name: "estado", label: "Estado", type: "select", options: estadoActivo },
+    ],
+  },
+  {
+    slug: "cat-gastos-familia",
+    collection: "catGastosFamilia",
+    title: "Gastos de Familia",
+    singular: "Concepto Gasto Familiar",
+    description: "Conceptos de asignaciones y gastos familiares.",
+    group: "Catálogos Principales",
+    fields: [
+      { name: "concepto", label: "Concepto Familiar", type: "text", required: true },
+      { name: "descripcion", label: "Descripción", type: "textarea" },
+      { name: "estado", label: "Estado", type: "select", options: estadoActivo },
+    ],
+  },
+  {
+    slug: "familiares",
+    collection: "familiares",
+    title: "Familiares",
+    singular: "Familiar",
+    description: "Catálogo de miembros familiares registrados.",
+    group: "Catálogos Principales",
+    fields: [
+      { name: "nombre", label: "Nombre Completo", type: "text", required: true },
+      { name: "parentesco", label: "Parentesco / Relación", type: "text", required: true },
+      { name: "telefono", label: "Teléfono", type: "text" },
+      { name: "estado", label: "Estado", type: "select", options: estadoActivo },
+    ],
+  },
+  {
+    slug: "trabajadores",
+    collection: "trabajadores",
+    title: "Trabajadores",
+    singular: "Trabajador",
+    description: "Catálogo de trabajadores y empleados.",
+    group: "Catálogos Principales",
+    fields: [
+      { name: "nombre", label: "Nombre completo", type: "text", required: true },
+      { name: "puesto", label: "Puesto / Función", type: "text", required: true },
+      { name: "salarioBase", label: "Salario base ($)", type: "number" },
+      { name: "telefono", label: "Teléfono", type: "text" },
+      { name: "estado", label: "Estado", type: "select", options: estadoActivo },
+    ],
+  },
+  {
+    slug: "usuarios",
+    collection: "usuarios",
+    title: "usuarios",
+    singular: "Usuario",
+    description: "Catálogo de usuarios registrados y sus permisos.",
+    group: "Catálogos Principales",
+    fields: [
+      { name: "nombre", label: "Nombre completo", type: "text", required: true },
+      { name: "email", label: "Correo electrónico", type: "text", required: true },
+      {
+        name: "rol",
+        label: "Rol de sistema",
+        type: "select",
+        options: [
+          { value: "admin", label: "Administrador" },
+          { value: "persona", label: "Usuario estándar" },
+        ],
+        required: true,
+      },
+      { name: "estado", label: "Estado", type: "select", options: estadoActivo },
+    ],
+  },
+
+  /* -------------------------------------------------------------------------- */
+  /* 2. Estructura Agrícola (Etapa Posterior)                                    */
+  /* -------------------------------------------------------------------------- */
   {
     slug: "ranchos",
     collection: "ranchos",
     title: "Ranchos",
     singular: "Rancho",
     description: "Unidades productivas de mayor nivel.",
-    group: "Estructura productiva",
+    group: "Estructura Agrícola (Etapa Posterior)",
     fields: [
       { name: "nombre", label: "Nombre", type: "text", required: true },
       { name: "estado", label: "Estado", type: "select", options: estadoActivo },
@@ -64,8 +238,8 @@ export const MODULES: ModuleConfig[] = [
     collection: "parcelas",
     title: "Parcelas (Lotes)",
     singular: "Parcela",
-    description: "Lotes que pertenecen a un rancho.",
-    group: "Estructura productiva",
+    description: "Lotes pertenecientes a un rancho.",
+    group: "Estructura Agrícola (Etapa Posterior)",
     fields: [
       {
         name: "ranchoId",
@@ -94,7 +268,7 @@ export const MODULES: ModuleConfig[] = [
     title: "Plantillas (Tablas)",
     singular: "Plantilla",
     description: "Subdivisiones de una parcela.",
-    group: "Estructura productiva",
+    group: "Estructura Agrícola (Etapa Posterior)",
     fields: [
       {
         name: "parcelaId",
@@ -107,13 +281,17 @@ export const MODULES: ModuleConfig[] = [
       { name: "superficieM2", label: "Superficie (m²)", type: "number" },
     ],
   },
+
+  /* -------------------------------------------------------------------------- */
+  /* 3. Producción y Campo (Etapa Posterior)                                   */
+  /* -------------------------------------------------------------------------- */
   {
     slug: "ciclos",
     collection: "ciclos",
     title: "Ciclos de cultivo",
     singular: "Ciclo",
     description: "Proceso completo de preparación a cosecha.",
-    group: "Producción",
+    group: "Producción y Campo (Etapa Posterior)",
     fields: [
       {
         name: "parcelaId",
@@ -143,7 +321,7 @@ export const MODULES: ModuleConfig[] = [
     title: "Siembras",
     singular: "Siembra",
     description: "Plantas sembradas por plantilla.",
-    group: "Producción",
+    group: "Producción y Campo (Etapa Posterior)",
     fields: [
       {
         name: "cicloId",
@@ -170,7 +348,7 @@ export const MODULES: ModuleConfig[] = [
     title: "Semilleros",
     singular: "Semillero",
     description: "Producción de plantas y su costeo.",
-    group: "Producción",
+    group: "Producción y Campo (Etapa Posterior)",
     fields: [
       {
         name: "parcelaId",
@@ -191,8 +369,8 @@ export const MODULES: ModuleConfig[] = [
     collection: "actividades",
     title: "Catálogo de actividades",
     singular: "Actividad",
-    description: "Actividades de mano de obra.",
-    group: "Mano de obra",
+    description: "Catálogo de actividades de mano de obra.",
+    group: "Producción y Campo (Etapa Posterior)",
     fields: [
       { name: "nombre", label: "Nombre", type: "text", required: true },
       { name: "descripcion", label: "Descripción", type: "textarea" },
@@ -204,7 +382,7 @@ export const MODULES: ModuleConfig[] = [
     title: "Registro de actividades",
     singular: "Registro",
     description: "Mano de obra ejecutada en campo.",
-    group: "Mano de obra",
+    group: "Producción y Campo (Etapa Posterior)",
     fields: [
       { name: "fecha", label: "Fecha", type: "date" },
       {
@@ -213,6 +391,12 @@ export const MODULES: ModuleConfig[] = [
         type: "reference",
         reference: { collection: "actividades", labelField: "nombre" },
         required: true,
+      },
+      {
+        name: "trabajadorId",
+        label: "Trabajador",
+        type: "reference",
+        reference: { collection: "trabajadores", labelField: "nombre" },
       },
       {
         name: "ranchoId",
@@ -240,9 +424,13 @@ export const MODULES: ModuleConfig[] = [
       },
       { name: "responsable", label: "Responsable", type: "text" },
       { name: "cantidad", label: "Cantidad", type: "number" },
-      { name: "costo", label: "Costo", type: "number" },
+      { name: "costo", label: "Costo ($)", type: "number" },
     ],
   },
+
+  /* -------------------------------------------------------------------------- */
+  /* 4. Compras e Inventarios                                                   */
+  /* -------------------------------------------------------------------------- */
   {
     slug: "productos",
     collection: "productos",
@@ -255,22 +443,6 @@ export const MODULES: ModuleConfig[] = [
       { name: "nombreComercial", label: "Nombre comercial", type: "text", required: true },
       { name: "presentacion", label: "Presentación", type: "text" },
       { name: "unidadMedida", label: "Unidad de medida", type: "text" },
-    ],
-  },
-  {
-    slug: "proveedores",
-    collection: "proveedores",
-    title: "Proveedores",
-    singular: "Proveedor",
-    description: "Catálogo de proveedores.",
-    group: "Compras e inventario",
-    fields: [
-      { name: "razonSocial", label: "Razón social", type: "text", required: true },
-      { name: "contacto", label: "Contacto", type: "text" },
-      { name: "telefonoPrincipal", label: "Tel. principal", type: "text" },
-      { name: "telefonoSecundario", label: "Tel. secundario", type: "text", hideInTable: true },
-      { name: "whatsapp", label: "WhatsApp", type: "text", hideInTable: true },
-      { name: "email", label: "Correo", type: "text" },
     ],
   },
   {
@@ -510,13 +682,340 @@ export const MODULES: ModuleConfig[] = [
       },
     ],
   },
+
+  /* -------------------------------------------------------------------------- */
+  /* 5. Tesorería y Ventas                                                      */
+  /* -------------------------------------------------------------------------- */
+  {
+    slug: "ventas-pina",
+    collection: "ventasPina",
+    title: "Ventas de Piña",
+    singular: "Venta de Piña",
+    description: "Ventas de cosecha de piña vinculadas a folios KG.",
+    group: "Tesorería y Ventas",
+    fields: [
+      {
+        name: "clienteId",
+        label: "Cliente",
+        type: "reference",
+        reference: { collection: "clientes", labelField: "nombreRazonSocial" },
+        required: true,
+      },
+      { name: "folioLoteProduccion", label: "Folio Lote (KG)", type: "text", required: true },
+      { name: "kilosEnviados", label: "Kilos (KG)", type: "number", required: true },
+      { name: "precioPorKg", label: "Precio por KG ($)", type: "number", required: true },
+      { name: "montoTotal", label: "Monto Total ($)", type: "number", required: true },
+      {
+        name: "tipoPago",
+        label: "Condición de Pago",
+        type: "select",
+        options: [
+          { value: "contado", label: "Contado" },
+          { value: "cxc", label: "Cuenta por Cobrar (CxC)" },
+        ],
+        required: true,
+      },
+      {
+        name: "bancoCuentaId",
+        label: "Cuenta de Depósito",
+        type: "reference",
+        reference: { collection: "cuentas", labelField: "nombre" },
+        required: true,
+      },
+      { name: "fecha", label: "Fecha de Venta", type: "date", required: true },
+      {
+        name: "estado",
+        label: "Estado",
+        type: "select",
+        options: [
+          { value: "pagada", label: "Pagada" },
+          { value: "pendiente", label: "Pendiente" },
+          { value: "parcial", label: "Parcial" },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "ventas-ganado",
+    collection: "ventasGanado",
+    title: "Ventas de Ganado",
+    singular: "Venta de Ganado",
+    description: "Ventas comerciales de ganado.",
+    group: "Tesorería y Ventas",
+    fields: [
+      {
+        name: "clienteId",
+        label: "Cliente",
+        type: "reference",
+        reference: { collection: "clientes", labelField: "nombreRazonSocial" },
+        required: true,
+      },
+      { name: "cabezasOKg", label: "Cabezas / KG", type: "number", required: true },
+      { name: "precioUnitario", label: "Precio Unitario ($)", type: "number", required: true },
+      { name: "montoTotal", label: "Monto Total ($)", type: "number", required: true },
+      {
+        name: "tipoPago",
+        label: "Condición de Pago",
+        type: "select",
+        options: [
+          { value: "contado", label: "Contado" },
+          { value: "cxc", label: "Cuenta por Cobrar (CxC)" },
+        ],
+        required: true,
+      },
+      {
+        name: "bancoCuentaId",
+        label: "Cuenta de Depósito",
+        type: "reference",
+        reference: { collection: "cuentas", labelField: "nombre" },
+        required: true,
+      },
+      { name: "fecha", label: "Fecha", type: "date", required: true },
+      {
+        name: "estado",
+        label: "Estado",
+        type: "select",
+        options: [
+          { value: "pagada", label: "Pagada" },
+          { value: "pendiente", label: "Pendiente" },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "anticipos-clientes",
+    collection: "anticiposClientes",
+    title: "Anticipos de Clientes",
+    singular: "Anticipo",
+    description: "Anticipos recibidos de clientes.",
+    group: "Tesorería y Ventas",
+    fields: [
+      {
+        name: "clienteId",
+        label: "Cliente",
+        type: "reference",
+        reference: { collection: "clientes", labelField: "nombreRazonSocial" },
+        required: true,
+      },
+      {
+        name: "bancoCuentaId",
+        label: "Cuenta Receptora",
+        type: "reference",
+        reference: { collection: "cuentas", labelField: "nombre" },
+        required: true,
+      },
+      { name: "monto", label: "Monto Anticipo ($)", type: "number", required: true },
+      { name: "fecha", label: "Fecha de Recepción", type: "date", required: true },
+      { name: "formaPago", label: "Forma de Pago", type: "text" },
+      { name: "folio", label: "Folio / Comprobante", type: "text" },
+      {
+        name: "estado",
+        label: "Estado",
+        type: "select",
+        options: [
+          { value: "pendiente", label: "Pendiente por aplicar" },
+          { value: "aplicado", label: "Aplicado a venta" },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "prestamos-bancarios",
+    collection: "prestamosBancarios",
+    title: "Préstamos Bancarios",
+    singular: "Préstamo Bancario",
+    description: "Créditos otorgados por instituciones bancarias.",
+    group: "Tesorería y Ventas",
+    fields: [
+      {
+        name: "bancoCuentaId",
+        label: "Cuenta de Depósito",
+        type: "reference",
+        reference: { collection: "cuentas", labelField: "nombre" },
+        required: true,
+      },
+      { name: "bancoNombre", label: "Banco / Institución", type: "text", required: true },
+      { name: "folio", label: "Folio / Contrato", type: "text", required: true },
+      { name: "montoTotal", label: "Monto Otorgado ($)", type: "number", required: true },
+      { name: "tasaInteres", label: "Tasa Interés (%)", type: "number" },
+      { name: "fechaConcesion", label: "Fecha de Concesión", type: "date", required: true },
+      { name: "saldoPendiente", label: "Saldo Pendiente ($)", type: "number", required: true },
+      {
+        name: "estado",
+        label: "Estado",
+        type: "select",
+        options: [
+          { value: "activo", label: "Activo" },
+          { value: "liquidado", label: "Liquidado" },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "prestamos-externos",
+    collection: "prestamosExternos",
+    title: "Préstamos de Externos",
+    singular: "Préstamo Externo",
+    description: "Prestamos otorgados por personas externas.",
+    group: "Tesorería y Ventas",
+    fields: [
+      { name: "prestamistaNombre", label: "Nombre del Prestamista", type: "text", required: true },
+      {
+        name: "bancoCuentaId",
+        label: "Cuenta de Depósito",
+        type: "reference",
+        reference: { collection: "cuentas", labelField: "nombre" },
+        required: true,
+      },
+      { name: "folio", label: "Folio / Pagaré", type: "text", required: true },
+      { name: "montoTotal", label: "Monto Prestado ($)", type: "number", required: true },
+      { name: "fechaConcesion", label: "Fecha de Recepción", type: "date", required: true },
+      { name: "saldoPendiente", label: "Saldo Pendiente ($)", type: "number", required: true },
+      {
+        name: "estado",
+        label: "Estado",
+        type: "select",
+        options: [
+          { value: "activo", label: "Activo" },
+          { value: "liquidado", label: "Liquidado" },
+        ],
+      },
+    ],
+  },
+  {
+    slug: "abonos-prestamos",
+    collection: "abonosPrestamos",
+    title: "Abonos a Préstamos",
+    singular: "Abono a Préstamo",
+    description: "Pagos y abonos a capital.",
+    group: "Tesorería y Ventas",
+    fields: [
+      {
+        name: "tipoPrestamo",
+        label: "Tipo de Préstamo",
+        type: "select",
+        options: [
+          { value: "bancario", label: "Bancario" },
+          { value: "externo", label: "Externo" },
+        ],
+        required: true,
+      },
+      { name: "prestamoId", label: "ID Préstamo", type: "text", required: true },
+      {
+        name: "bancoCuentaId",
+        label: "Cuenta de Origen (Pago)",
+        type: "reference",
+        reference: { collection: "cuentas", labelField: "nombre" },
+        required: true,
+      },
+      { name: "monto", label: "Monto Abono ($)", type: "number", required: true },
+      { name: "fecha", label: "Fecha de Abono", type: "date", required: true },
+      { name: "folio", label: "Folio / Comprobante", type: "text" },
+    ],
+  },
+  {
+    slug: "transferencias-hijuelos",
+    collection: "transferenciasHijuelos",
+    title: "Transferencias (Compra Hijuelos)",
+    singular: "Transferencia",
+    description: "Transferencias inter-cuentas bajo concepto 'Compra de Hijuelos'.",
+    group: "Tesorería y Ventas",
+    fields: [
+      {
+        name: "cuentaOrigenId",
+        label: "Cuenta Origen",
+        type: "reference",
+        reference: { collection: "cuentas", labelField: "nombre" },
+        required: true,
+      },
+      {
+        name: "cuentaDestinoId",
+        label: "Cuenta Destino",
+        type: "reference",
+        reference: { collection: "cuentas", labelField: "nombre" },
+        required: true,
+      },
+      { name: "monto", label: "Monto Transferido ($)", type: "number", required: true },
+      { name: "fecha", label: "Fecha", type: "date", required: true },
+      { name: "folioFiscal", label: "Folio Fiscal", type: "text", required: true },
+      { name: "conceptoFiscal", label: "Concepto Fiscal", type: "text", required: true },
+      { name: "observaciones", label: "Observaciones", type: "textarea", hideInTable: true },
+    ],
+  },
+  {
+    slug: "cargos-comisiones",
+    collection: "cargosComisiones",
+    title: "Cargos y Comisiones Bancarias",
+    singular: "Comisión Bancaria",
+    description: "Comisiones y gastos bancarios.",
+    group: "Tesorería y Ventas",
+    fields: [
+      {
+        name: "bancoCuentaId",
+        label: "Cuenta Bancaria",
+        type: "reference",
+        reference: { collection: "cuentas", labelField: "nombre" },
+        required: true,
+      },
+      {
+        name: "catGastoFinancieroId",
+        label: "Concepto Gasto Financiero",
+        type: "reference",
+        reference: { collection: "catGastosFinancieros", labelField: "concepto" },
+        required: true,
+      },
+      { name: "monto", label: "Monto ($)", type: "number", required: true },
+      { name: "fecha", label: "Fecha", type: "date", required: true },
+      { name: "folio", label: "Folio / Referencia", type: "text" },
+      { name: "observaciones", label: "Observaciones", type: "textarea", hideInTable: true },
+    ],
+  },
+  {
+    slug: "gastos-externos",
+    collection: "gastosExternos",
+    title: "Otros Gastos Externos",
+    singular: "Gasto Externo",
+    description: "Gastos clasificados externos.",
+    group: "Tesorería y Ventas",
+    fields: [
+      {
+        name: "tipoGasto",
+        label: "Tipo de Gasto",
+        type: "select",
+        options: [
+          { value: "operativo", label: "Operativo" },
+          { value: "administrativo", label: "Administrativo" },
+          { value: "familiar", label: "Familiar" },
+        ],
+        required: true,
+      },
+      { name: "catGastoId", label: "ID Concepto Gasto", type: "text", required: true },
+      {
+        name: "familiarId",
+        label: "Familiar Asignado",
+        type: "reference",
+        reference: { collection: "familiares", labelField: "nombre" },
+      },
+      {
+        name: "bancoCuentaId",
+        label: "Cuenta de Origen",
+        type: "reference",
+        reference: { collection: "cuentas", labelField: "nombre" },
+        required: true,
+      },
+      { name: "monto", label: "Monto ($)", type: "number", required: true },
+      { name: "fecha", label: "Fecha", type: "date", required: true },
+      { name: "folioFactura", label: "Folio Factura", type: "text" },
+      { name: "observaciones", label: "Observaciones", type: "textarea", hideInTable: true },
+    ],
+  },
   {
     slug: "categorias",
     collection: "categorias",
-    title: "Categorías",
+    title: "Categorías de Tesorería",
     singular: "Categoría",
-    description: "Árbol de categorías de ingreso/egreso de tesorería.",
-    group: "Tesorería",
+    description: "Árbol de categorías de ingreso y egreso.",
+    group: "Tesorería y Ventas",
     fields: [
       { name: "nombre", label: "Nombre", type: "text", required: true },
       {
@@ -540,42 +1039,32 @@ export const MODULES: ModuleConfig[] = [
       { name: "estado", label: "Estado", type: "select", options: estadoActivo },
     ],
   },
-  {
-    slug: "cuentas",
-    collection: "cuentas",
-    title: "Cuentas",
-    singular: "Cuenta",
-    description: "Cuentas de tesorería: bancos, efectivo, persona y reserva.",
-    group: "Tesorería",
-    fields: [
-      { name: "nombre", label: "Nombre", type: "text", required: true },
-      {
-        name: "tipo",
-        label: "Tipo",
-        type: "select",
-        options: [
-          { value: "banco", label: "Banco" },
-          { value: "efectivo", label: "Efectivo" },
-          { value: "persona", label: "Persona" },
-          { value: "reserva", label: "Reserva" },
-        ],
-        required: true,
-      },
-      { name: "moneda", label: "Moneda", type: "text", required: true },
-      { name: "saldoInicial", label: "Saldo inicial", type: "number", required: true },
-      { name: "estado", label: "Estado", type: "select", options: estadoActivo },
-    ],
-  },
 ]
 
 export function getModuleBySlug(slug: string): ModuleConfig | undefined {
+  if (slug === "cuentas") {
+    return MODULES.find((m) => m.slug === "bancos")
+  }
   return MODULES.find((m) => m.slug === slug)
 }
 
 export const MODULE_GROUPS = [
-  "Estructura productiva",
-  "Producción",
-  "Mano de obra",
+  "Catálogos Principales",
+  "Estructura Agrícola (Etapa Posterior)",
+  "Producción y Campo (Etapa Posterior)",
   "Compras e inventario",
-  "Tesorería",
+  "Tesorería y Ventas",
+] as const
+
+export const PRIMARY_CATALOG_ITEMS = [
+  { slug: "bancos", title: "Bancos" },
+  { slug: "clientes", title: "Clientes" },
+  { slug: "proveedores", title: "Proveedores" },
+  { slug: "cat-gastos-operativos", title: "Gastos Operativos" },
+  { slug: "cat-gastos-financieros", title: "Gastos Financieros" },
+  { slug: "cat-gastos-administrativos", title: "Gastos Admvos" },
+  { slug: "cat-gastos-familia", title: "Gastos de Familia" },
+  { slug: "familiares", title: "Familiares" },
+  { slug: "trabajadores", title: "Trabajadores" },
+  { slug: "usuarios", title: "usuarios" },
 ] as const

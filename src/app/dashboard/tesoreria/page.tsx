@@ -1,48 +1,45 @@
-import Link from "next/link"
 import { redirect } from "next/navigation"
-import { PageHeader } from "@/presentation/components/page-header"
+import { BankingDashboard } from "@/presentation/components/banking-dashboard"
 import { getCurrentUser } from "@/infrastructure/auth/current-user"
 import { repository, tesoreriaService } from "@/infrastructure/container"
-import type { Cuenta, UsuarioCuenta } from "@/core/domain/entities"
+import type { Categoria, Cuenta, Movimiento, UsuarioCuenta } from "@/core/domain/entities"
+
+export const dynamic = "force-dynamic"
 
 export default async function TesoreriaPage() {
   const actor = await getCurrentUser()
   if (!actor) redirect("/login")
 
-  const [cuentas, saldos] = await Promise.all([
+  const [cuentas, saldos, movimientos, categorias] = await Promise.all([
     repository<Cuenta>("cuentas").findAll(),
     tesoreriaService().saldosDeTodasLasCuentas(),
+    repository<Movimiento>("movimientos").findAll(),
+    repository<Categoria>("categorias").findAll(),
   ])
 
   let visibles = cuentas
   if (actor.rol === "persona") {
-    const asignadas = await repository<UsuarioCuenta>("usuarioCuentas").findBy({ usuarioId: actor.usuarioId })
+    const asignadas = await repository<UsuarioCuenta>("usuarioCuentas").findBy({
+      usuarioId: actor.usuarioId,
+    })
     const permitidas = new Set(asignadas.map((a) => a.cuentaId))
     visibles = cuentas.filter((c) => permitidas.has(c.id))
   }
 
+  // Sort recent movements descending by date
+  const movimientosRecientes = [...movimientos].sort((a, b) =>
+    b.fecha.localeCompare(a.fecha)
+  )
+
+  const isAdmin = actor.rol === "admin"
+
   return (
-    <div className="flex flex-col gap-6">
-      <PageHeader
-        title="Tesorería"
-        description="Cuentas, saldos y movimientos."
-        badge="Tesorería"
-      />
-      <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-        {visibles.map((c) => (
-          <Link
-            key={c.id}
-            href={`/dashboard/tesoreria/${c.id}`}
-            className="rounded-xl bg-card p-4 text-card-foreground ring-1 ring-foreground/10 transition hover:ring-primary/50"
-          >
-            <p className="text-xs text-muted-foreground">{c.tipo} · {c.moneda}</p>
-            <p className="font-medium">{c.nombre}</p>
-            <p className="mt-2 text-lg font-semibold">
-              {(saldos[c.id] ?? 0).toLocaleString("es-MX", { style: "currency", currency: c.moneda })}
-            </p>
-          </Link>
-        ))}
-      </div>
-    </div>
+    <BankingDashboard
+      cuentas={visibles}
+      saldos={saldos}
+      movimientosRecientes={movimientosRecientes}
+      categorias={categorias}
+      isAdmin={isAdmin}
+    />
   )
 }

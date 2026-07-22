@@ -10,7 +10,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-	title: "Demo",
+	title: "Sistema de Gestión Agrícola y Financiera",
 	description:
 		"Una aplicación para gestionar tus cultivos y tareas agrícolas de manera eficiente.",
 	icons: {

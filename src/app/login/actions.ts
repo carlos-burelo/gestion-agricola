@@ -13,8 +13,20 @@ export async function login(_prevState: string | null, formData: FormData) {
   const email = String(formData.get("email") ?? "").trim().toLowerCase()
   const password = String(formData.get("password") ?? "")
 
-  const usuarios = await repository<Usuario>("usuarios").findBy({ email })
-  const usuario = usuarios[0]
+  if (!email || !password) {
+    return "Por favor ingresa tu correo y contraseña."
+  }
+
+  let usuario: Usuario | undefined
+
+  try {
+    const usuarios = await repository<Usuario>("usuarios").findBy({ email })
+    usuario = usuarios[0]
+  } catch (error) {
+    console.error("Error de conexión o consulta en login:", error)
+    return "No se pudo conectar a la base de datos PostgreSQL. Asegúrate de iniciar el servicio con 'docker compose up -d'."
+  }
+
   if (!usuario || usuario.estado !== "activo" || !verifyPassword(password, usuario.passwordHash)) {
     return "Correo o contraseña incorrectos."
   }
@@ -32,5 +44,6 @@ export async function login(_prevState: string | null, formData: FormData) {
     path: "/",
     maxAge: 7 * 24 * 60 * 60,
   })
+
   redirect("/dashboard/tesoreria")
 }

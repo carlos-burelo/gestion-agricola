@@ -1,19 +1,13 @@
 /**
- * Domain entities for the Pineapple Agricultural Management System.
+ * Domain entities for the Agricultural & Financial Management System.
  *
- * These types describe the REAL schema of the system. They are completely
- * framework- and persistence-agnostic: nothing here knows about JSON, files,
- * SQL, React or Next.js. Migrating to a real database only requires providing
- * a new implementation of the repository ports (see ./repositories.ts) — these
- * types stay exactly the same.
+ * Framework- and persistence-agnostic domain interfaces.
  */
 
-/** Anything stored in a collection is identifiable by a string id. */
 export interface Identifiable {
   id: string
 }
 
-/** Common audit metadata kept on every persisted record. */
 export interface Auditable {
   createdAt: string
   updatedAt: string
@@ -23,7 +17,6 @@ export type BaseEntity = Identifiable & Auditable
 
 export type EstadoActivo = "activo" | "inactivo"
 
-/** GeoJSON Polygon (rings of [lng, lat] pairs in degrees). */
 export interface GeoPolygon {
   type: "Polygon"
   coordinates: number[][][]
@@ -44,7 +37,6 @@ export interface Parcela extends BaseEntity {
   superficieM2: number
   estado: EstadoActivo
   esSemillero: boolean
-  /** Optional drawn boundary; absent until captured on the map. */
   geometria?: GeoPolygon | null
 }
 
@@ -55,7 +47,7 @@ export interface Plantilla extends BaseEntity {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 2. Ciclos de cultivo                                                       */
+/* 2. Producción y Ciclos                                                     */
 /* -------------------------------------------------------------------------- */
 
 export type EstadoCiclo = "planeado" | "activo" | "cosechado" | "cerrado"
@@ -75,10 +67,6 @@ export interface Siembra extends BaseEntity {
   costoUnitarioPlanta: number
 }
 
-/* -------------------------------------------------------------------------- */
-/* 3. Semilleros                                                              */
-/* -------------------------------------------------------------------------- */
-
 export interface Semillero extends BaseEntity {
   parcelaId: string
   fechaProduccion: string
@@ -89,7 +77,7 @@ export interface Semillero extends BaseEntity {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 4. Mano de obra                                                            */
+/* 3. Mano de obra y Trabajadores                                             */
 /* -------------------------------------------------------------------------- */
 
 export interface Actividad extends BaseEntity {
@@ -97,9 +85,18 @@ export interface Actividad extends BaseEntity {
   descripcion: string
 }
 
+export interface Trabajador extends BaseEntity {
+  nombre: string
+  puesto: string
+  salarioBase: number
+  telefono: string
+  estado: EstadoActivo
+}
+
 export interface RegistroActividad extends BaseEntity {
   fecha: string
   actividadId: string
+  trabajadorId?: string
   ranchoId: string
   parcelaId: string
   plantillaId: string
@@ -110,7 +107,7 @@ export interface RegistroActividad extends BaseEntity {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 5. Productos e insumos                                                     */
+/* 4. Inventarios, Productos y Proveedores                                    */
 /* -------------------------------------------------------------------------- */
 
 export interface Producto extends BaseEntity {
@@ -120,10 +117,6 @@ export interface Producto extends BaseEntity {
   unidadMedida: string
 }
 
-/* -------------------------------------------------------------------------- */
-/* 6. Proveedores                                                             */
-/* -------------------------------------------------------------------------- */
-
 export interface Proveedor extends BaseEntity {
   razonSocial: string
   contacto: string
@@ -131,11 +124,8 @@ export interface Proveedor extends BaseEntity {
   telefonoSecundario: string
   whatsapp: string
   email: string
+  estado: EstadoActivo
 }
-
-/* -------------------------------------------------------------------------- */
-/* 7. Inventarios (PEPS)                                                      */
-/* -------------------------------------------------------------------------- */
 
 export type TipoMovimiento = "entrada" | "salida"
 
@@ -151,7 +141,7 @@ export interface MovimientoInventario extends BaseEntity {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 8. Requerimientos                                                          */
+/* 5. Requerimientos, Compras y CxP                                            */
 /* -------------------------------------------------------------------------- */
 
 export interface DetalleRequerimiento {
@@ -168,10 +158,6 @@ export interface Requerimiento extends BaseEntity {
   detalles: DetalleRequerimiento[]
 }
 
-/* -------------------------------------------------------------------------- */
-/* 9. Cotizaciones                                                            */
-/* -------------------------------------------------------------------------- */
-
 export type EstadoCotizacion = "pendiente" | "cotizada" | "comprada"
 
 export interface DetalleCotizacion {
@@ -187,10 +173,6 @@ export interface Cotizacion extends BaseEntity {
   estado: EstadoCotizacion
   detalles: DetalleCotizacion[]
 }
-
-/* -------------------------------------------------------------------------- */
-/* 10. Órdenes de compra                                                      */
-/* -------------------------------------------------------------------------- */
 
 export type EstadoOrdenCompra =
   | "borrador"
@@ -213,10 +195,6 @@ export interface OrdenCompra extends BaseEntity {
   detalles: DetalleOrdenCompra[]
 }
 
-/* -------------------------------------------------------------------------- */
-/* 11. Recepción de productos                                                 */
-/* -------------------------------------------------------------------------- */
-
 export interface DetalleRecepcion {
   productoId: string
   cantidad: number
@@ -230,10 +208,6 @@ export interface Recepcion extends BaseEntity {
   detalles: DetalleRecepcion[]
 }
 
-/* -------------------------------------------------------------------------- */
-/* 12. Cuentas por pagar                                                      */
-/* -------------------------------------------------------------------------- */
-
 export type EstadoCuentaPorPagar = "pendiente" | "pagada" | "vencida"
 
 export interface CuentaPorPagar extends BaseEntity {
@@ -243,10 +217,6 @@ export interface CuentaPorPagar extends BaseEntity {
   fechaVencimiento: string
   estado: EstadoCuentaPorPagar
 }
-
-/* -------------------------------------------------------------------------- */
-/* 13. Vales de salida                                                        */
-/* -------------------------------------------------------------------------- */
 
 export interface DetalleVale {
   productoId: string
@@ -266,7 +236,175 @@ export interface ValeSalida extends BaseEntity {
 }
 
 /* -------------------------------------------------------------------------- */
-/* 14. Tesorería                                                              */
+/* 6. Catálogos Financieros y de Gastos Clasificados                          */
+/* -------------------------------------------------------------------------- */
+
+export interface CatGastoOperativo extends BaseEntity {
+  concepto: string
+  descripcion: string
+  estado: EstadoActivo
+}
+
+export interface CatGastoFinanciero extends BaseEntity {
+  concepto: string
+  descripcion: string
+  estado: EstadoActivo
+}
+
+export interface CatGastoAdministrativo extends BaseEntity {
+  concepto: string
+  descripcion: string
+  estado: EstadoActivo
+}
+
+export interface CatGastoFamilia extends BaseEntity {
+  concepto: string
+  descripcion: string
+  estado: EstadoActivo
+}
+
+export interface Familiar extends BaseEntity {
+  nombre: string
+  parentesco: string
+  telefono: string
+  estado: EstadoActivo
+}
+
+/* -------------------------------------------------------------------------- */
+/* 7. Clientes y Ventas (Piña, Ganado, Anticipos)                            */
+/* -------------------------------------------------------------------------- */
+
+export interface Cliente extends BaseEntity {
+  nombreRazonSocial: string
+  rfc: string
+  telefono: string
+  email: string
+  direccion: string
+  estado: EstadoActivo
+}
+
+export type TipoPagoVenta = "contado" | "cxc"
+export type EstadoVenta = "pagada" | "pendiente" | "parcial"
+
+export interface VentaPina extends BaseEntity {
+  clienteId: string
+  folioLoteProduccion: string
+  kilosEnviados: number
+  precioPorKg: number
+  montoTotal: number
+  tipoPago: TipoPagoVenta
+  bancoCuentaId: string
+  fecha: string
+  estado: EstadoVenta
+}
+
+export interface VentaGanado extends BaseEntity {
+  clienteId: string
+  cabezasOKg: number
+  precioUnitario: number
+  montoTotal: number
+  tipoPago: TipoPagoVenta
+  bancoCuentaId: string
+  fecha: string
+  estado: EstadoVenta
+}
+
+export type EstadoAnticipo = "pendiente" | "aplicado"
+
+export interface AnticipoCliente extends BaseEntity {
+  clienteId: string
+  bancoCuentaId: string
+  monto: number
+  fecha: string
+  formaPago: string
+  folio: string
+  estado: EstadoAnticipo
+}
+
+export interface AbonoCliente extends BaseEntity {
+  clienteId: string
+  ventaId: string
+  bancoCuentaId: string
+  monto: number
+  fecha: string
+  folio: string
+}
+
+/* -------------------------------------------------------------------------- */
+/* 8. Banco, Préstamos y Transferencias Fisclo-Financieras                    */
+/* -------------------------------------------------------------------------- */
+
+export type TipoPrestamo = "bancario" | "externo"
+export type EstadoPrestamo = "activo" | "liquidado"
+
+export interface PrestamoBancario extends BaseEntity {
+  bancoCuentaId: string
+  bancoNombre: string
+  folio: string
+  montoTotal: number
+  tasaInteres: number
+  fechaConcesion: string
+  saldoPendiente: number
+  estado: EstadoPrestamo
+}
+
+export interface PrestamoExterno extends BaseEntity {
+  prestamistaNombre: string
+  bancoCuentaId: string
+  folio: string
+  montoTotal: number
+  fechaConcesion: string
+  saldoPendiente: number
+  estado: EstadoPrestamo
+}
+
+export interface AbonoPrestamo extends BaseEntity {
+  tipoPrestamo: TipoPrestamo
+  prestamoId: string
+  bancoCuentaId: string
+  monto: number
+  fecha: string
+  folio: string
+}
+
+export interface TransferenciaHijuelos extends BaseEntity {
+  cuentaOrigenId: string
+  cuentaDestinoId: string
+  monto: number
+  fecha: string
+  folioFiscal: string
+  conceptoFiscal: string
+  observaciones: string
+}
+
+export interface CargoComisionBancaria extends BaseEntity {
+  bancoCuentaId: string
+  catGastoFinancieroId: string
+  monto: number
+  folio: string
+  fecha: string
+  observaciones: string
+}
+
+/* -------------------------------------------------------------------------- */
+/* 9. Módulo Otros Gastos (Fuera del core agrícola)                            */
+/* -------------------------------------------------------------------------- */
+
+export type TipoGastoExterno = "operativo" | "administrativo" | "familiar"
+
+export interface GastoExterno extends BaseEntity {
+  tipoGasto: TipoGastoExterno
+  catGastoId: string
+  familiarId?: string
+  bancoCuentaId: string
+  monto: number
+  fecha: string
+  folioFactura: string
+  observaciones: string
+}
+
+/* -------------------------------------------------------------------------- */
+/* 10. Cuentas Bancarias, Usuarios y Tesorería                               */
 /* -------------------------------------------------------------------------- */
 
 export type TipoCategoria = "ingreso" | "egreso"
@@ -274,17 +412,21 @@ export type TipoCategoria = "ingreso" | "egreso"
 export interface Categoria extends BaseEntity {
   nombre: string
   tipo: TipoCategoria
-  /** "" = categoría raíz (sin padre). */
   parentId: string
   orden: number
   estado: EstadoActivo
 }
 
 export type TipoCuenta = "banco" | "efectivo" | "persona" | "reserva"
+export type TitularTipo = "cliente" | "proveedor" | "trabajador" | "familiar" | "negocio"
 
 export interface Cuenta extends BaseEntity {
   nombre: string
   tipo: TipoCuenta
+  titularTipo?: TitularTipo
+  titularNombre?: string
+  bancoNombre?: string
+  numeroCuenta?: string
   moneda: string
   saldoInicial: number
   estado: EstadoActivo
@@ -310,9 +452,7 @@ export interface Traspaso extends BaseEntity {
   cuentaOrigenId: string
   cuentaDestinoId: string
   monto: number
-  /** "" = sin referencia. */
   referencia: string
-  /** "" = sin autor (import histórico). */
   creadoPor: string
 }
 
@@ -322,28 +462,20 @@ export interface Movimiento extends BaseEntity {
   cuentaId: string
   fecha: string
   direccion: DireccionMovimiento
-  /** "" = movimiento generado por un traspaso (sin categoría propia). */
   categoriaId: string
   monto: number
-  /** "" = sin beneficiario registrado. */
   beneficiario: string
-  /** "" = sin referencia. */
   referencia: string
-  /** "" = sin folio. */
   folio: string
-  /** "" = sin descripción. */
   descripcion: string
-  /** "" = movimiento normal (no viene de un traspaso). */
   traspasoId: string
-  /** "" = sin autor (import histórico). */
   creadoPor: string
 }
 
-/**
- * Registry mapping every collection name to its entity type. This is the single
- * source of truth that ties the persistence layer, the application services and
- * the presentation layer together in a type-safe way.
- */
+/* -------------------------------------------------------------------------- */
+/* Mapping of Collections                                                     */
+/* -------------------------------------------------------------------------- */
+
 export interface CollectionMap {
   ranchos: Rancho
   parcelas: Parcela
@@ -352,6 +484,7 @@ export interface CollectionMap {
   siembras: Siembra
   semilleros: Semillero
   actividades: Actividad
+  trabajadores: Trabajador
   registrosActividad: RegistroActividad
   productos: Producto
   proveedores: Proveedor
@@ -362,6 +495,22 @@ export interface CollectionMap {
   recepciones: Recepcion
   cuentasPorPagar: CuentaPorPagar
   valesSalida: ValeSalida
+  catGastosOperativos: CatGastoOperativo
+  catGastosFinancieros: CatGastoFinanciero
+  catGastosAdministrativos: CatGastoAdministrativo
+  catGastosFamilia: CatGastoFamilia
+  familiares: Familiar
+  clientes: Cliente
+  ventasPina: VentaPina
+  ventasGanado: VentaGanado
+  anticiposClientes: AnticipoCliente
+  abonosClientes: AbonoCliente
+  prestamosBancarios: PrestamoBancario
+  prestamosExternos: PrestamoExterno
+  abonosPrestamos: AbonoPrestamo
+  transferenciasHijuelos: TransferenciaHijuelos
+  cargosComisiones: CargoComisionBancaria
+  gastosExternos: GastoExterno
   categorias: Categoria
   cuentas: Cuenta
   usuarios: Usuario

@@ -49,21 +49,19 @@ export function DatePicker({
   return (
     <Popover open={open} onOpenChange={setOpen}>
       {name ? <input type="hidden" name={name} value={value} /> : null}
-      <PopoverTrigger
-        render={
-          <Button
-            id={id}
-            variant="outline"
-            className={cn(
-              "w-full justify-start font-normal",
-              !value && "text-muted-foreground",
-            )}
-          >
-            <CalendarDays data-icon="inline-start" />
-            {value ? formatDate(value, "long") : placeholder}
-          </Button>
-        }
-      />
+      <PopoverTrigger asChild>
+        <Button
+          id={id}
+          variant="outline"
+          className={cn(
+            "w-full justify-start font-normal",
+            !value && "text-muted-foreground",
+          )}
+        >
+          <CalendarDays data-icon="inline-start" />
+          {value ? formatDate(value, "long") : placeholder}
+        </Button>
+      </PopoverTrigger>
       <PopoverContent className="w-auto p-0" align="start">
         <Calendar
           mode="single"

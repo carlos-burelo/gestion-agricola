@@ -1,4 +1,4 @@
-﻿﻿import type { InventarioFila } from "@/presentation/reports-queries"
+﻿import type { InventarioFila } from "@/presentation/reports-queries"
 import { ReportDocument, ReportKpis, ReportTable, mxn } from "./report-shell"
 
 export function InventarioDoc({
@@ -13,7 +13,7 @@ export function InventarioDoc({
   const valorTotal = inventario.reduce((a, f) => a + f.valorInventario, 0)
   const unidades = inventario.reduce((a, f) => a + f.existencia, 0)
   return (
-    <ReportDocument titulo="Inventario valorizado (PEPS)" generadoEl={generadoEl}>
+    <ReportDocument titulo="Inventario valorizado (PEPS)" folio={folio} generadoEl={generadoEl}>
       <ReportKpis
         items={[
           { label: "Valor total en almacén", value: mxn(valorTotal) },
