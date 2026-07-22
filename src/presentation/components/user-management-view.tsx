@@ -282,7 +282,7 @@ export function UserManagementView({
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="maria@agropina.mx"
+                placeholder="maria@mgz.mx"
                 required
               />
             </div>

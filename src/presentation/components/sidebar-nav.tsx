@@ -8,14 +8,15 @@ import {
 	Building2,
 	ChevronRight,
 	ClipboardList,
+	FileText,
 	GitBranch,
-	Handshake,
 	HandCoins,
+	Handshake,
 	Landmark,
 	LayoutDashboard,
 	Leaf,
-	type LucideIcon,
 	LineChart,
+	type LucideIcon,
 	MapPinned,
 	Percent,
 	Receipt,
@@ -48,11 +49,32 @@ import {
 } from "@/components/ui/sidebar";
 
 const BANCOS_LINKS: { slug: string; title: string; icon: LucideIcon }[] = [
-	{ slug: "bancos", title: "Estado de Cuentas", icon: Wallet },
-	{ slug: "bancos/transferencias", title: "Transferencias Bancarias", icon: ArrowLeftRight },
-	{ slug: "bancos/prestamos-bancarios", title: "(e) Préstamos Bancarios", icon: Landmark },
-	{ slug: "bancos/prestamos-externos", title: "(e) Préstamo de Externos", icon: Handshake },
-	{ slug: "bancos/cargos-comisiones", title: "(s) Cargos y Comisiones", icon: Percent },
+	{ slug: "bancos", title: "Cuentas Bancarias", icon: Wallet },
+	{
+		slug: "bancos/estados-de-cuenta",
+		title: "Estados de Cuenta",
+		icon: FileText,
+	},
+	{
+		slug: "bancos/transferencias",
+		title: "Transferencias Bancarias",
+		icon: ArrowLeftRight,
+	},
+	{
+		slug: "bancos/prestamos-bancarios",
+		title: "(e) Préstamos Bancarios",
+		icon: Landmark,
+	},
+	{
+		slug: "bancos/prestamos-externos",
+		title: "(e) Préstamo de Externos",
+		icon: Handshake,
+	},
+	{
+		slug: "bancos/cargos-comisiones",
+		title: "(s) Cargos y Comisiones",
+		icon: Percent,
+	},
 ];
 
 const CLIENTES_LINKS: { slug: string; title: string; icon: LucideIcon }[] = [
@@ -93,9 +115,9 @@ export function SidebarNav() {
 								<Image src="/icon.svg" alt="Logo" width={20} height={20} />
 							</span>
 							<span className="flex flex-col gap-0.5 leading-none">
-								<span className="font-semibold">SISTEMA ADMINISTRATIVO</span>
+								<span className="font-semibold">MGZ, S. de P.R. de R.L.</span>
 								<span className="text-xs text-sidebar-foreground/70">
-									Gestión y Comercial
+									Sistema de Gestión Agrícola
 								</span>
 							</span>
 						</SidebarMenuButton>
@@ -137,7 +159,9 @@ export function SidebarNav() {
 					<SidebarMenu>
 						{BANCOS_LINKS.map((b) => {
 							const href = `/dashboard/${b.slug}`;
-							const isActive = pathname === href || (b.slug === "bancos" && pathname === "/dashboard/bancos");
+							const isActive =
+								pathname === href ||
+								(b.slug === "bancos" && pathname === "/dashboard/bancos");
 							return (
 								<SidebarMenuItem key={b.slug}>
 									<SidebarMenuButton
@@ -160,7 +184,9 @@ export function SidebarNav() {
 					<SidebarMenu>
 						{CLIENTES_LINKS.map((c) => {
 							const href = `/dashboard/${c.slug}`;
-							const isActive = pathname === href || (c.slug === "clientes" && pathname === "/dashboard/clientes");
+							const isActive =
+								pathname === href ||
+								(c.slug === "clientes" && pathname === "/dashboard/clientes");
 							return (
 								<SidebarMenuItem key={c.slug}>
 									<SidebarMenuButton
@@ -248,11 +274,11 @@ export function SidebarNav() {
 				<SidebarMenu>
 					<SidebarMenuItem>
 						<SidebarMenuButton
-							tooltip="Producción de Piña"
+							tooltip="MGZ, S. de P.R. de R.L."
 							className="text-sidebar-foreground/70"
 						>
 							<Leaf />
-							<span className="text-xs">Producción de Piña · 2026</span>
+							<span className="text-xs">MGZ, S. de P.R. de R.L. · 2026</span>
 						</SidebarMenuButton>
 					</SidebarMenuItem>
 				</SidebarMenu>

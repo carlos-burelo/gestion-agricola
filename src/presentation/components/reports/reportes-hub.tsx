@@ -78,7 +78,7 @@ const hoyStr = () => formatDateLong(toDateInput())
 
 export function ReportesHub({ ctx }: { ctx: ReportesContext }) {
   const [sel, setSel] = useState<ReportId>("aging")
-  const [desde, setDesde] = useState(() => toDateInput(new Date(new Date().getFullYear(), 0, 1)))
+  const [desde, setDesde] = useState(() => toDateInput(new Date(new Date().getFullYear() - 1, 0, 1)))
   const [hasta, setHasta] = useState(() => toDateInput())
   const [proveedorId, setProveedorId] = useState(ctx.proveedores[0]?.id ?? "")
   const [nivel, setNivel] = useState<NivelCosteo>("ranchoId")

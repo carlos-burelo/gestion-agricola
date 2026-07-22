@@ -7,13 +7,9 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint .",
-    "db:up": "docker compose up -d",
-    "db:down": "docker compose down",
-    "db:generate": "drizzle-kit generate",
+    "demo:reset": "tsx scripts/db/seed.ts && tsx scripts/db/seed-admin.ts",
     "db:migrate": "drizzle-kit migrate",
     "db:seed": "tsx scripts/db/seed.ts",
-    "db:seed-admin": "tsx scripts/db/seed-admin.ts",
-    "db:reset": "drizzle-kit migrate && tsx scripts/db/seed.ts && tsx scripts/db/seed-admin.ts",
     "test:e2e": "playwright test"
   },
   "dependencies": {

@@ -193,7 +193,7 @@ export default async function DashboardHome() {
   return (
     <div className="flex flex-col gap-8">
       <PageHeader
-        badge="Sistema de gestión agrícola"
+        badge="MGZ, S. de P.R. de R.L."
         title="Producción de Piña"
         description="Indicadores y analítica de costos, inventario y producción por rancho, parcela, plantilla y ciclo."
       />

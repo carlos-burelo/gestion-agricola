@@ -109,8 +109,9 @@ export function generateSeedData() {
     }
   })
 
-  // Generate 40 labor activity records over Jan - Jul 2025
+  // Generate 40 labor activity records over 2025 and 2026
   const registrosActividad = Array.from({ length: 40 }).map((_, i) => {
+    const yr = i % 2 === 0 ? 2026 : 2025
     const m = (i % 7) + 1
     const d = (i % 25) + 1
     const act = actividades[i % actividades.length]
@@ -121,7 +122,7 @@ export function generateSeedData() {
     const costo = (i % 5 + 1) * 1400 + faker.number.int({ min: 100, max: 800 })
     return {
       id: `reg-act-${i + 1}`,
-      fecha: ymd(2025, m, d),
+      fecha: ymd(yr, m, d),
       actividadId: act.id,
       trabajadorId: trab.id,
       ranchoId: parc.ranchoId,
@@ -131,14 +132,15 @@ export function generateSeedData() {
       responsable: trab.nombre,
       cantidad: faker.number.int({ min: 5, max: 30 }),
       costo,
-      createdAt: ts(2025, m, d),
-      updatedAt: ts(2025, m, d),
+      createdAt: ts(yr, m, d),
+      updatedAt: ts(yr, m, d),
     }
   })
 
   // Generate 30 inventory movements (entradas y salidas)
   const movimientosInventario = Array.from({ length: 30 }).map((_, i) => {
     const isEntrada = i % 2 === 0
+    const yr = i % 2 === 0 ? 2026 : 2025
     const m = (i % 7) + 1
     const d = (i % 25) + 1
     const prod = productos[i % productos.length]
@@ -149,19 +151,20 @@ export function generateSeedData() {
       id: `mov-${i + 1}`,
       productoId: prod.id,
       tipo: isEntrada ? "entrada" : "salida",
-      fecha: ymd(2025, m, d),
+      fecha: ymd(yr, m, d),
       cantidad: cant,
       costoUnitario: unit,
       proveedorId: prov.id,
-      factura: isEntrada ? `FAC-2025-${100 + i}` : "",
+      factura: isEntrada ? `FAC-${yr}-${100 + i}` : "",
       destino: isEntrada ? "Almacén General" : `Aplicación Lote A-${(i % 3) + 1}`,
-      createdAt: ts(2025, m, d),
-      updatedAt: ts(2025, m, d),
+      createdAt: ts(yr, m, d),
+      updatedAt: ts(yr, m, d),
     }
   })
 
   // Generate 15 vales de salida with child details
   const valesSalida = Array.from({ length: 15 }).map((_, i) => {
+    const yr = i % 2 === 0 ? 2026 : 2025
     const m = (i % 7) + 1
     const d = (i % 25) + 1
     const parc = parcelas[i % parcelas.length]
@@ -171,8 +174,8 @@ export function generateSeedData() {
     const prod2 = productos[(i + 1) % productos.length]
     return {
       id: `vale-${i + 1}`,
-      folio: `VAL-2025-${String(i + 1).padStart(3, "0")}`,
-      fecha: ymd(2025, m, d),
+      folio: `VAL-${yr}-${String(i + 1).padStart(3, "0")}`,
+      fecha: ymd(yr, m, d),
       responsable: trabajadores[i % trabajadores.length].nombre,
       ranchoId: parc.ranchoId,
       parcelaId: parc.id,
@@ -182,35 +185,37 @@ export function generateSeedData() {
         { productoId: prod1.id, cantidad: 15 + i, costoUnitario: 350 + i * 10 },
         { productoId: prod2.id, cantidad: 8 + i, costoUnitario: 520 + i * 15 },
       ],
-      createdAt: ts(2025, m, d),
-      updatedAt: ts(2025, m, d),
+      createdAt: ts(yr, m, d),
+      updatedAt: ts(yr, m, d),
     }
   })
 
   // Generate 12 purchase orders
   const estadosOC = ["borrador", "autorizada", "parcial", "surtida", "cancelada"] as const
   const ordenesCompra = Array.from({ length: 12 }).map((_, i) => {
+    const yr = i % 2 === 0 ? 2026 : 2025
     const m = (i % 6) + 1
     const d = (i % 20) + 1
     const prov = proveedores[i % proveedores.length]
     const prod = productos[i % productos.length]
     return {
       id: `oc-${i + 1}`,
-      folio: `OC-2025-${String(i + 1).padStart(3, "0")}`,
-      fecha: ymd(2025, m, d),
+      folio: `OC-${yr}-${String(i + 1).padStart(3, "0")}`,
+      fecha: ymd(yr, m, d),
       proveedorId: prov.id,
       estado: estadosOC[i % estadosOC.length],
       detalles: [
         { productoId: prod.id, cantidad: 50 + i * 10, precioUnitario: 300 + i * 20 },
       ],
-      createdAt: ts(2025, m, d),
-      updatedAt: ts(2025, m, d),
+      createdAt: ts(yr, m, d),
+      updatedAt: ts(yr, m, d),
     }
   })
 
   // Generate 12 accounts payable
   const estadosCxP = ["pendiente", "pagada", "vencida"] as const
   const cuentasPorPagar = Array.from({ length: 12 }).map((_, i) => {
+    const yr = i % 2 === 0 ? 2026 : 2025
     const m = (i % 6) + 2
     const d = (i % 20) + 1
     const prov = proveedores[i % proveedores.length]
@@ -219,61 +224,64 @@ export function generateSeedData() {
       proveedorId: prov.id,
       factura: `FAC-PROV-${200 + i}`,
       importe: 18000 + i * 8500,
-      fechaVencimiento: ymd(2025, m, d),
+      fechaVencimiento: ymd(yr, m, d),
       estado: estadosCxP[i % estadosCxP.length],
-      createdAt: ts(2025, m - 1, d),
-      updatedAt: ts(2025, m - 1, d),
+      createdAt: ts(yr, m - 1, d),
+      updatedAt: ts(yr, m - 1, d),
     }
   })
 
   // Requerimientos, Cotizaciones, Recepciones
   const requerimientos = Array.from({ length: 8 }).map((_, i) => {
+    const yr = i % 2 === 0 ? 2026 : 2025
     const m = (i % 5) + 1
     const d = (i % 20) + 1
     return {
       id: `req-${i + 1}`,
-      folio: `REQ-2025-${String(i + 1).padStart(3, "0")}`,
-      fecha: ymd(2025, m, d),
+      folio: `REQ-${yr}-${String(i + 1).padStart(3, "0")}`,
+      fecha: ymd(yr, m, d),
       solicitante: "Ing. Agrónomo Manuel Silva",
       observaciones: "Solicitud urgente para nutrición foliar y fertilizante.",
       detalles: [
         { productoId: productos[i % productos.length].id, cantidad: 40 + i * 5, unidadMedida: productos[i % productos.length].unidadMedida },
       ],
-      createdAt: ts(2025, m, d),
-      updatedAt: ts(2025, m, d),
+      createdAt: ts(yr, m, d),
+      updatedAt: ts(yr, m, d),
     }
   })
 
   const cotizaciones = Array.from({ length: 8 }).map((_, i) => {
+    const yr = i % 2 === 0 ? 2026 : 2025
     const m = (i % 5) + 1
     const d = (i % 20) + 5
     return {
       id: `cot-${i + 1}`,
       requerimientoId: `req-${i + 1}`,
       proveedorId: proveedores[i % proveedores.length].id,
-      fecha: ymd(2025, m, d),
+      fecha: ymd(yr, m, d),
       estado: i % 2 === 0 ? "cotizada" : "comprada",
       detalles: [
         { productoId: productos[i % productos.length].id, cantidad: 40 + i * 5, precioUnitario: 280 + i * 15 },
       ],
-      createdAt: ts(2025, m, d),
-      updatedAt: ts(2025, m, d),
+      createdAt: ts(yr, m, d),
+      updatedAt: ts(yr, m, d),
     }
   })
 
   const recepciones = Array.from({ length: 6 }).map((_, i) => {
+    const yr = i % 2 === 0 ? 2026 : 2025
     const m = (i % 5) + 2
     const d = (i % 20) + 2
     return {
       id: `rec-${i + 1}`,
       ordenCompraId: `oc-${i + 1}`,
       factura: `FAC-REC-${300 + i}`,
-      fecha: ymd(2025, m, d),
+      fecha: ymd(yr, m, d),
       detalles: [
         { productoId: productos[i % productos.length].id, cantidad: 50 + i * 10, costoUnitario: 300 + i * 20 },
       ],
-      createdAt: ts(2025, m, d),
-      updatedAt: ts(2025, m, d),
+      createdAt: ts(yr, m, d),
+      updatedAt: ts(yr, m, d),
     }
   })
 
@@ -317,14 +325,24 @@ export function generateSeedData() {
     { id: "cat-fam-3", concepto: "Gastos Médicos y Salud", descripcion: "Consultas, medicinas y seguros familiares.", estado: "activo", createdAt: ts(2025, 1, 10), updatedAt: ts(2025, 1, 10) },
   ]
 
-  const familiares = [
-    { id: "fam-1", nombre: "Don Carlos Burelo (Padre)", parentesco: "Padre", telefono: "287-111-9988", estado: "activo", createdAt: ts(2025, 1, 10), updatedAt: ts(2025, 1, 10) },
-    { id: "fam-2", nombre: "María Elena Burelo (Hija)", parentesco: "Hija", telefono: "287-222-7766", estado: "activo", createdAt: ts(2025, 1, 10), updatedAt: ts(2025, 1, 10) },
-    { id: "fam-3", nombre: "Sofia Burelo (Esposa)", parentesco: "Esposa", telefono: "287-333-5544", estado: "activo", createdAt: ts(2025, 1, 10), updatedAt: ts(2025, 1, 10) },
-  ]
+  const parentescos = ["Padre", "Hija", "Esposa", "Hijo", "Hermano"]
+  const familiares = parentescos.slice(0, 3).map((parentesco, i) => {
+    const firstName = faker.person.firstName()
+    const lastName = faker.person.lastName()
+    const prefix = parentesco === "Padre" ? "Don " : ""
+    return {
+      id: `fam-${i + 1}`,
+      nombre: `${prefix}${firstName} ${lastName} (${parentesco})`,
+      parentesco,
+      telefono: faker.phone.number({ style: "national" }),
+      estado: "activo",
+      createdAt: ts(2025, 1, 10),
+      updatedAt: ts(2025, 1, 10),
+    }
+  })
 
   const cuentas = [
-    { id: "cuenta-1", nombre: "Cuenta BBVA Don Carlos Burelo", tipo: "banco", titularTipo: "familiar", titularNombre: "Don Carlos Burelo (Padre)", bancoNombre: "BBVA Bancomer", numeroCuenta: "012345678901234567", moneda: "MXN", saldoInicial: 285000, estado: "activo", createdAt: ts(2025, 1, 1), updatedAt: ts(2025, 1, 1) },
+    { id: "cuenta-1", nombre: `Cuenta BBVA ${familiares[0].nombre}`, tipo: "banco", titularTipo: "familiar", titularNombre: familiares[0].nombre, bancoNombre: "BBVA Bancomer", numeroCuenta: "012345678901234567", moneda: "MXN", saldoInicial: 285000, estado: "activo", createdAt: ts(2025, 1, 1), updatedAt: ts(2025, 1, 1) },
     { id: "cuenta-2", nombre: "Cuenta Banamex Agroquímicos Golfo", tipo: "banco", titularTipo: "proveedor", titularNombre: proveedores[0].razonSocial, bancoNombre: "Citibanamex", numeroCuenta: "002180019283746501", moneda: "MXN", saldoInicial: 140000, estado: "activo", createdAt: ts(2025, 1, 1), updatedAt: ts(2025, 1, 1) },
     { id: "cuenta-3", nombre: "Cuenta Comercializadora Frutas Sur", tipo: "banco", titularTipo: "cliente", titularNombre: clientes[0].nombreRazonSocial, bancoNombre: "BBVA Bancomer", numeroCuenta: "012890987654321098", moneda: "MXN", saldoInicial: 195000, estado: "activo", createdAt: ts(2025, 1, 1), updatedAt: ts(2025, 1, 1) },
     { id: "cuenta-4", nombre: "Cuenta Banco Azteca Juan Pérez", tipo: "persona", titularTipo: "trabajador", titularNombre: trabajadores[0].nombre, bancoNombre: "Banco Azteca", numeroCuenta: "1273901928374", moneda: "MXN", saldoInicial: 35000, estado: "activo", createdAt: ts(2025, 1, 1), updatedAt: ts(2025, 1, 1) },
@@ -370,8 +388,8 @@ export function generateSeedData() {
   ]
 
   const gastosExternos = [
-    { id: "gasto-ext-1", tipoGasto: "familiar", catGastoId: "cat-fam-1", familiarId: "fam-1", bancoCuentaId: "cuenta-1", monto: 25000, fecha: "2025-06-05", folioFactura: "", observaciones: "Entrega de manutención mensual a Don Carlos Burelo.", createdAt: ts(2025, 6, 5), updatedAt: ts(2025, 6, 5) },
-    { id: "gasto-ext-2", tipoGasto: "familiar", catGastoId: "cat-fam-2", familiarId: "fam-2", bancoCuentaId: "cuenta-1", monto: 12000, fecha: "2025-06-12", folioFactura: "FAC-EDUC-0812", observaciones: "Pago de colegiatura semestral María Elena.", createdAt: ts(2025, 6, 12), updatedAt: ts(2025, 6, 12) },
+    { id: "gasto-ext-1", tipoGasto: "familiar", catGastoId: "cat-fam-1", familiarId: "fam-1", bancoCuentaId: "cuenta-1", monto: 25000, fecha: "2025-06-05", folioFactura: "", observaciones: `Entrega de manutención mensual a ${familiares[0].nombre}.`, createdAt: ts(2025, 6, 5), updatedAt: ts(2025, 6, 5) },
+    { id: "gasto-ext-2", tipoGasto: "familiar", catGastoId: "cat-fam-2", familiarId: "fam-2", bancoCuentaId: "cuenta-1", monto: 12000, fecha: "2025-06-12", folioFactura: "FAC-EDUC-0812", observaciones: `Pago de colegiatura semestral de ${familiares[1].nombre}.`, createdAt: ts(2025, 6, 12), updatedAt: ts(2025, 6, 12) },
     { id: "gasto-ext-3", tipoGasto: "operativo", catGastoId: "cat-op-1", familiarId: "", bancoCuentaId: "cuenta-2", monto: 8500, fecha: "2025-06-18", folioFactura: "FAC-REFAC-9901", observaciones: "Reparación de embrague tractor John Deere.", createdAt: ts(2025, 6, 18), updatedAt: ts(2025, 6, 18) },
   ]
 
@@ -379,8 +397,8 @@ export function generateSeedData() {
   const userPasswordHash = hashPassword("operador123")
 
   const usuarios = [
-    { id: "usr-admin", nombre: "Administrador General", email: "admin@agropina.mx", passwordHash: adminPasswordHash, rol: "admin", estado: "activo", createdAt: ts(2025, 1, 1), updatedAt: ts(2025, 1, 1) },
-    { id: "usr-operador-1", nombre: "Operador de Cajas Campo", email: "cajas@agropina.mx", passwordHash: userPasswordHash, rol: "persona", estado: "activo", createdAt: ts(2025, 1, 10), updatedAt: ts(2025, 1, 10) },
+    { id: "usr-admin", nombre: "Administrador General", email: "admin@mgz.mx", passwordHash: adminPasswordHash, rol: "admin", estado: "activo", createdAt: ts(2025, 1, 1), updatedAt: ts(2025, 1, 1) },
+    { id: "usr-operador-1", nombre: "Operador de Cajas Campo", email: "cajas@mgz.mx", passwordHash: userPasswordHash, rol: "persona", estado: "activo", createdAt: ts(2025, 1, 10), updatedAt: ts(2025, 1, 10) },
   ]
 
   const usuarioCuentas = [

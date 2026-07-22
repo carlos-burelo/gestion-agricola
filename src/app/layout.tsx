@@ -10,9 +10,9 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-	title: "Sistema de Gestión Agrícola y Financiera",
+	title: "MGZ, S. de P.R. de R.L. | Sistema de Gestión Agrícola",
 	description:
-		"Una aplicación para gestionar tus cultivos y tareas agrícolas de manera eficiente.",
+		"Sistema de gestión agrícola y financiera de MGZ, S. de P.R. de R.L. Control de cultivos, costeo, bancos y producción.",
 	icons: {
 		icon: [
 			{

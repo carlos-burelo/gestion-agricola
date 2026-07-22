@@ -6,7 +6,7 @@ import * as schema from "@/infrastructure/persistence/sql/schema"
 import { hashPassword } from "@/infrastructure/auth/password"
 import { generateId, nowDate } from "@/infrastructure/persistence/sql/util"
 
-const EMAIL = process.env.ADMIN_EMAIL ?? "admin@agropina.mx"
+const EMAIL = process.env.ADMIN_EMAIL ?? "admin@mgz.mx"
 const PASSWORD = process.env.ADMIN_PASSWORD ?? "admin123"
 const NOMBRE = process.env.ADMIN_NOMBRE ?? "Administrador General"
 

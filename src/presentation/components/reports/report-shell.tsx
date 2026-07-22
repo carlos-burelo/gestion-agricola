@@ -255,12 +255,12 @@ export function ReportDocument({
 	children: ReactNode;
 }) {
 	return (
-		<Document title={titulo} author="DEMO">
+		<Document title={titulo} author="MGZ, S. de P.R. de R.L.">
 			<Page size="A4" style={s.page}>
 				{/* Marca de agua */}
 				<View style={s.watermarkWrap} fixed>
-					<Text style={s.watermarkText}>DEMO</Text>
-					<Text style={s.watermarkSub}>Sistema de gestión agrícola</Text>
+					<Text style={s.watermarkText}>MGZ</Text>
+					<Text style={s.watermarkSub}>S. de P.R. de R.L.</Text>
 				</View>
 
 				{/* Encabezado con banda verde */}
@@ -268,7 +268,7 @@ export function ReportDocument({
 					<Logo />
 					<View style={s.headerSep} />
 					<View style={s.headerTitles}>
-						<Text style={s.brandName}>DEMO</Text>
+						<Text style={s.brandName}>MGZ, S. de P.R. de R.L.</Text>
 						<Text style={s.headerDocTitle}>{titulo}</Text>
 						{subtitulo ? <Text style={s.headerDocSub}>{subtitulo}</Text> : null}
 					</View>
@@ -287,7 +287,7 @@ export function ReportDocument({
 
 				{/* Pie de página con folio + hoja */}
 				<View style={s.footer} fixed>
-					<Text style={s.footerLeft}>DEMO · Sistema de gestión agrícola</Text>
+					<Text style={s.footerLeft}>MGZ, S. de P.R. de R.L. · Sistema de Gestión Agrícola</Text>
 					<Text style={s.footerFolio}>{folio}</Text>
 					<Text
 						style={s.footerPage}

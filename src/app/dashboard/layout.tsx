@@ -17,7 +17,7 @@ export default function DashboardLayout({ children }: { children: ReactNode }) {
 					<header className="sticky top-0 z-10 flex h-14 shrink-0 items-center gap-2 border-b border-border bg-background/80 px-4 backdrop-blur">
 						<SidebarTrigger className="-ml-1" />
 						<div className="h-4 w-px bg-border" />
-						<span className="text-sm font-medium text-foreground">Sistema de Gestión</span>
+						<span className="text-sm font-medium text-foreground">MGZ, S. de P.R. de R.L.</span>
 					</header>
 					<div className="mx-auto w-full max-w-6xl px-4 py-8 md:px-8">
 						{children}
