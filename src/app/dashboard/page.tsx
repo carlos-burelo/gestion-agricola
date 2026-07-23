@@ -1,35 +1,30 @@
-import { Boxes, Leaf, MapPin, Sprout } from "lucide-react"
+import { redirect } from "next/navigation"
 import type {
   Ciclo,
+  Cuenta,
   CuentaPorPagar,
+  GastoExterno,
   MovimientoInventario,
   OrdenCompra,
   Parcela,
+  Producto,
   Rancho,
   Semillero,
+  Trabajador,
+  ValeSalida,
 } from "@/core/domain/entities"
+import { getCurrentUser } from "@/infrastructure/auth/current-user"
 import {
   analyticsService,
   costingService,
   inventoryService,
+  repository,
+  tesoreriaService,
 } from "@/infrastructure/container"
-import { ChartCard } from "@/presentation/components/chart-card"
-import { AreaCostos } from "@/presentation/components/charts/area-costos"
-import { BarCosteoNivel } from "@/presentation/components/charts/bar-costeo-nivel"
-import { BarTopProductos } from "@/presentation/components/charts/bar-top-productos"
-import { DonutMezcla } from "@/presentation/components/charts/donut-mezcla"
-import { LinePlantas } from "@/presentation/components/charts/line-plantas"
-import { RadarCostos } from "@/presentation/components/charts/radar-costos"
-import { PageHeader } from "@/presentation/components/page-header"
-import { StatCard } from "@/presentation/components/stat-card"
+import { RoleDashboardView } from "@/presentation/components/role-dashboard-view"
 import { loadRecords } from "@/presentation/queries"
 
-const currency = (n: number) =>
-  new Intl.NumberFormat("es-MX", {
-    style: "currency",
-    currency: "MXN",
-    maximumFractionDigits: 0,
-  }).format(n)
+export const dynamic = "force-dynamic"
 
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
 const labelsOf = <T extends { id: string }>(
@@ -38,17 +33,28 @@ const labelsOf = <T extends { id: string }>(
 ): Record<string, string> => Object.fromEntries(rows.map((r) => [r.id, pick(r)]))
 
 export default async function DashboardHome() {
+  const actor = await getCurrentUser()
+  if (!actor) redirect("/login")
+
   const analytics = analyticsService()
   const costing = costingService()
+  const tesoreria = tesoreriaService()
+
   const [
     ranchos,
     parcelas,
     ciclos,
     semilleros,
-    cuentas,
+    cuentasPorPagar,
+    cuentasBancarias,
+    gastosExternos,
+    trabajadores,
+    productos,
+    valesSalida,
     ordenes,
     movimientos,
     existencias,
+    saldosCuentas,
     costosMes,
     plantasMes,
     mezcla,
@@ -61,9 +67,15 @@ export default async function DashboardHome() {
     loadRecords<Ciclo>("ciclos"),
     loadRecords<Semillero>("semilleros"),
     loadRecords<CuentaPorPagar>("cuentasPorPagar"),
+    loadRecords<Cuenta>("cuentas"),
+    loadRecords<GastoExterno>("gastosExternos"),
+    loadRecords<Trabajador>("trabajadores"),
+    loadRecords<Producto>("productos"),
+    loadRecords<ValeSalida>("valesSalida"),
     loadRecords<OrdenCompra>("ordenesCompra"),
     loadRecords<MovimientoInventario>("movimientosInventario"),
     inventoryService().existencias(),
+    tesoreria.saldosDeTodasLasCuentas(),
     analytics.costosPorMes(),
     analytics.plantasPorMes(),
     analytics.mezclaCostos(),
@@ -83,6 +95,14 @@ export default async function DashboardHome() {
   const valorInventario = existencias.reduce((a, e) => a + e.valorInventario, 0)
   const ciclosActivos = ciclos.filter((c) => c.estado === "activo").length
 
+  const saldoBancarioTotal = Object.values(saldosCuentas).reduce((a, b) => a + b, 0)
+  const cxpPendientesMonto = cuentasPorPagar
+    .filter((c) => c.estado === "pendiente" || c.estado === "vencida")
+    .reduce((a, c) => a + c.importe, 0)
+
+  const totalGastosMes = gastosExternos.reduce((a, g) => a + g.monto, 0)
+  const ordenesCompraProceso = ordenes.filter((o) => o.estado !== "cancelada" && o.estado !== "surtida").length
+
   const topProductos = [...existencias]
     .sort((a, b) => b.valorInventario - a.valorInventario)
     .slice(0, 6)
@@ -91,17 +111,14 @@ export default async function DashboardHome() {
       valor: Math.round(e.valorInventario),
     }))
 
-  const sparkCostos = costosMes.map((m) => m.total)
-  const totalPlantas = plantasMes.reduce((a, b) => a + b.plantas, 0)
-
-  // Radar: mano de obra vs insumos por rancho (nombre corto sin "Rancho ").
+  // Radar: mano de obra vs insumos por rancho
   const costoRadar = costoRancho.map((r) => ({
     rancho: (ranchoLabels[r.clave] ?? r.clave).replace(/^Rancho\s+/i, ""),
     manoObra: Math.round(r.manoObra),
     insumos: Math.round(r.insumos),
   }))
 
-  // Distribuciones por estado / agrupaciones (derivadas de datos reales).
+  // Distribuciones por estado
   const ciclosPorEstado = (
     ["planeado", "activo", "cosechado", "cerrado"] as const
   )
@@ -112,7 +129,7 @@ export default async function DashboardHome() {
     .map((e) => ({
       nombre: cap(e),
       valor: Math.round(
-        cuentas.filter((c) => c.estado === e).reduce((a, c) => a + c.importe, 0),
+        cuentasPorPagar.filter((c) => c.estado === e).reduce((a, c) => a + c.importe, 0),
       ),
     }))
     .filter((x) => x.valor > 0)
@@ -161,134 +178,42 @@ export default async function DashboardHome() {
     },
   ].filter((x) => x.valor > 0)
 
-  const iconCls = "size-4 text-primary"
-  const stats = [
-    {
-      label: "Ranchos",
-      value: ranchos.length.toString(),
-      icon: <MapPin className={iconCls} />,
-      href: "/dashboard/ranchos",
-    },
-    {
-      label: "Parcelas",
-      value: parcelas.length.toString(),
-      icon: <Leaf className={iconCls} />,
-      href: "/dashboard/parcelas",
-    },
-    {
-      label: "Ciclos activos",
-      value: ciclosActivos.toString(),
-      icon: <Sprout className={iconCls} />,
-      href: "/dashboard/ciclos",
-    },
-    {
-      label: "Valor de inventario",
-      value: currency(valorInventario),
-      icon: <Boxes className={iconCls} />,
-      href: "/dashboard/kardex",
-      spark: sparkCostos,
-    },
-  ]
-
   return (
-    <div className="flex flex-col gap-8">
-      <PageHeader
-        badge="MGZ, S. de P.R. de R.L."
-        title="Producción de Piña"
-        description="Indicadores y analítica de costos, inventario y producción por rancho, parcela, plantilla y ciclo."
-      />
-
-      <section className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
-        {stats.map((s) => (
-          <StatCard key={s.label} {...s} />
-        ))}
-      </section>
-
-      <section className="grid gap-6 lg:grid-cols-3">
-        <div className="lg:col-span-2">
-          <ChartCard title="Costos por mes" description="Mano de obra vs. insumos">
-            <AreaCostos data={costosMes} />
-          </ChartCard>
-        </div>
-        <ChartCard title="Mezcla de costos" description="Distribución global">
-          <DonutMezcla data={mezcla} />
-        </ChartCard>
-      </section>
-
-      <section className="grid gap-6 lg:grid-cols-2">
-        <ChartCard
-          title="Top productos por valor"
-          description="Valor de inventario (PEPS)"
-        >
-          <BarTopProductos data={topProductos} />
-        </ChartCard>
-        <ChartCard
-          title="Plantas sembradas por mes"
-          description={`${totalPlantas.toLocaleString("es-MX")} plantas en total`}
-        >
-          <LinePlantas data={plantasMes} />
-        </ChartCard>
-      </section>
-
-      <section className="grid gap-6 lg:grid-cols-3">
-        <ChartCard title="Costos por rancho" description="Mano de obra vs. insumos">
-          <BarCosteoNivel rows={costoRancho} labels={ranchoLabels} />
-        </ChartCard>
-        <ChartCard title="Costos por parcela" description="Mano de obra vs. insumos">
-          <BarCosteoNivel rows={costoParcela} labels={parcelaLabels} />
-        </ChartCard>
-        <ChartCard title="Costos por ciclo" description="Mano de obra vs. insumos">
-          <BarCosteoNivel rows={costoCiclo} labels={cicloLabels} />
-        </ChartCard>
-      </section>
-
-      <section>
-        <ChartCard
-          title="Perfil de costos por rancho"
-          description="Comparativo mano de obra vs. insumos por unidad productiva"
-        >
-          <RadarCostos data={costoRadar} />
-        </ChartCard>
-      </section>
-
-      <section className="grid gap-6 lg:grid-cols-3">
-        <ChartCard title="Ciclos por estado" description="Distribución de cultivos">
-          <BarTopProductos data={ciclosPorEstado} />
-        </ChartCard>
-        <ChartCard
-          title="Órdenes de compra por estado"
-          description="Conteo por estado"
-        >
-          <BarTopProductos data={ordenesPorEstado} />
-        </ChartCard>
-        <ChartCard
-          title="Cuentas por pagar por estado"
-          description="Importe acumulado"
-        >
-          <BarTopProductos data={cxpPorEstado} />
-        </ChartCard>
-      </section>
-
-      <section className="grid gap-6 lg:grid-cols-3">
-        <ChartCard
-          title="Superficie por rancho"
-          description="m² sembrables por unidad"
-        >
-          <BarTopProductos data={superficiePorRancho} />
-        </ChartCard>
-        <ChartCard
-          title="Plantas producidas por semillero"
-          description="Top semilleros"
-        >
-          <BarTopProductos data={plantasPorSemillero} />
-        </ChartCard>
-        <ChartCard
-          title="Movimientos de inventario"
-          description="Entradas vs. salidas (cantidad)"
-        >
-          <BarTopProductos data={movPorTipo} />
-        </ChartCard>
-      </section>
-    </div>
+    <RoleDashboardView
+      data={{
+        userRole: actor.rol,
+        userName: actor.nombre || "Usuario MGZ",
+        totalRanchos: ranchos.length,
+        totalParcelas: parcelas.length,
+        ciclosActivos,
+        valorInventario,
+        totalCuentasBancarias: cuentasBancarias.length,
+        saldoBancarioTotal,
+        totalCxp: cuentasPorPagar.length,
+        cxpPendientesMonto,
+        totalGastosMes,
+        totalTrabajadores: trabajadores.length,
+        totalProductos: productos.length,
+        ordenesCompraProceso,
+        valesSalidaMes: valesSalida.length,
+        topProductos,
+        costosMes,
+        plantasMes,
+        mezcla,
+        costoRancho,
+        costoParcela,
+        costoCiclo,
+        costoRadar,
+        ciclosPorEstado,
+        cxpPorEstado,
+        ordenesPorEstado,
+        superficiePorRancho,
+        plantasPorSemillero,
+        movPorTipo,
+        ranchoLabels,
+        parcelaLabels,
+        cicloLabels,
+      }}
+    />
   )
 }

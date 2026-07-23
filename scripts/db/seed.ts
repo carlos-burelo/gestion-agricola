@@ -53,6 +53,9 @@ async function main() {
   const sql = postgres(process.env.DATABASE_URL!)
   const db = drizzle(sql, { schema })
 
+  await sql`ALTER TABLE usuarios ALTER COLUMN rol TYPE text;`
+  await sql`ALTER TABLE cuentas ADD COLUMN IF NOT EXISTS familiar_id text;`
+
   const data = generateSeedData() as Record<string, Record<string, unknown>[]>
 
   await sql`

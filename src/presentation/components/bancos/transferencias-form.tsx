@@ -312,6 +312,8 @@ export function TransferenciasBancariasView({
                   Importe: $
                 </label>
                 <Input
+                  id="monto"
+                  name="monto"
                   type="number"
                   step="0.01"
                   min="0.01"
@@ -347,6 +349,8 @@ export function TransferenciasBancariasView({
                   Folio o Num. Cheque:
                 </label>
                 <Input
+                  id="folio"
+                  name="folio"
                   type="text"
                   placeholder="Ej. SPEI-880192 / CHQ-001"
                   value={folio}
@@ -361,6 +365,8 @@ export function TransferenciasBancariasView({
                   Observación:
                 </label>
                 <Input
+                  id="observaciones"
+                  name="observaciones"
                   type="text"
                   placeholder="Comentarios u observaciones del movimiento..."
                   value={observaciones}

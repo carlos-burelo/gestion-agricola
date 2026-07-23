@@ -1,8 +1,8 @@
 import { redirect } from "next/navigation"
-import { BankingDashboard } from "@/presentation/components/banking-dashboard"
+import { BancosTablaView } from "@/presentation/components/bancos-tabla-view"
 import { getCurrentUser } from "@/infrastructure/auth/current-user"
 import { repository, tesoreriaService } from "@/infrastructure/container"
-import type { Categoria, Cuenta, Movimiento, UsuarioCuenta } from "@/core/domain/entities"
+import type { Categoria, Cuenta, Familiar, Movimiento, UsuarioCuenta } from "@/core/domain/entities"
 
 export const dynamic = "force-dynamic"
 
@@ -10,11 +10,12 @@ export default async function BancosEstadoCuentaPage() {
   const actor = await getCurrentUser()
   if (!actor) redirect("/login")
 
-  const [cuentas, saldos, movimientos, categorias] = await Promise.all([
+  const [cuentas, saldos, movimientos, categorias, familiares] = await Promise.all([
     repository<Cuenta>("cuentas").findAll(),
     tesoreriaService().saldosDeTodasLasCuentas(),
     repository<Movimiento>("movimientos").findAll(),
     repository<Categoria>("categorias").findAll(),
+    repository<Familiar>("familiares").findAll(),
   ])
 
   let visibles = cuentas
@@ -33,11 +34,12 @@ export default async function BancosEstadoCuentaPage() {
   const isAdmin = actor.rol === "admin"
 
   return (
-    <BankingDashboard
+    <BancosTablaView
       cuentas={visibles}
       saldos={saldos}
       movimientosRecientes={movimientosRecientes}
       categorias={categorias}
+      familiares={familiares}
       isAdmin={isAdmin}
     />
   )

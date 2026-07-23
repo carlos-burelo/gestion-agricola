@@ -19,6 +19,16 @@ import {
 import Link from "next/link";
 import { useState } from "react";
 import { toast } from "sonner";
+import {
+	AlertDialog,
+	AlertDialogAction,
+	AlertDialogCancel,
+	AlertDialogContent,
+	AlertDialogDescription,
+	AlertDialogFooter,
+	AlertDialogHeader,
+	AlertDialogTitle,
+} from "@/components/ui/alert-dialog";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import {
@@ -215,13 +225,15 @@ export function BankCard({
 		}
 	};
 
-	const handleDelete = async () => {
-		if (!confirm(`¿Eliminar la cuenta "${cuenta.nombre}"?`)) return;
+	const [isDeleteConfirmOpen, setIsDeleteConfirmOpen] = useState(false);
+
+	const handleDeleteConfirm = async () => {
 		setIsDeleting(true);
 		try {
 			const res = await deleteRecord("cuentas", cuenta.id);
 			if (res.ok) {
 				toast.success("Cuenta eliminada correctamente");
+				setIsDeleteConfirmOpen(false);
 				onUpdate?.();
 			} else {
 				toast.error(res.error || "Error al eliminar la cuenta");
@@ -233,9 +245,11 @@ export function BankCard({
 		}
 	};
 
-	const ownerLabel = cuenta.titularTipo
+	const ownerLabel = cuenta.titularTipo === "familiar"
+		? "SOCIO / FAMILIAR"
+		: cuenta.titularTipo
 		? cuenta.titularTipo.toUpperCase()
-		: "NEGOCIO";
+		: "SOCIO";
 	const ownerName = cuenta.titularNombre || cuenta.nombre;
 
 	const cardContent = (
@@ -303,7 +317,7 @@ export function BankCard({
 									disabled={isDeleting}
 									onClick={(e) => {
 										e.stopPropagation();
-										handleDelete();
+										setIsDeleteConfirmOpen(true);
 									}}
 								>
 									<Trash2 className="mr-2 h-3.5 w-3.5" />
@@ -546,6 +560,28 @@ export function BankCard({
 					</DialogContent>
 				</Dialog>
 			)}
+
+			{/* DELETE CONFIRMATION DIALOG */}
+			<AlertDialog open={isDeleteConfirmOpen} onOpenChange={setIsDeleteConfirmOpen}>
+				<AlertDialogContent>
+					<AlertDialogHeader>
+						<AlertDialogTitle>¿Eliminar cuenta bancaria?</AlertDialogTitle>
+						<AlertDialogDescription>
+							¿Estás seguro de que deseas eliminar la cuenta &quot;{cuenta.nombre}&quot;? Esta acción no se puede deshacer.
+						</AlertDialogDescription>
+					</AlertDialogHeader>
+					<AlertDialogFooter>
+						<AlertDialogCancel disabled={isDeleting}>Cancelar</AlertDialogCancel>
+						<AlertDialogAction
+							onClick={handleDeleteConfirm}
+							disabled={isDeleting}
+							className="bg-destructive text-destructive-foreground hover:bg-destructive/90 font-bold"
+						>
+							{isDeleting ? "Eliminando..." : "Eliminar Cuenta"}
+						</AlertDialogAction>
+					</AlertDialogFooter>
+				</AlertDialogContent>
+			</AlertDialog>
 		</>
 	);
 }

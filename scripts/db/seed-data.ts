@@ -342,11 +342,11 @@ export function generateSeedData() {
   })
 
   const cuentas = [
-    { id: "cuenta-1", nombre: `Cuenta BBVA ${familiares[0].nombre}`, tipo: "banco", titularTipo: "familiar", titularNombre: familiares[0].nombre, bancoNombre: "BBVA Bancomer", numeroCuenta: "012345678901234567", moneda: "MXN", saldoInicial: 285000, estado: "activo", createdAt: ts(2025, 1, 1), updatedAt: ts(2025, 1, 1) },
-    { id: "cuenta-2", nombre: "Cuenta Banamex Agroquímicos Golfo", tipo: "banco", titularTipo: "proveedor", titularNombre: proveedores[0].razonSocial, bancoNombre: "Citibanamex", numeroCuenta: "002180019283746501", moneda: "MXN", saldoInicial: 140000, estado: "activo", createdAt: ts(2025, 1, 1), updatedAt: ts(2025, 1, 1) },
-    { id: "cuenta-3", nombre: "Cuenta Comercializadora Frutas Sur", tipo: "banco", titularTipo: "cliente", titularNombre: clientes[0].nombreRazonSocial, bancoNombre: "BBVA Bancomer", numeroCuenta: "012890987654321098", moneda: "MXN", saldoInicial: 195000, estado: "activo", createdAt: ts(2025, 1, 1), updatedAt: ts(2025, 1, 1) },
-    { id: "cuenta-4", nombre: "Cuenta Banco Azteca Juan Pérez", tipo: "persona", titularTipo: "trabajador", titularNombre: trabajadores[0].nombre, bancoNombre: "Banco Azteca", numeroCuenta: "1273901928374", moneda: "MXN", saldoInicial: 35000, estado: "activo", createdAt: ts(2025, 1, 1), updatedAt: ts(2025, 1, 1) },
-    { id: "cuenta-5", nombre: "Caja Chica Efectivo Rancho 1", tipo: "efectivo", titularTipo: "negocio", titularNombre: "AgroPiña Rancho El Paraíso", bancoNombre: "Efectivo", numeroCuenta: "CAJA-01", moneda: "MXN", saldoInicial: 25000, estado: "activo", createdAt: ts(2025, 1, 1), updatedAt: ts(2025, 1, 1) },
+    { id: "cuenta-1", nombre: `BBVA Bancomer Corporativa (${familiares[0].nombre})`, tipo: "banco", titularTipo: "familiar", titularNombre: familiares[0].nombre, familiarId: familiares[0].id, bancoNombre: "BBVA Bancomer", numeroCuenta: "012345678901234567", moneda: "MXN", saldoInicial: 485000, estado: "activo", createdAt: ts(2025, 1, 1), updatedAt: ts(2025, 1, 1) },
+    { id: "cuenta-2", nombre: `Citibanamex Empresarial (${familiares[0].nombre})`, tipo: "banco", titularTipo: "familiar", titularNombre: familiares[0].nombre, familiarId: familiares[0].id, bancoNombre: "Citibanamex", numeroCuenta: "002180019283746501", moneda: "MXN", saldoInicial: 320000, estado: "activo", createdAt: ts(2025, 1, 1), updatedAt: ts(2025, 1, 1) },
+    { id: "cuenta-3", nombre: `Santander Operaciones (${familiares[0].nombre})`, tipo: "banco", titularTipo: "familiar", titularNombre: familiares[0].nombre, familiarId: familiares[0].id, bancoNombre: "Santander", numeroCuenta: "012890987654321098", moneda: "MXN", saldoInicial: 195000, estado: "activo", createdAt: ts(2025, 1, 1), updatedAt: ts(2025, 1, 1) },
+    { id: "cuenta-4", nombre: `Banorte Reserva Especial (${familiares[0].nombre})`, tipo: "banco", titularTipo: "familiar", titularNombre: familiares[0].nombre, familiarId: familiares[0].id, bancoNombre: "Banorte", numeroCuenta: "127390192837482910", moneda: "MXN", saldoInicial: 250000, estado: "activo", createdAt: ts(2025, 1, 1), updatedAt: ts(2025, 1, 1) },
+    { id: "cuenta-5", nombre: `Caja Chica Efectivo (${familiares[1].nombre})`, tipo: "efectivo", titularTipo: "familiar", titularNombre: familiares[1].nombre, familiarId: familiares[1].id, bancoNombre: "Efectivo", numeroCuenta: "CAJA-01", moneda: "MXN", saldoInicial: 45000, estado: "activo", createdAt: ts(2025, 1, 1), updatedAt: ts(2025, 1, 1) },
   ]
 
   const ventasPina = [
@@ -394,16 +394,22 @@ export function generateSeedData() {
   ]
 
   const adminPasswordHash = hashPassword(process.env.ADMIN_PASSWORD ?? "admin123")
-  const userPasswordHash = hashPassword("operador123")
+  const adminisPasswordHash = hashPassword("adminis123")
+  const operadorPasswordHash = hashPassword("operador123")
+  const inventarioPasswordHash = hashPassword("inventario123")
 
   const usuarios = [
     { id: "usr-admin", nombre: "Administrador General", email: "admin@mgz.mx", passwordHash: adminPasswordHash, rol: "admin", estado: "activo", createdAt: ts(2025, 1, 1), updatedAt: ts(2025, 1, 1) },
-    { id: "usr-operador-1", nombre: "Operador de Cajas Campo", email: "cajas@mgz.mx", passwordHash: userPasswordHash, rol: "persona", estado: "activo", createdAt: ts(2025, 1, 10), updatedAt: ts(2025, 1, 10) },
+    { id: "usr-adminis", nombre: "Lic. Laura Ramos", email: "adminis@mgz.mx", passwordHash: adminisPasswordHash, rol: "administrativo", estado: "activo", createdAt: ts(2025, 1, 5), updatedAt: ts(2025, 1, 5) },
+    { id: "usr-operativo", nombre: "Ing. Carlos Mendoza", email: "operador@mgz.mx", passwordHash: operadorPasswordHash, rol: "operativo", estado: "activo", createdAt: ts(2025, 1, 8), updatedAt: ts(2025, 1, 8) },
+    { id: "usr-inventario", nombre: "Roberto Silva (Almacén)", email: "inventario@mgz.mx", passwordHash: inventarioPasswordHash, rol: "inventario", estado: "activo", createdAt: ts(2025, 1, 9), updatedAt: ts(2025, 1, 9) },
+    { id: "usr-operador-1", nombre: "Operador de Cajas Campo", email: "cajas@mgz.mx", passwordHash: operadorPasswordHash, rol: "persona", estado: "activo", createdAt: ts(2025, 1, 10), updatedAt: ts(2025, 1, 10) },
   ]
 
   const usuarioCuentas = [
     { id: "uc-1", usuarioId: "usr-operador-1", cuentaId: "cuenta-5", createdAt: ts(2025, 1, 10), updatedAt: ts(2025, 1, 10) },
     { id: "uc-2", usuarioId: "usr-operador-1", cuentaId: "cuenta-4", createdAt: ts(2025, 1, 10), updatedAt: ts(2025, 1, 10) },
+    { id: "uc-3", usuarioId: "usr-adminis", cuentaId: "cuenta-1", createdAt: ts(2025, 1, 5), updatedAt: ts(2025, 1, 5) },
   ]
 
   return {

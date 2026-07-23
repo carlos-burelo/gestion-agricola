@@ -47,7 +47,7 @@ export async function crearUsuarioAction(input: CrearUsuarioInput) {
       estado: "activo",
     })
 
-    if (rol === "persona" && cuentaIds.length > 0) {
+    if (rol !== "admin" && cuentaIds.length > 0) {
       for (const cuentaId of cuentaIds) {
         await repository<UsuarioCuenta>("usuarioCuentas").create({
           usuarioId: usuario.id,

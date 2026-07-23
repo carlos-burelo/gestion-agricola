@@ -39,6 +39,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select"
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+} from "@/components/ui/alert-dialog"
 import { createRecord, deleteRecord } from "@/presentation/actions/crud-actions"
 
 export interface OtrosGastosViewProps {
@@ -166,12 +176,15 @@ export function OtrosGastosView({
   }
 
   // Handle Record Deletion
-  const handleDelete = async (id: string) => {
-    if (!confirm("¿Deseas eliminar este registro de gasto?")) return
+  const [deletingId, setDeletingId] = useState<string | null>(null)
+
+  const handleDeleteConfirm = async () => {
+    if (!deletingId) return
     try {
-      const res = await deleteRecord("gastosExternos", id)
+      const res = await deleteRecord("gastosExternos", deletingId)
       if (res.ok) {
-        toast.success("Gasto eliminado")
+        toast.success("Gasto eliminado exitosamente")
+        setDeletingId(null)
       } else {
         toast.error(res.error || "No se pudo eliminar el gasto")
       }
@@ -598,7 +611,7 @@ export function OtrosGastosView({
                         <Button
                           variant="ghost"
                           size="icon"
-                          onClick={() => handleDelete(g.id)}
+                          onClick={() => setDeletingId(g.id)}
                           className="size-7 text-destructive hover:bg-destructive/10"
                         >
                           <Trash2 className="size-3.5" />
@@ -612,6 +625,27 @@ export function OtrosGastosView({
           </div>
         </CardContent>
       </Card>
+
+      {/* DELETE CONFIRMATION DIALOG */}
+      <AlertDialog open={!!deletingId} onOpenChange={(open) => !open && setDeletingId(null)}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>¿Eliminar registro de gasto?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Esta acción no se puede deshacer. Se eliminará permanentemente este registro de gasto.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancelar</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDeleteConfirm}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90 font-bold"
+            >
+              Eliminar Gasto
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }

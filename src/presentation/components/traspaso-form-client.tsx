@@ -52,6 +52,7 @@ export function TraspasoFormClient({ cuentas, saldos }: TraspasoFormClientProps)
 
   // Selection Modal State
   const [selectingSlot, setSelectingSlot] = useState<"origen" | "destino" | null>(null)
+  const [referenciaModalSearch, setReferenciaModalSearch] = useState<string>("")
 
   const cuentaOrigen = cuentas.find((c) => c.id === origenId)
   const cuentaDestino = cuentas.find((c) => c.id === destinoId)
@@ -63,53 +64,57 @@ export function TraspasoFormClient({ cuentas, saldos }: TraspasoFormClientProps)
   const saldoOrigenFuturo = saldoOrigenActual - montoNum
   const saldoDestinoFuturo = saldoDestinoActual + montoNum
 
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (!origenId) {
-      toast.error("Por favor selecciona la cuenta de origen")
-      return
-    }
-    if (!destinoId) {
-      toast.error("Por favor selecciona la cuenta de destino")
-      return
-    }
-    if (origenId === destinoId) {
-      toast.error("La cuenta origen y destino deben ser distintas")
-      return
-    }
-    if (!montoNum || montoNum <= 0) {
-      toast.error("Ingresa un monto válido mayor a $0")
-      return
-    }
-    if (montoNum > saldoOrigenActual) {
-      if (
-        !confirm(
-          "El monto a transferir supera el saldo actual de la cuenta origen. ¿Deseas continuar de todos modos?"
-        )
-      ) {
-        return
-      }
-    }
+  // Overdraft confirmation dialog state
+  const [showOverdraftConfirm, setShowOverdraftConfirm] = useState(false)
 
+  const executeTraspaso = async () => {
     setIsSubmitting(true)
     try {
       const formData = new FormData()
       formData.set("fecha", fecha)
       formData.set("cuentaOrigenId", origenId)
       formData.set("cuentaDestinoId", destinoId)
-      formData.set("monto", String(montoNum))
+      formData.set("monto", String(Number(monto)))
       formData.set("referencia", referencia)
 
       await registrarTraspaso(formData)
       toast.success("Traspaso entre cuentas registrado exitosamente")
       setMonto("")
       setReferencia("")
+      setShowOverdraftConfirm(false)
       router.push("/dashboard/tesoreria")
     } catch (err: unknown) {
       toast.error((err as Error).message || "Error al registrar el traspaso")
     } finally {
       setIsSubmitting(false)
     }
+  }
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    if (!origenId) {
+      toast.error("Selecciona la cuenta de origen")
+      return
+    }
+    if (!destinoId) {
+      toast.error("Selecciona la cuenta de destino")
+      return
+    }
+    if (origenId === destinoId) {
+      toast.error("La cuenta origen y destino deben ser distintas")
+      return
+    }
+    const montoNum = Number(monto)
+    if (!montoNum || montoNum <= 0) {
+      toast.error("Ingresa un monto válido mayor a $0")
+      return
+    }
+    if (montoNum > saldoOrigenActual) {
+      setShowOverdraftConfirm(true)
+      return
+    }
+
+    await executeTraspaso()
   }
 
   const presetAmounts = [1000, 5000, 10000, 25000, 50000, 100000]
@@ -119,6 +124,17 @@ export function TraspasoFormClient({ cuentas, saldos }: TraspasoFormClientProps)
     selectingSlot === "origen"
       ? cuentas.filter((c) => c.id !== destinoId)
       : cuentas.filter((c) => c.id !== origenId)
+
+  const filteredAvailableAccounts = availableAccountsForSlot.filter((c) => {
+    const q = referenciaModalSearch.toLowerCase().trim()
+    if (!q) return true
+    return (
+      c.nombre.toLowerCase().includes(q) ||
+      (c.bancoNombre ?? "").toLowerCase().includes(q) ||
+      (c.titularNombre ?? "").toLowerCase().includes(q) ||
+      (c.numeroCuenta ?? "").toLowerCase().includes(q)
+    )
+  })
 
   return (
     <div className="flex flex-col gap-8 pb-12">
@@ -379,7 +395,7 @@ export function TraspasoFormClient({ cuentas, saldos }: TraspasoFormClientProps)
         open={selectingSlot !== null}
         onOpenChange={(open) => !open && setSelectingSlot(null)}
       >
-        <DialogContent className="sm:max-w-md">
+        <DialogContent className="sm:max-w-lg">
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               {selectingSlot === "origen" ? (
@@ -390,30 +406,111 @@ export function TraspasoFormClient({ cuentas, saldos }: TraspasoFormClientProps)
               Seleccionar {selectingSlot === "origen" ? "Cuenta Origen" : "Cuenta Destino"}
             </DialogTitle>
             <DialogDescription>
-              Elige la tarjeta o cuenta para esta operación.
+              Selecciona de la lista la cuenta bancaria para esta operación.
             </DialogDescription>
           </DialogHeader>
 
-          <div className="space-y-3 py-2 max-h-[60vh] overflow-y-auto">
-            {availableAccountsForSlot.map((c) => (
-              <div
-                key={`modal-${c.id}`}
-                className="cursor-pointer transition hover:scale-[1.01]"
-                onClick={() => {
-                  if (selectingSlot === "origen") {
-                    setOrigenId(c.id)
-                  } else {
-                    setDestinoId(c.id)
-                  }
-                  setSelectingSlot(null)
-                }}
-              >
-                <BankCard cuenta={c} saldoCalculado={saldos[c.id]} readOnly />
-              </div>
-            ))}
+          <div className="space-y-3 py-1">
+            {/* Search filter for modal */}
+            <div className="relative">
+              <Input
+                type="text"
+                placeholder="Buscar por banco, titular o cuenta..."
+                value={referenciaModalSearch}
+                onChange={(e) => setReferenciaModalSearch(e.target.value)}
+                className="text-xs h-9"
+              />
+            </div>
+
+            {/* Compact Accounts List */}
+            <div className="divide-y divide-border rounded-xl border bg-card overflow-hidden max-h-[50vh] overflow-y-auto">
+              {filteredAvailableAccounts.length === 0 ? (
+                <div className="p-6 text-center text-xs text-muted-foreground">
+                  No se encontraron cuentas disponibles.
+                </div>
+              ) : (
+                filteredAvailableAccounts.map((c) => {
+                  const saldoActual = saldos[c.id] ?? c.saldoInicial
+                  const isSelected =
+                    selectingSlot === "origen" ? origenId === c.id : destinoId === c.id
+                  return (
+                    <button
+                      key={`modal-${c.id}`}
+                      type="button"
+                      onClick={() => {
+                        if (selectingSlot === "origen") {
+                          setOrigenId(c.id)
+                        } else {
+                          setDestinoId(c.id)
+                        }
+                        setSelectingSlot(null)
+                        setReferenciaModalSearch("")
+                      }}
+                      className={`w-full flex items-center justify-between p-3 text-left transition hover:bg-muted/60 group ${
+                        isSelected ? "bg-primary/5" : ""
+                      }`}
+                    >
+                      <div className="flex items-center gap-3">
+                        <div className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-border bg-muted/40 group-hover:border-primary/40 group-hover:bg-primary/10 transition-colors">
+                          <Wallet className="size-4 text-primary" />
+                        </div>
+                        <div>
+                          <div className="flex items-center gap-2">
+                            <span className="font-bold text-xs text-foreground group-hover:text-primary transition-colors">
+                              {c.nombre}
+                            </span>
+                            <span className="inline-flex items-center rounded-md border border-border bg-muted/50 px-1.5 py-0.5 text-[10px] font-bold text-muted-foreground uppercase">
+                              {c.bancoNombre || c.tipo}
+                            </span>
+                          </div>
+                          <div className="flex items-center gap-2 mt-0.5 text-[11px] text-muted-foreground">
+                            {c.titularNombre && <span>{c.titularNombre}</span>}
+                            {c.numeroCuenta && <span className="font-mono">&middot; {c.numeroCuenta}</span>}
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="text-right">
+                        <span className="text-xs font-extrabold text-foreground block">
+                          {saldoActual.toLocaleString("es-MX", {
+                            style: "currency",
+                            currency: c.moneda,
+                          })}
+                        </span>
+                        <span className="text-[10px] text-emerald-600 dark:text-emerald-400 uppercase font-semibold">
+                          Disponible
+                        </span>
+                      </div>
+                    </button>
+                  )
+                })
+              )}
+            </div>
           </div>
         </DialogContent>
       </Dialog>
+
+      {/* OVERDRAFT CONFIRMATION DIALOG */}
+      <AlertDialog open={showOverdraftConfirm} onOpenChange={setShowOverdraftConfirm}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>¿Confirmar transferencia con sobregiro?</AlertDialogTitle>
+            <AlertDialogDescription>
+              El monto a transferir (${Number(monto).toLocaleString("es-MX")}) supera el saldo disponible de la cuenta origen (${saldoOrigenActual.toLocaleString("es-MX")}). ¿Deseas continuar con la operación de todos modos?
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={isSubmitting}>Cancelar</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={executeTraspaso}
+              disabled={isSubmitting}
+              className="bg-amber-600 text-white hover:bg-amber-500 font-bold"
+            >
+              {isSubmitting ? "Procesando..." : "Sí, Transferir de todos modos"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }

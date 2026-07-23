@@ -45,5 +45,12 @@ export async function login(_prevState: string | null, formData: FormData) {
     maxAge: 7 * 24 * 60 * 60,
   })
 
-  redirect("/dashboard/tesoreria")
+  redirect("/dashboard")
 }
+
+export async function logout() {
+  const jar = await cookies()
+  jar.delete("session")
+  redirect("/login")
+}
+

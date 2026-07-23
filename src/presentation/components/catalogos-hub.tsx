@@ -112,6 +112,55 @@ export function CatalogosHub({
   const activeTheme = getModuleTheme(activeModule.config)
   const ActiveIcon = activeTheme.Icon
 
+  if (initialSlug && initialSlug !== "catalogos" && activeModule) {
+    return (
+      <div className="flex flex-col gap-6">
+        {/* Dedicated Single Module Header */}
+        <div className="flex flex-col gap-3 border-b border-border pb-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-center gap-3">
+            <span className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary shadow-xs">
+              <ActiveIcon className="size-6 text-primary" />
+            </span>
+            <div>
+              <div className="flex items-center gap-2">
+                <Badge variant="outline" className="text-[10px] font-bold uppercase tracking-wider text-muted-foreground">
+                  {activeModule.config.group}
+                </Badge>
+              </div>
+              <h1 className="text-2xl font-bold text-foreground tracking-tight">
+                Catálogo de {activeModule.config.title}
+              </h1>
+              <p className="text-xs text-muted-foreground mt-0.5">
+                {activeModule.config.description}
+              </p>
+            </div>
+          </div>
+
+          <div className="flex items-center gap-2">
+            <RecordForm
+              config={activeModule.config}
+              referenceOptions={activeModule.referenceOptions}
+              trigger={
+                <Button className="gap-1.5 shadow-xs bg-emerald-600 hover:bg-emerald-500 text-white font-semibold">
+                  <Plus className="size-4" />
+                  <span>Nuevo {activeModule.config.singular}</span>
+                </Button>
+              }
+            />
+          </div>
+        </div>
+
+        {/* Dedicated Single Module Table */}
+        <RecordTable
+          config={activeModule.config}
+          records={activeModule.records}
+          referenceOptions={activeModule.referenceOptions}
+          labelMap={activeModule.labelMap}
+        />
+      </div>
+    )
+  }
+
   return (
     <div className="flex flex-col gap-6">
       {/* Sleek Page Header */}

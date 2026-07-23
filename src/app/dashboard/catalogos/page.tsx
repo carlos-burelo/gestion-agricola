@@ -13,7 +13,7 @@ export const dynamic = "force-dynamic"
 export default async function CatalogosPage() {
   const [modulesData, usuarioCuentas, cuentas] = await Promise.all([
     Promise.all(
-      MODULES.map(async (config) => {
+      MODULES.filter((m) => m.slug !== "bancos").map(async (config) => {
         const [records, referenceOptions, labelMap] = await Promise.all([
           loadRecords(config.collection),
           loadReferenceOptions(config),

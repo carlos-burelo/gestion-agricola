@@ -425,6 +425,7 @@ export interface Cuenta extends BaseEntity {
   tipo: TipoCuenta
   titularTipo?: TitularTipo
   titularNombre?: string
+  familiarId?: string
   bancoNombre?: string
   numeroCuenta?: string
   moneda: string
@@ -432,7 +433,12 @@ export interface Cuenta extends BaseEntity {
   estado: EstadoActivo
 }
 
-export type RolUsuario = "admin" | "persona"
+export type RolUsuario =
+  | "admin"
+  | "administrativo"
+  | "operativo"
+  | "inventario"
+  | "persona"
 
 export interface Usuario extends BaseEntity {
   nombre: string

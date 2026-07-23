@@ -34,21 +34,54 @@ function coerce(slug: string, raw: Record<string, string>) {
   const data: Record<string, unknown> = {}
 
   for (const field of config.fields) {
-    const value = raw[field.name]
-    if (value === undefined) continue
+    const rawVal = raw[field.name]
+    const valStr = rawVal !== undefined && rawVal !== null ? String(rawVal).trim() : ""
+
+    if (field.required) {
+      if (!valStr || valStr === "__none") {
+        throw new BusinessRuleError(`El campo "${field.label}" es obligatorio.`)
+      }
+    }
+
     switch (field.type) {
       case "number":
-        data[field.name] = value === "" ? 0 : Number(value)
+        if (!valStr) {
+          data[field.name] = field.required ? 0 : null
+        } else {
+          const num = Number(valStr)
+          if (isNaN(num)) {
+            throw new BusinessRuleError(`El campo "${field.label}" debe ser un número válido.`)
+          }
+          data[field.name] = num
+        }
         break
       case "json":
-        data[field.name] = value ? JSON.parse(value) : []
+        if (!valStr) data[field.name] = []
+        else data[field.name] = JSON.parse(valStr)
         break
       case "select":
-        if (field.name === "esSemillero") data[field.name] = value === "true"
-        else data[field.name] = value
+        if (field.name === "esSemillero") {
+          data[field.name] = valStr === "true"
+        } else {
+          data[field.name] = valStr || (field.required ? "" : null)
+        }
+        break
+      case "reference":
+        if (!valStr || valStr === "__none") {
+          if (field.required) {
+            throw new BusinessRuleError(`Selecciona un ${field.label} válido.`)
+          }
+          data[field.name] = null
+        } else {
+          data[field.name] = valStr
+        }
         break
       default:
-        data[field.name] = value
+        if (!valStr) {
+          data[field.name] = field.required ? "" : null
+        } else {
+          data[field.name] = valStr
+        }
     }
   }
   return { config, data }
@@ -105,8 +138,22 @@ export async function deleteRecord(
 }
 
 function toMessage(error: unknown): string {
-  if (error instanceof DomainError) return error.message
+  if (error instanceof DomainError || error instanceof BusinessRuleError) {
+    return error.message
+  }
   if (error instanceof SyntaxError) return "JSON inválido en un campo."
-  if (error instanceof Error) return error.message
-  return "Error desconocido."
+  if (error instanceof Error) {
+    const msg = error.message.toLowerCase()
+    if (msg.includes("foreign key") || msg.includes("violates foreign key")) {
+      return "No se pudo realizar la operación: El registro de referencia seleccionado no existe o fue eliminado."
+    }
+    if (msg.includes("not-null") || msg.includes("null value in column")) {
+      return "Por favor completa todos los campos requeridos."
+    }
+    if (msg.includes("unique") || msg.includes("duplicate key")) {
+      return "Ya existe un registro con este nombre o identificador."
+    }
+    return error.message
+  }
+  return "Error desconocido al procesar la solicitud."
 }

@@ -95,7 +95,7 @@ export function BankingDashboard({
           <div className="space-y-2">
             <div className="flex items-center gap-2 text-slate-400 text-xs font-semibold uppercase tracking-widest">
               <ShieldCheck className="h-4 w-4 text-emerald-400" />
-              Banca Digital AgroPiña · Tesorería
+              Banca Digital MGZ · Tesorería
             </div>
             <div className="flex items-center gap-3">
               <h1 className="text-3xl md:text-5xl font-extrabold tracking-tight">
@@ -152,8 +152,8 @@ export function BankingDashboard({
               asChild
               className="rounded-xl bg-emerald-500 text-slate-950 font-bold hover:bg-emerald-400 shadow-xs"
             >
-              <Link href="/dashboard/tesoreria/traspasos">
-                <Repeat2 className="mr-2 h-4 w-4" />
+              <Link href="/dashboard/bancos/transferencias">
+                <ArrowLeftRight className="mr-2 h-4 w-4" />
                 Hacer Traspaso
               </Link>
             </Button>

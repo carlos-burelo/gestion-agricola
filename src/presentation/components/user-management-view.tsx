@@ -17,7 +17,15 @@ import {
   Wallet,
 } from "lucide-react"
 import { toast } from "sonner"
-import type { Cuenta, Usuario } from "@/core/domain/entities"
+import type { RolUsuario } from "@/core/domain/entities"
+import { getRoleDefinition, SYSTEM_ROLES } from "@/infrastructure/auth/permissions"
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
@@ -58,7 +66,7 @@ export function UserManagementView({
   const [nombre, setNombre] = useState("")
   const [email, setEmail] = useState("")
   const [password, setPassword] = useState("")
-  const [rol, setRol] = useState<"admin" | "persona">("persona")
+  const [rol, setRol] = useState<RolUsuario>("operativo")
   const [selectedCuentaIds, setSelectedCuentaIds] = useState<string[]>([])
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -196,10 +204,10 @@ export function UserManagementView({
                   </div>
 
                   <Badge
-                    variant={isAdmin ? "default" : "secondary"}
-                    className="text-[10px] uppercase font-bold"
+                    variant="outline"
+                    className={`text-[10px] font-bold uppercase ${getRoleDefinition(u.rol).badgeColor}`}
                   >
-                    {isAdmin ? "Admin" : "Operador"}
+                    {getRoleDefinition(u.rol).label}
                   </Badge>
                 </div>
               </CardHeader>
@@ -300,15 +308,22 @@ export function UserManagementView({
             </div>
 
             <div className="space-y-1.5">
-              <Label htmlFor="create-rol">Rol de Acceso</Label>
-              <SelectNative
-                id="create-rol"
-                value={rol}
-                onChange={(e) => setRol(e.target.value as any)}
-              >
-                <option value="persona">Operador (Acceso restringido a sus cuentas)</option>
-                <option value="admin">Administrador (Acceso total a todo)</option>
-              </SelectNative>
+              <Label htmlFor="create-rol">Rol de Acceso al Sistema</Label>
+              <Select value={rol} onValueChange={(val: RolUsuario) => setRol(val)}>
+                <SelectTrigger id="create-rol" className="w-full">
+                  <SelectValue placeholder="Selecciona el rol de acceso" />
+                </SelectTrigger>
+                <SelectContent>
+                  {SYSTEM_ROLES.map((r) => (
+                    <SelectItem key={r.value} value={r.value}>
+                      <div className="flex flex-col">
+                        <span className="font-semibold">{r.label}</span>
+                        <span className="text-[10px] text-muted-foreground">{r.description}</span>
+                      </div>
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
 
             {rol === "persona" && (

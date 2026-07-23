@@ -219,6 +219,18 @@ function ColumnHeaderFilter({
   )
 }
 
+import {
+  AlertDialog,
+  AlertDialogAction,
+  AlertDialogCancel,
+  AlertDialogContent,
+  AlertDialogDescription,
+  AlertDialogFooter,
+  AlertDialogHeader,
+  AlertDialogTitle,
+  AlertDialogTrigger,
+} from "@/components/ui/alert-dialog"
+
 function RowActions({
   config,
   referenceOptions,
@@ -229,14 +241,20 @@ function RowActions({
   record: RowT
 }) {
   const [pending, startTransition] = useTransition()
-  function handleDelete() {
-    if (!confirm("¿Eliminar este registro?")) return
+  const [deleteOpen, setDeleteOpen] = useState(false)
+
+  function handleDeleteConfirm() {
     startTransition(async () => {
       const result = await deleteRecord(config.slug, String(record.id))
-      if (result.ok) toast.success("Registro eliminado")
-      else toast.error(result.error ?? "No se pudo eliminar")
+      if (result.ok) {
+        toast.success("Registro eliminado exitosamente")
+        setDeleteOpen(false)
+      } else {
+        toast.error(result.error ?? "No se pudo eliminar el registro")
+      }
     })
   }
+
   return (
     <div className="flex justify-end gap-1">
       <RecordForm
@@ -249,15 +267,37 @@ function RowActions({
           </Button>
         }
       />
-      <Button
-        variant="ghost"
-        size="icon-sm"
-        aria-label="Eliminar"
-        disabled={pending}
-        onClick={handleDelete}
-      >
-        <Trash2 className="size-4 text-destructive" />
-      </Button>
+
+      <AlertDialog open={deleteOpen} onOpenChange={setDeleteOpen}>
+        <AlertDialogTrigger asChild>
+          <Button
+            variant="ghost"
+            size="icon-sm"
+            aria-label="Eliminar"
+            disabled={pending}
+          >
+            <Trash2 className="size-4 text-destructive" />
+          </Button>
+        </AlertDialogTrigger>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>¿Confirmar eliminación?</AlertDialogTitle>
+            <AlertDialogDescription>
+              Esta acción no se puede deshacer. Se eliminará permanentemente este registro de {config.singular.toLowerCase()}.
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel disabled={pending}>Cancelar</AlertDialogCancel>
+            <AlertDialogAction
+              onClick={handleDeleteConfirm}
+              disabled={pending}
+              className="bg-destructive text-destructive-foreground hover:bg-destructive/90 font-bold"
+            >
+              {pending ? "Eliminando..." : "Eliminar Registro"}
+            </AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   )
 }

@@ -72,7 +72,7 @@ export const flatConfigs: Record<string, FlatConfig> = {
   cuentas: {
     table: s.cuentas,
     dateFields: AUDIT,
-    nullableFields: ["titularTipo", "titularNombre", "bancoNombre", "numeroCuenta"],
+    nullableFields: ["titularTipo", "titularNombre", "familiarId", "bancoNombre", "numeroCuenta"],
   },
   usuarios: { table: s.usuarios, dateFields: AUDIT },
   usuarioCuentas: { table: s.usuarioCuentas, dateFields: AUDIT },

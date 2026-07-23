@@ -49,16 +49,12 @@ export const MODULES: ModuleConfig[] = [
     fields: [
       { name: "nombre", label: "Nombre de la Cuenta", type: "text", required: true },
       {
-        name: "titularTipo",
-        label: "Propietario / Titular",
-        type: "select",
-        options: [
-          { value: "cliente", label: "Cliente" },
-          { value: "proveedor", label: "Proveedor" },
-          { value: "trabajador", label: "Trabajador" },
-          { value: "familiar", label: "Familiar" },
-          { value: "negocio", label: "Negocio / Empresa" },
-        ],
+        name: "familiarId",
+        label: "Socio / Titular",
+        type: "reference",
+        reference: { collection: "familiares", labelField: "nombre" },
+        required: true,
+        helper: "Socio o familiar titular de la cuenta bancaria",
       },
       { name: "titularNombre", label: "Nombre del Titular", type: "text" },
       { name: "bancoNombre", label: "Institución / Banco", type: "text" },

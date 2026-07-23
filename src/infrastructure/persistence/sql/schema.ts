@@ -565,6 +565,7 @@ export const cuentas = pgTable("cuentas", {
   tipo: tipoCuenta("tipo").notNull(),
   titularTipo: titularTipo("titular_tipo"),
   titularNombre: text("titular_nombre"),
+  familiarId: text("familiar_id"),
   bancoNombre: text("banco_nombre"),
   numeroCuenta: text("numero_cuenta"),
   moneda: text("moneda").notNull(),
@@ -578,7 +579,7 @@ export const usuarios = pgTable("usuarios", {
   nombre: text("nombre").notNull(),
   email: text("email").notNull().unique(),
   passwordHash: text("password_hash").notNull(),
-  rol: rolUsuario("rol").notNull(),
+  rol: text("rol").$type<RolUsuario>().notNull(),
   estado: estadoActivo("estado").notNull(),
   ...audit,
 })
